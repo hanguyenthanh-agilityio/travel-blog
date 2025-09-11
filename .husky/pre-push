@@ -1,0 +1,8 @@
+#!/usr/bin/env sh
+echo "🚀 Running tests & build before push..."
+
+# Run tests 
+pnpm test
+
+# Run Astro build
+pnpm build

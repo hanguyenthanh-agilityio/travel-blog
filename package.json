@@ -7,7 +7,18 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "lint": "eslint . --ext .js,.jsx,.ts,.tsx,.astro"
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx,.astro",
+    "format": "prettier --write .",
+    "test": "vitest run",
+    "prepare": "husky"
+  },
+  "lint-staged": {
+    "*.{js,ts,tsx,astro}": [
+      "eslint --fix"
+    ],
+    "*.{js,ts,tsx,astro,css,md}": [
+      "prettier --write"
+    ]
   },
   "dependencies": {
     "@astrojs/tailwind": "^6.0.2",
@@ -24,6 +35,8 @@
   },
   "devDependencies": {
     "@astrojs/react": "^4.3.1",
+    "@commitlint/cli": "^19.8.1",
+    "@commitlint/config-conventional": "^19.8.1",
     "@eslint/js": "^9.35.0",
     "@types/react": "^19.1.12",
     "@typescript-eslint/eslint-plugin": "^8.43.0",
@@ -35,6 +48,8 @@
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^5.2.0",
     "globals": "^16.4.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.1.6",
     "prettier": "^3.6.2"
   }
 }

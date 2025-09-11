@@ -1,0 +1,4 @@
+#!/usr/bin/env sh
+# Run lint-staged before commit
+echo "🔍 Running lint-staged..."
+pnpm lint-staged
