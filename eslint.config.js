@@ -19,9 +19,10 @@ export default [
       parserOptions: {
         parser: tsParser,
         extraFileExtensions: ['.astro'],
+        project: './tsconfig.json',
       },
     },
-    plugins: { astro },
+    plugins: { astro, '@typescript-eslint': ts },
     rules: {
       ...astro.configs.recommended.rules,
     },
@@ -56,7 +57,6 @@ export default [
 
       // === Rules custom ===
       'no-console': 'warn',
-      'no-unused-vars': 'error',
       '@typescript-eslint/no-unused-vars': [
         'error',
         {
