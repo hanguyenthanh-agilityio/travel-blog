@@ -1,4 +1,3 @@
-// eslint.config.js
 import js from '@eslint/js';
 import ts from '@typescript-eslint/eslint-plugin';
 import tsParser from '@typescript-eslint/parser';
@@ -9,6 +8,9 @@ import reactHooks from 'eslint-plugin-react-hooks';
 import prettier from 'eslint-config-prettier';
 
 export default [
+  // Ignore generated and build outputs
+  { ignores: ['.astro/**/*', 'dist/**/*'] },
+
   js.configs.recommended,
 
   // Astro
@@ -19,10 +21,9 @@ export default [
       parserOptions: {
         parser: tsParser,
         extraFileExtensions: ['.astro'],
-        project: './tsconfig.json',
       },
     },
-    plugins: { astro, '@typescript-eslint': ts },
+    plugins: { astro },
     rules: {
       ...astro.configs.recommended.rules,
     },
@@ -55,7 +56,6 @@ export default [
       '@typescript-eslint/no-empty-object-type': 'off',
       '@typescript-eslint/triple-slash-reference': 'off',
 
-      // === Rules custom ===
       'no-console': 'warn',
       '@typescript-eslint/no-unused-vars': [
         'error',
@@ -69,7 +69,7 @@ export default [
     },
   },
 
-  // Node.js config files (tailwind.config.js, eslint.config.js, etc.)
+  // Node.js config files
   {
     files: ['**/*.config.js', '**/*.cjs'],
     languageOptions: {
@@ -83,7 +83,7 @@ export default [
     },
   },
 
-  // Ignore generated files of Astro
+  // Ignore generated files
   {
     files: ['.astro/*.d.ts'],
     rules: {

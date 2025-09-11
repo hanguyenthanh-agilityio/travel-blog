@@ -1,4 +1,5 @@
 #!/usr/bin/env sh
-# Run lint-staged before commit
+. "$(dirname -- "$0")/_/husky.sh"
+
 echo "🔍 Running lint-staged..."
 pnpm lint-staged

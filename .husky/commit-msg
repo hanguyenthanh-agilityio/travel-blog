@@ -1,3 +1,5 @@
 #!/usr/bin/env sh
-# Check commit message with Commitlint
+. "$(dirname -- "$0")/_/husky.sh"
+
+echo "✅ Checking commit message..."
 pnpm commitlint --edit "$1"
