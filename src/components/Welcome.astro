@@ -1,6 +1,7 @@
 ---
 import astroLogo from "../assets/astro.svg";
 import background from "../assets/background.svg";
+import { Button } from "@/components/ui/button";
 ---
 
 <div id="container">
@@ -15,6 +16,8 @@ import background from "../assets/background.svg";
           alt="Astro Homepage"
         /></a
       >
+      <!-- Example of using a component -->
+      <Button client:load variant="default">Click me</Button>
       <h1 class="text-green-500">
         To get started, open the <code><pre>src/pages</pre></code> directory in your
         project.
