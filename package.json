@@ -15,10 +15,7 @@
   },
   "lint-staged": {
     "*.{js,ts,tsx,astro}": [
-      "eslint --fix --max-warnings=0"
-    ],
-    "*.{js,ts,tsx,astro,css,md}": [
-      "prettier --write"
+      "eslint --fix --max-warnings=0 --exit-on-fatal-error"
     ]
   },
   "dependencies": {
