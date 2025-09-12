@@ -63,9 +63,11 @@
 
 All commands are run from the root of the project, from a terminal:
 
-| Command        | Action                                       |
-| :------------- | :------------------------------------------- |
-| `pnpm install` | Installs dependencies                        |
-| `pnpm dev`     | Starts local dev server at `localhost:4321`  |
-| `pnpm build`   | Build your production site to `./dist/`      |
-| `pnpm preview` | Preview your build locally, before deploying |
+| Command                                                                   | Action                                       |
+| :------------------------------------------------------------------------ | :------------------------------------------- |
+| `git clone git@gitlab.asoft-python.com:ha.nguyenthanh/astro-training.git` | Create a copy of the target repository       |
+| `cd feature/travel-blog`                                                  | Change directory to travel-blog              |
+| `pnpm install`                                                            | Installs dependencies                        |
+| `pnpm dev`                                                                | Starts local dev server at `localhost:4321`  |
+| `pnpm build`                                                              | Build your production site to `./dist/`      |
+| `pnpm preview`                                                            | Preview your build locally, before deploying |
