@@ -1,0 +1,28 @@
+---
+import NavDropdownMenu from '../NavDropdownMenu';
+
+const menu = [
+  { href: '/', text: 'Home' },
+  { href: '/blog', text: 'Blog' },
+  { href: '/post/example', text: 'Single Post' },
+];
+
+const otherPages = [
+  { href: '/about', text: 'About' },
+  { href: '/contact', text: 'Contact' },
+  { href: '/faq', text: 'FAQ' },
+];
+---
+
+<nav class="flex items-center space-x-6">
+  {
+    menu.map((item) => (
+      <a href={item.href} class="text-sm hover:text-gray-600">
+        {item.text}
+      </a>
+    ))
+  }
+  <div>
+    <NavDropdownMenu label="Other Pages" items={otherPages} />
+  </div>
+</nav>
