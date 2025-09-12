@@ -1,11 +1,13 @@
 import React from 'react';
-import { Button } from '@/components/ui/Button';
+
+import ArrowIcon from '@/components/icon/arrow';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from '@/components/ui/Dropdown';
+} from '@/components/ui/dropdown';
+import { Button } from '@/components/ui/button';
 
 interface ItemProps {
   href: string;
@@ -20,32 +22,20 @@ const NavDropdownMenu = ({
   items: ItemProps[];
 }) => (
   <DropdownMenu>
-    <DropdownMenuTrigger>
+    <DropdownMenuTrigger asChild>
       <Button
+        type="button"
         variant="outline"
-        className="border-none p-0 shadow-none text-sm font-normal"
+        className="border-none p-0 shadow-none text-sm font-normal hover:text-gray-600 hover:bg-[none]"
       >
         {label}
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className="h-4 w-4"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            d="M19 9l-7 7-7-7"
-          />
-        </svg>
+        <ArrowIcon />
       </Button>
     </DropdownMenuTrigger>
 
     <DropdownMenuContent>
       {items.map((item) => (
-        <DropdownMenuItem key={item.href}>
+        <DropdownMenuItem key={item.href} asChild>
           <a href={item.href}>{item.text}</a>
         </DropdownMenuItem>
       ))}

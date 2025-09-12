@@ -10,7 +10,6 @@ const menu = [
 const otherPages = [
   { href: '/about', text: 'About' },
   { href: '/contact', text: 'Contact' },
-  { href: '/faq', text: 'FAQ' },
 ];
 ---
 
@@ -23,6 +22,6 @@ const otherPages = [
     ))
   }
   <div>
-    <NavDropdownMenu label="Other Pages" items={otherPages} />
+    <NavDropdownMenu client:load label="Other Pages" items={otherPages} />
   </div>
 </nav>
