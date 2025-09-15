@@ -25,3 +25,9 @@ export const socials = [
     icon: '/images/youtube.svg',
   },
 ];
+
+export const contactItems = [
+  { label: 'Address', value: 'Level 1, 12 Sample St, Sydney NSW 2000' },
+  { label: 'Phone Number', value: '1800 123 4567' },
+  { label: 'Email', value: 'blog@template.io' },
+];

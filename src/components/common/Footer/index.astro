@@ -1,14 +1,13 @@
 ---
 import SocialIcons from '@/components/common/SocialIcons/index.astro';
-import { socials } from '@/contents/socials';
+import ContactInfo from '@/components/common/ContactInfo/index.astro';
+import { socials, contactItems } from '@/contents/blog';
 import { Image } from 'astro:assets';
 ---
 
 <footer class="border-t bg-white text-gray-800">
-  <div
-    class="mx-auto max-w-6xl px-6 py-10 grid gap-10 md:grid-cols-2 lg:grid-cols-4"
-  >
-    <div>
+  <div class="container mx-auto px-6 py-10 flex justify-between items-center">
+    <div class="pr-20 xl:pr-0">
       <Image
         src="/images/logo.svg"
         alt="logo image"
@@ -27,6 +26,10 @@ import { Image } from 'astro:assets';
         class="flex-col space-y-4"
         linkCustom="bg-[#f4f4f4] rounded-xl w-10 h-10 justify-center"
       /> -->
+    </div>
+
+    <div class="md:col-span-2 lg:col-span-3 2xl:pr-32">
+      <ContactInfo items={contactItems} />
     </div>
   </div>
 </footer>
