@@ -1,0 +1,28 @@
+---
+interface LinkProps {
+  href: string;
+  label: string;
+  text?: string;
+  classes?: string;
+  external?: boolean;
+}
+
+const {
+  href,
+  label,
+  text,
+  classes,
+  external = false,
+} = Astro.props as LinkProps;
+---
+
+<a
+  href={href}
+  aria-label={label}
+  class={classes}
+  target={external ? '_blank' : '_self'}
+  rel={external ? 'noopener noreferrer' : undefined}
+>
+  <slot />
+  {text && <span class="ml-1">{text}</span>}
+</a>

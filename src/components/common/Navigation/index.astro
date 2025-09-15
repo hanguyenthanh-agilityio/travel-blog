@@ -1,5 +1,6 @@
 ---
 import NavDropdownMenu from '../NavDropdownMenu';
+import Link from '@/components/ui/link/index.astro';
 
 const menu = [
   { href: '/', text: 'Home' },
@@ -16,9 +17,11 @@ const otherPages = [
 <nav class="flex items-center space-x-6">
   {
     menu.map((item) => (
-      <a href={item.href} class="text-sm hover:text-gray-600">
-        {item.text}
-      </a>
+      <Link
+        href={item.href}
+        text={item.text}
+        class="text-sm hover:text-gray-600"
+      />
     ))
   }
   <div>
