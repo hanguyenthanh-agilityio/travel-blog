@@ -1,12 +1,15 @@
 ---
 import SocialIcons from '@/components/common/SocialIcons/index.astro';
 import ContactInfo from '@/components/common/ContactInfo/index.astro';
-import { socials, contactItems } from '@/contents/blog';
+import Link from '@/components/ui/link/index.astro';
+
+import { socials, contactItems, bottomLinks } from '@/contents/blog';
 import { Image } from 'astro:assets';
 ---
 
-<footer class="border-t bg-white text-gray-800">
-  <div class="container mx-auto px-6 py-10 flex justify-between items-center">
+<footer class="container mx-auto bg-white text-gray-800 px-4">
+  <div class="py-10 flex justify-between items-center">
+    <!-- Logo and social icons -->
     <div class="pr-20 xl:pr-0">
       <Image
         src="/images/logo.svg"
@@ -28,8 +31,24 @@ import { Image } from 'astro:assets';
       /> -->
     </div>
 
+    <!-- Contact info -->
     <div class="md:col-span-2 lg:col-span-3 2xl:pr-32">
       <ContactInfo items={contactItems} />
     </div>
   </div>
+
+  <div class="flex justify-between item-center text-sm py-10 text-secondary">
+    <p>
+      &copy; <span id="copyright"></span> Blog Template. All rights reserved.
+    </p>
+    <div class="flex space-x-6">
+      {bottomLinks.map((link) => <Link href={link.href} text={link.text} />)}
+    </div>
+  </div>
 </footer>
+
+<script>
+  document.querySelector('#copyright')!.textContent = new Date()
+    .getFullYear()
+    .toString();
+</script>
