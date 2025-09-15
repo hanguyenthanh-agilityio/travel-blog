@@ -8,7 +8,9 @@ import { Image } from 'astro:assets';
 ---
 
 <footer class="container mx-auto bg-white text-gray-800 px-4">
-  <div class="py-10 flex justify-between items-center">
+  <div
+    class="py-10 flex flex-col lg:flex-row justify-between lg:items-center gap-10 lg:gap-0"
+  >
     <!-- Logo and social icons -->
     <div class="pr-20 xl:pr-0">
       <Image
@@ -22,13 +24,6 @@ import { Image } from 'astro:assets';
         class="pb-6"
       />
       <SocialIcons socials={socials} class="space-x-6" />
-
-      <!-- Use For Blog detail -->
-      <!-- <SocialIcons
-        socials={socials}
-        class="flex-col space-y-4"
-        linkCustom="bg-[#f4f4f4] rounded-xl w-10 h-10 justify-center"
-      /> -->
     </div>
 
     <!-- Contact info -->
@@ -37,11 +32,15 @@ import { Image } from 'astro:assets';
     </div>
   </div>
 
-  <div class="flex justify-between item-center text-sm py-10 text-secondary">
-    <p>
+  <div
+    class="flex flex-col lg:flex-row justify-between lg:item-center text-sm pt-0 pb-6 lg:py-10 text-secondary gap-4 lg:gap-0"
+  >
+    <p class="order-2 lg:order-1 font-medium">
       &copy; <span id="copyright"></span> Blog Template. All rights reserved.
     </p>
-    <div class="flex space-x-6">
+    <div
+      class="order-1 lg: order-2 flex flex-col lg:flex-row space-y-3 lg:space-y-0 lg:space-x-6"
+    >
       {bottomLinks.map((link) => <Link href={link.href} text={link.text} />)}
     </div>
   </div>
