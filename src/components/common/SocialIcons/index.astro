@@ -6,15 +6,21 @@ interface SocialItem {
   label: string;
   icon: string;
   class?: string;
+  linkCustom?: string;
 }
 
 const { socials } = Astro.props as { socials: SocialItem[] };
 ---
 
-<div class="flex space-x-6 mt-4 md:mt-0">
+<div class={`flex mt-4 md:mt-0 ${Astro.props.class ?? ''}`}>
   {
     socials.map((s) => (
-      <Link href={s.href} label={s.label} external classes="flex items-center">
+      <Link
+        href={s.href}
+        label={s.label}
+        external
+        classes={`flex items-center ${Astro.props.linkCustom ?? ''}`}
+      >
         <img src={s.icon} alt={s.label} class="h-6 w-6" />
       </Link>
     ))

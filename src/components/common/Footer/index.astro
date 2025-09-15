@@ -19,7 +19,14 @@ import { Image } from 'astro:assets';
         quality={80}
         class="pb-6"
       />
-      <SocialIcons socials={socials} />
+      <SocialIcons socials={socials} class="space-x-6" />
+
+      <!-- Use For Blog detail -->
+      <!-- <SocialIcons
+        socials={socials}
+        class="flex-col space-y-4"
+        linkCustom="bg-[#f4f4f4] rounded-xl w-10 h-10 justify-center"
+      /> -->
     </div>
   </div>
 </footer>
