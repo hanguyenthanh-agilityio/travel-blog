@@ -1,6 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import Navigation from '../Navigation/index.astro';
+import MobileSheetMenu from '@/components/common/SheetMenu';
 ---
 
 <header class="w-full bg-white">
@@ -8,17 +9,23 @@ import Navigation from '../Navigation/index.astro';
     <div class="flex items-center justify-between">
       <div class="flex items-center">
         <Image
-          src="/images/logo.png"
+          src="/images/logo.svg"
           alt="logo image"
           width="194"
           height="40"
-          format="avif"
-          fit="cover"
-          quality={80}
           class="hero-image"
         />
       </div>
-      <Navigation />
+
+      <!-- Desktop -->
+      <div class="hidden md:block">
+        <Navigation />
+      </div>
+
+      <!-- Mobile -->
+      <div class="md:hidden">
+        <MobileSheetMenu client:load />
+      </div>
     </div>
   </div>
 </header>
