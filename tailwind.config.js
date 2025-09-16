@@ -27,6 +27,7 @@ module.exports = {
         accent: '#2980b9',
         muted: '#757575',
         background: '#ffffff',
+        date: '#9a9a9a',
         cardBackground: '',
         destructive: {
           DEFAULT: 'hsl(var(--destructive))',
