@@ -1,6 +1,7 @@
 ---
 import BlogLayout from '@/layouts/BlogLayout.astro';
 import BlogHero from '@/components/home/BLogHero/index.astro';
+import SectionTitle from '@/components/home/SectionTitle/index.astro';
 
 const heroPost = {
   title: 'A Foodie’s Guide to Europe: Best Culinary Experiences by Country',
@@ -13,8 +14,14 @@ const heroPost = {
     layout: 'hero',
   },
 };
+
+const popularTitle = {
+  title: 'Popular Post',
+  subTitle: 'Ideas, trends, and inspiration for a brighter future',
+};
 ---
 
 <BlogLayout>
   <BlogHero {...heroPost} />
+  <SectionTitle {...popularTitle} />
 </BlogLayout>
