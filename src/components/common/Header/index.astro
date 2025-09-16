@@ -1,6 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import Navigation from '../Navigation/index.astro';
+import MobileSheetMenu from '@/components/common/SheetMenu';
 ---
 
 <header class="w-full bg-white">
@@ -12,13 +13,19 @@ import Navigation from '../Navigation/index.astro';
           alt="logo image"
           width="194"
           height="40"
-          format="avif"
-          fit="cover"
-          quality={80}
           class="hero-image"
         />
       </div>
-      <Navigation />
+
+      <!-- Desktop -->
+      <div class="hidden md:block">
+        <Navigation />
+      </div>
+
+      <!-- Mobile -->
+      <div class="md:hidden">
+        <MobileSheetMenu client:load />
+      </div>
     </div>
   </div>
 </header>

@@ -31,3 +31,9 @@ export const contactItems = [
   { label: 'Phone Number', value: '1800 123 4567' },
   { label: 'Email', value: 'blog@template.io' },
 ];
+
+export const bottomLinks = [
+  { href: '/privacy', text: 'privacy Policy' },
+  { href: '/term', text: 'Terms of Service' },
+  { href: '/setting', text: 'Cookies Settings' },
+];

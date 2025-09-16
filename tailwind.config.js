@@ -23,6 +23,7 @@ module.exports = {
       colors: {
         foreground: 'hsl(var(--foreground))',
         primary: '#212121',
+        secondary: '#30333c',
         accent: '#2980b9',
         muted: '#757575',
         background: '#ffffff',
