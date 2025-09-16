@@ -1,0 +1,28 @@
+---
+import Link from '@/components/ui/link/index.astro';
+
+interface SocialItem {
+  href: string;
+  label: string;
+  icon: string;
+  class?: string;
+  linkCustom?: string;
+}
+
+const { socials } = Astro.props as { socials: SocialItem[] };
+---
+
+<div class={`flex mt-0 md:mt-4 md:mt-0 ${Astro.props.class ?? ''}`}>
+  {
+    socials.map((s) => (
+      <Link
+        href={s.href}
+        label={s.label}
+        external
+        classes={`flex items-center ${Astro.props.linkCustom ?? ''}`}
+      >
+        <img src={s.icon} alt={s.label} class="h-6 w-6" />
+      </Link>
+    ))
+  }
+</div>
