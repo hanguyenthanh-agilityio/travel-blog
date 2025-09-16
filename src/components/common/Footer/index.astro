@@ -1,14 +1,18 @@
 ---
 import SocialIcons from '@/components/common/SocialIcons/index.astro';
-import { socials } from '@/contents/socials';
+import ContactInfo from '@/components/common/ContactInfo/index.astro';
+import Link from '@/components/ui/link/index.astro';
+
+import { socials, contactItems, bottomLinks } from '@/contents/blog';
 import { Image } from 'astro:assets';
 ---
 
-<footer class="border-t bg-white text-gray-800">
+<footer class="container mx-auto bg-white text-gray-800 px-4">
   <div
-    class="mx-auto max-w-6xl px-6 py-10 grid gap-10 md:grid-cols-2 lg:grid-cols-4"
+    class="py-10 flex flex-col lg:flex-row justify-between lg:items-center gap-10 lg:gap-0"
   >
-    <div>
+    <!-- Logo and social icons -->
+    <div class="pr-20 xl:pr-0">
       <Image
         src="/images/logo.svg"
         alt="logo image"
@@ -20,13 +24,30 @@ import { Image } from 'astro:assets';
         class="pb-6"
       />
       <SocialIcons socials={socials} class="space-x-6" />
+    </div>
 
-      <!-- Use For Blog detail -->
-      <!-- <SocialIcons
-        socials={socials}
-        class="flex-col space-y-4"
-        linkCustom="bg-[#f4f4f4] rounded-xl w-10 h-10 justify-center"
-      /> -->
+    <!-- Contact info -->
+    <div class="md:col-span-2 lg:col-span-3 2xl:pr-32">
+      <ContactInfo items={contactItems} />
+    </div>
+  </div>
+
+  <div
+    class="flex flex-col lg:flex-row justify-between lg:item-center text-sm pt-0 pb-6 lg:py-10 text-secondary gap-4 lg:gap-0"
+  >
+    <p class="order-2 lg:order-1 font-medium">
+      &copy; <span id="copyright"></span> Blog Template. All rights reserved.
+    </p>
+    <div
+      class="order-1 lg: order-2 flex flex-col lg:flex-row space-y-3 lg:space-y-0 lg:space-x-6"
+    >
+      {bottomLinks.map((link) => <Link href={link.href} text={link.text} />)}
     </div>
   </div>
 </footer>
+
+<script>
+  document.querySelector('#copyright')!.textContent = new Date()
+    .getFullYear()
+    .toString();
+</script>
