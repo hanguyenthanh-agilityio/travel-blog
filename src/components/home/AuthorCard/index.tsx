@@ -21,7 +21,9 @@ const AuthorCard: React.FC<AuthorCardProps> = ({
   layout = 'card',
 }) => {
   return (
-    <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-4 md:gap-0">
+    <div
+      className={`flex ${layout === 'hero' ? 'flex-col md:flex-row md:justify-between md:items-center' : 'flex-row items-center justify-between'} gap-4 md:gap-0`}
+    >
       {/* Create date */}
       <p
         className={`${layout === 'hero' ? 'order-1' : 'order-2'} text-sm ${dark ? 'text-white' : 'text-date'}`}
@@ -38,7 +40,7 @@ const AuthorCard: React.FC<AuthorCardProps> = ({
           <AvatarFallback>{name?.[0]}</AvatarFallback>
         </Avatar>
         <div
-          className={`${dark ? 'text-white' : 'text-primary'} flex flex-col gap-1.5`}
+          className={`${dark ? 'text-white' : 'text-primary'} ${layout === 'hero' ? 'flex flex-col gap-1.5' : ''}`}
         >
           <p className="text-sm font-medium">{name}</p>
           <p className="text-xs opacity-70">{role}</p>
