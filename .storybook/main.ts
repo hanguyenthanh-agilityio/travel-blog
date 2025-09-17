@@ -1,3 +1,5 @@
+/* eslint-disable no-undef */
+import path from 'path';
 import type { StorybookConfig } from '@storybook/react-vite';
 
 const config: StorybookConfig = {
@@ -13,5 +15,17 @@ const config: StorybookConfig = {
     name: '@storybook/react-vite',
     options: {},
   },
+  staticDirs: ['../public'],
+  async viteFinal(baseConfig) {
+    baseConfig.resolve = {
+      ...baseConfig.resolve,
+      alias: {
+        ...(baseConfig.resolve?.alias ?? {}),
+        '@': path.resolve(__dirname, '../src'),
+      },
+    };
+    return baseConfig;
+  },
 };
+
 export default config;
