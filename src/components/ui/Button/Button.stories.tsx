@@ -2,7 +2,7 @@ import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Button } from './index';
 
-const meta: Meta<typeof Button> = {
+const meta = {
   title: 'UI/Button',
   component: Button,
   tags: ['autodocs'],
@@ -28,24 +28,21 @@ const meta: Meta<typeof Button> = {
     children: 'Click me',
     variant: 'default',
     size: 'default',
+    className: 'text-white',
   },
-};
+} satisfies Meta<typeof Button>;
 
 export default meta;
+type Story = StoryObj<typeof meta>;
 
-type Story = StoryObj<typeof Button>;
-
-export const Default: Story = {
-  render: () => (
-    <Button variant="default" className="text-white">
-      Default
-    </Button>
-  ),
-};
+export const Default: Story = {};
 
 export const Variants: Story = {
   render: () => (
     <div className="flex flex-wrap gap-4">
+      <Button variant="default" className="text-white">
+        Default
+      </Button>
       <Button variant="destructive">Destructive</Button>
       <Button variant="outline">Outline</Button>
       <Button variant="secondary" className="text-white">
