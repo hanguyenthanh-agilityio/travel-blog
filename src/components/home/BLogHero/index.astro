@@ -1,0 +1,30 @@
+---
+import AuthorCard from '../AuthorCard';
+
+const { title, image, author } = Astro.props;
+
+const parts = title.split(':');
+---
+
+<section class="relative w-full h-[400px] rounded-2xl overflow-hidden">
+  <img src={image} alt={title} class="w-full h-full object-cover" />
+
+  <div class="absolute inset-0 bg-gradient-to-b from-[#2980B9]/0 to-[#2980B9]">
+  </div>
+
+  <div
+    class="absolute top-4 md:top-8 left-3 md:left-10 right-3 md:right-10 text-white"
+  >
+    <h1 class="text-xl md:text-2xl font-bold max-w-2xl leading-snug">
+      {parts[0]}:
+      <br />
+      {parts[1]}
+    </h1>
+  </div>
+
+  <div
+    class="absolute bottom-4 md:bottom-8 left-3 md:left-10 right-3 md:right-10 text-white"
+  >
+    <AuthorCard {...author} dark client:load />
+  </div>
+</section>
