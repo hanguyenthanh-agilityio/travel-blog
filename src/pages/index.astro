@@ -1,20 +1,38 @@
 ---
 import BlogLayout from '@/layouts/BlogLayout.astro';
 import BlogHero from '@/components/home/BLogHero/index.astro';
+import SectionTitle from '@/components/home/SectionTitle/index.astro';
+import BlogCard from '@/components/home/BlogCard/index.astro';
+import BlogGrid from '@/components/home/BlogGrid/index.astro';
+import { heroPost, popularPost, trendingPost } from '@/contents/blog';
 
-const heroPost = {
-  title: 'A Foodie’s Guide to Europe: Best Culinary Experiences by Country',
-  image: '/images/hero.png',
-  author: {
-    name: 'Cruz Mcintyre',
-    role: 'Author',
-    avatar: '/images/avatar-blog-1.png',
-    date: 'Nov 29, 2024',
-    layout: 'hero',
-  },
+const popularTitle = {
+  title: 'Popular Post',
+  subTitle: 'Ideas, trends, and inspiration for a brighter future',
+};
+
+const trendingTitle = {
+  title: 'Trending Post',
+  subTitle: 'Discover how innovation and creativity drive meaningful change',
 };
 ---
 
 <BlogLayout>
   <BlogHero {...heroPost} />
+  <SectionTitle {...popularTitle} />
+  <div class="grid md:grid-cols-[1fr_1.4fr] gap-6 md:gap-4 lg:gap-10">
+    <BlogCard
+      {...popularPost[0]}
+      className="md:max-h-[200px] lg:max-h-[230px] xl:max-h-[340px]"
+    />
+
+    <div class="flex flex-col gap-6 md:gap-2 justify-between">
+      <BlogCard {...popularPost[1]} variant="horizontal" />
+      <BlogCard {...popularPost[2]} variant="horizontal" />
+    </div>
+  </div>
+
+  <SectionTitle {...trendingTitle} />
+
+  <BlogGrid posts={trendingPost} />
 </BlogLayout>

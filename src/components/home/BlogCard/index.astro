@@ -1,0 +1,39 @@
+---
+import AuthorCard from '../AuthorCard';
+
+const { title, image, author, variant = 'default', className } = Astro.props;
+---
+
+<div class={`overflow-hidden hover:shadow-md transition`}>
+  {
+    variant === 'horizontal' ? (
+      <div class="flex flex-col md:flex-row gap-4">
+        <img
+          src={image}
+          alt={title}
+          class="w-full md:w-1/2 object-cover rounded-xl max-h-[230px]"
+        />
+        <div class="flex-1 py-4 flex flex-col justify-between">
+          <h3 class="text-lg md:text-xl font-bold mb-4 line-clamp-2">
+            {title}
+          </h3>
+          <AuthorCard {...author} client:load />
+        </div>
+      </div>
+    ) : (
+      <>
+        <img
+          src={image}
+          alt={title}
+          class={`w-full ${className} object-cover rounded-xl`}
+        />
+        <div class="py-4">
+          <h3 class="text-lg md:text-xl font-bold mb-4 line-clamp-2">
+            {title}
+          </h3>
+          <AuthorCard {...author} client:load />
+        </div>
+      </>
+    )
+  }
+</div>
