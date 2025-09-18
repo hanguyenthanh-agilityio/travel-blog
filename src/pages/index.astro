@@ -1,7 +1,20 @@
 ---
 import BlogLayout from '@/layouts/BlogLayout.astro';
+import BlogHero from '@/components/home/BLogHero/index.astro';
+
+const heroPost = {
+  title: 'A Foodie’s Guide to Europe: Best Culinary Experiences by Country',
+  image: '/images/hero.png',
+  author: {
+    name: 'Cruz Mcintyre',
+    role: 'Author',
+    avatar: '/images/avatar-blog-1.png',
+    date: 'Nov 29, 2024',
+    layout: 'hero',
+  },
+};
 ---
 
 <BlogLayout>
-  <p>HomePage</p>
+  <BlogHero {...heroPost} />
 </BlogLayout>
