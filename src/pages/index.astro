@@ -1,6 +1,8 @@
 ---
 import BlogLayout from '@/layouts/BlogLayout.astro';
 import BlogHero from '@/components/home/BLogHero/index.astro';
+import SectionTitle from '@/components/home/SectionTitle/index.astro';
+import BlogCard from '@/components/home/BlogCard/index.astro';
 
 const heroPost = {
   title: 'A Foodie’s Guide to Europe: Best Culinary Experiences by Country',
@@ -13,8 +15,55 @@ const heroPost = {
     layout: 'hero',
   },
 };
+
+const popularTitle = {
+  title: 'Popular Post',
+  subTitle: 'Ideas, trends, and inspiration for a brighter future',
+};
+
+const popularPost = [
+  {
+    title: 'Sustainable Travel Tips: Reducing Your Carbon Footprint',
+    image: '/images/popular-1.png',
+
+    author: {
+      date: 'Nov 29, 2024',
+      name: 'Clara Wilson',
+      avatar: '/images/avatar-blog-2.png',
+    },
+  },
+  {
+    title: 'Chasing Sunsets: The World’s Most Scenic Destinations',
+    image: '/images/popular-2.png',
+
+    author: {
+      date: 'Nov 29, 2024',
+      name: 'Amelia Scott',
+      avatar: '/images/avatar-blog-3.png',
+    },
+  },
+  {
+    title: 'Hidden Gems: Europe’s Best Kept Secret Destinations',
+    image: '/images/popular-3.png',
+    date: 'Nov 29, 2024',
+    author: {
+      date: 'Nov 29, 2024',
+      name: 'Oliver Clark',
+      avatar: '/images/avatar-blog-4.png',
+    },
+  },
+];
 ---
 
 <BlogLayout>
   <BlogHero {...heroPost} />
+  <SectionTitle {...popularTitle} />
+  <div class="grid md:grid-cols-[1fr_1.4fr] gap-6">
+    <BlogCard {...popularPost[0]} />
+
+    <div class="flex flex-col gap-2 justify-between">
+      <BlogCard {...popularPost[1]} variant="horizontal" />
+      <BlogCard {...popularPost[2]} variant="horizontal" />
+    </div>
+  </div>
 </BlogLayout>
