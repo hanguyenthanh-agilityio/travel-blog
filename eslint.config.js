@@ -11,7 +11,7 @@ import prettier from 'eslint-config-prettier';
 
 export default [
   // Ignore generated and build outputs
-  { ignores: ['.astro/**/*', 'dist/**/*'] },
+  { ignores: ['.astro/**/*', 'dist/**/*', '.storybook/**/*'] },
   js.configs.recommended, // Astro
   {
     files: ['**/*.astro'],
