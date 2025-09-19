@@ -25,6 +25,7 @@ const { post } = Astro.props;
       <AuthorCard
         {...post.author}
         isBlogDetail="true"
+        classAvatar="w-14 h-14"
         classContainer="!justify-center pb-4"
         className="flex flex-col gap-1 justify-center items-center"
         client:load

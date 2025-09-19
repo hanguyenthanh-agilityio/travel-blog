@@ -9,6 +9,7 @@ interface AuthorCardProps {
   dark?: boolean;
   className?: string;
   classContainer?: string;
+  classAvatar?: string;
   layout?: string;
   isBlogDetail?: boolean;
 }
@@ -21,6 +22,7 @@ const AuthorCard: React.FC<AuthorCardProps> = ({
   dark = false,
   className = '',
   classContainer = '',
+  classAvatar = '',
   layout = 'card',
   isBlogDetail = false,
 }) => {
@@ -41,7 +43,7 @@ const AuthorCard: React.FC<AuthorCardProps> = ({
       <div
         className={`flex items-center gap-3 ${className} ${layout === 'hero' ? 'order-2' : 'order-1'}`}
       >
-        <Avatar className="w-10 h-10">
+        <Avatar className={classAvatar}>
           <AvatarImage src={avatar} alt={name} />
           <AvatarFallback>{name?.[0]}</AvatarFallback>
         </Avatar>
