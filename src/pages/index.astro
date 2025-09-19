@@ -4,7 +4,6 @@ import BlogHero from '@/components/home/BLogHero/index.astro';
 import SectionTitle from '@/components/home/SectionTitle/index.astro';
 import BlogCard from '@/components/home/BlogCard/index.astro';
 import BlogGrid from '@/components/home/BlogGrid/index.astro';
-import { heroPost, popularPost, trendingPost } from '@/contents/blog';
 
 const popularTitle = {
   title: 'Popular Post',
@@ -15,6 +14,26 @@ const trendingTitle = {
   title: 'Trending Post',
   subTitle: 'Discover how innovation and creativity drive meaningful change',
 };
+
+const API_URL =
+  'https://68cbe88d716562cf50758d1c.mockapi.io/api/travel-blog/posts';
+
+const res = await fetch(API_URL);
+const posts = await res.json();
+console.log(posts);
+
+// Hero post
+const heroPost = posts[0];
+
+// Popular posts
+const popularPosts = (posts as Array<{ category: string }>)
+  .filter((p) => p.category === 'popular')
+  .slice(0, 3);
+
+// Trending posts
+const trendingPosts = (posts as Array<{ category: string }>).filter(
+  (p) => p.category === 'trending',
+);
 ---
 
 <BlogLayout>
@@ -22,17 +41,17 @@ const trendingTitle = {
   <SectionTitle {...popularTitle} />
   <div class="grid md:grid-cols-[1fr_1.4fr] gap-6 md:gap-4 lg:gap-10">
     <BlogCard
-      {...popularPost[0]}
+      {...popularPosts[0]}
       className="md:max-h-[200px] lg:max-h-[230px] xl:max-h-[340px]"
     />
 
     <div class="flex flex-col gap-6 md:gap-2 justify-between">
-      <BlogCard {...popularPost[1]} variant="horizontal" />
-      <BlogCard {...popularPost[2]} variant="horizontal" />
+      <BlogCard {...popularPosts[1]} variant="horizontal" />
+      <BlogCard {...popularPosts[2]} variant="horizontal" />
     </div>
   </div>
 
   <SectionTitle {...trendingTitle} />
 
-  <BlogGrid posts={trendingPost} />
+  <BlogGrid posts={trendingPosts} />
 </BlogLayout>
