@@ -11,7 +11,7 @@ import {
   SheetFooter,
   SheetClose,
 } from '../sheet';
-import { Button } from '@/components/ui/button';
+import { Button } from '../button';
 
 const meta: Meta = {
   title: 'UI/Sheet',
