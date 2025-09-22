@@ -25,6 +25,12 @@ const parts = title.split(':');
   <div
     class="absolute bottom-4 md:bottom-8 left-3 md:left-10 right-3 md:right-10 text-white"
   >
-    <AuthorCard {...author} classAvatar="w-10 h-10" dark client:load />
+    <AuthorCard
+      {...author}
+      classAvatar="w-10 h-10"
+      isRole="true"
+      dark
+      client:load
+    />
   </div>
 </section>
