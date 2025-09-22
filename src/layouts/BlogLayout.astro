@@ -4,16 +4,19 @@ import Footer from '@/components/common/Footer/index.astro';
 import MainHead from './MainHead.astro';
 import '@/styles/tailwind.css';
 
-// component import
+const seo = Astro.props.seo || {};
 
 const {
-  title = 'My Astro Blog',
-  description = 'My musings about the Astro framework',
+  title = seo.title || 'My Astro Blog',
+  description = seo.description || 'My musings about the Astro framework',
+  image = seo.image,
+  url = seo.url,
+  noindex = false,
 } = Astro.props;
 ---
 
 <html lang="en">
-  <MainHead {title} {description} />
+  <MainHead {title} {description} {image} {url} {noindex} />
   <body>
     <Header />
     <main class="flex-1 container mx-auto px-4 py-8">
