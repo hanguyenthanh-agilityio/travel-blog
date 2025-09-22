@@ -1,13 +1,13 @@
 import React from 'react';
 
-import ArrowIcon from '@/components/icon/arrow.tsx';
+import ArrowIcon from '@/components/icon/arrow';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from '@/components/ui/dropdown/index.tsx';
-import { Button } from '@/components/ui/button/index.tsx';
+} from '@/components/ui/dropdown';
+import { Button } from '@/components/ui/button';
 
 interface ItemProps {
   href: string;

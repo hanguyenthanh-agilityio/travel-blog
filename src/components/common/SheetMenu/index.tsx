@@ -4,10 +4,10 @@ import {
   SheetTrigger,
   SheetContent,
   SheetClose,
-} from '@/components/ui/sheet/index.tsx';
-import NavDropdownMenu from '@/components/common/NavDropdownMenu/index.tsx';
-import Hamburger from '@/components/icon/hamburger.tsx';
-import { Button } from '@/components/ui/button/index.tsx';
+} from '@/components/ui/sheet';
+import NavDropdownMenu from '@/components/common/NavDropdownMenu';
+import Hamburger from '@/components/icon/hamburger';
+import { Button } from '@/components/ui/button';
 const menu = [
   { href: '/', text: 'Home' },
   { href: '/blog', text: 'Blog' },
