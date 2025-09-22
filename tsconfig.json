@@ -4,6 +4,9 @@
   "exclude": ["dist"],
   "compilerOptions": {
     "baseUrl": ".",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "types": ["node"],
     "paths": {
       "@/*": ["./src/*"]
     }
