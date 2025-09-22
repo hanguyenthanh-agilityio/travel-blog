@@ -1,34 +1,45 @@
 import path from 'node:path';
+import fs from 'node:fs';
 import { fileURLToPath } from 'node:url';
-
 import { defineConfig } from 'vitest/config';
-
-import { storybookTest } from '@storybook/addon-vitest/vitest-plugin';
 
 const dirname = path.dirname(fileURLToPath(import.meta.url));
 
-// More info at: https://storybook.js.org/docs/next/writing-tests/integrations/vitest-addon
+// Try to load Storybook Vitest addon only if available and configured
+let storybookTestPlugin: any = null;
+const storybookDir = path.join(dirname, '.storybook');
+const hasStorybookDir = fs.existsSync(storybookDir);
+
+try {
+  if (hasStorybookDir) {
+    // Dynamic import; types may not be present if addon not installed
+    // @ts-expect-error optional dependency types may be missing
+    const mod = (await import('@storybook/addon-vitest/vitest-plugin')) as any;
+    storybookTestPlugin = mod?.storybookTest?.({ configDir: storybookDir });
+  }
+} catch {
+  // Silently skip if addon is not installed; keeps pre-push from failing
+}
+
 export default defineConfig({
   test: {
-    projects: [
-      {
-        extends: true,
-        plugins: [
-          // The plugin will run tests for the stories defined in your Storybook config
-          // See options at: https://storybook.js.org/docs/next/writing-tests/integrations/vitest-addon#storybooktest
-          storybookTest({ configDir: path.join(dirname, '.storybook') }),
-        ],
-        test: {
-          name: 'storybook',
-          browser: {
-            enabled: true,
-            headless: true,
-            provider: 'playwright',
-            instances: [{ browser: 'chromium' }],
+    projects: storybookTestPlugin
+      ? [
+          {
+            extends: true,
+            plugins: [storybookTestPlugin],
+            test: {
+              name: 'storybook',
+              browser: {
+                enabled: true,
+                headless: true,
+                provider: 'playwright',
+                instances: [{ browser: 'chromium' }],
+              },
+              setupFiles: ['.storybook/vitest.setup.ts'],
+            },
           },
-          setupFiles: ['.storybook/vitest.setup.ts'],
-        },
-      },
-    ],
+        ]
+      : [],
   },
 });

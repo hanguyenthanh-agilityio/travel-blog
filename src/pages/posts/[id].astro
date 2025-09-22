@@ -1,0 +1,87 @@
+---
+import BlogLayout from '@/layouts/BlogLayout.astro';
+import AuthorCard from '@/components/home/AuthorCard';
+import SocialIcons from '@/components/common/SocialIcons/index.astro';
+import { socials } from '@/contents/blog';
+
+export async function getStaticPaths() {
+  const res = await fetch(
+    'https://68cbe88d716562cf50758d1c.mockapi.io/api/travel-blog/posts',
+  );
+  const posts: Array<{ id: string; [key: string]: any }> = await res.json();
+
+  return posts.map((post) => ({
+    params: { id: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+---
+
+<BlogLayout>
+  <article class="max-w-3xl mx-auto py-8">
+    <div class="md:px-8">
+      <AuthorCard
+        {...post.author}
+        isBlogDetail="true"
+        classAvatar="w-14 h-14"
+        classContainer="!justify-center pb-4"
+        className="flex flex-col gap-1 justify-center items-center"
+        client:load
+      />
+      <h1 class="text-xl md:text-3xl md:text-4xl font-bold mb-4 text-center">
+        {post.title}
+      </h1>
+
+      <p
+        class="text-center text-sm text-primary mt-2 pb-5 border-b border-[#dddddd]"
+      >
+        {post.author.date}
+      </p>
+    </div>
+    <div class="lg:relative">
+      <!-- Social Icons -->
+      <div class="lg:absolute lg:right-[-100px] pt-5">
+        <SocialIcons
+          socials={socials}
+          class="justify-center lg:flex-col gap-3 md:gap-4"
+          linkCustom="bg-[#f4f4f4] rounded-xl p-2"
+        />
+      </div>
+
+      <p class="pt-5 text-primary text-base md:px-8">
+        {post.excerpt}
+      </p>
+
+      <img
+        src={post.image}
+        alt={post.title}
+        class="rounded-xl my-6 w-full h-[400px] md:h-auto"
+      />
+
+      <div class="prose lg:prose-lg md:px-8">
+        <div class="border-l-2 border-[#dddddd]">
+          <p class="pl-4 text-primary text-base">{post.content.intro}</p>
+        </div>
+
+        {
+          post.content?.sections?.map(
+            (section: { country: string; items: string[] }) => (
+              <div>
+                <h2 class="text-lg font-semibold mt-6">{section.country}</h2>
+                <ul class="list-disc ml-6 text-primary text-base">
+                  {section.items.map((item: string) => (
+                    <li>{item}</li>
+                  ))}
+                </ul>
+              </div>
+            ),
+          )
+        }
+
+        <p class="mt-8 font-medium">{post.content.conclusion}</p>
+      </div>
+    </div>
+  </article>
+</BlogLayout>
