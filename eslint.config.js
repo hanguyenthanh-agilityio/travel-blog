@@ -1,5 +1,4 @@
-// Storybook ESLint plugin disabled to prevent module resolution errors during lint-staged
-
+// eslint.config.js
 import js from '@eslint/js';
 import ts from '@typescript-eslint/eslint-plugin';
 import tsParser from '@typescript-eslint/parser';
@@ -12,7 +11,11 @@ import prettier from 'eslint-config-prettier';
 export default [
   // Ignore generated and build outputs
   { ignores: ['.astro/**/*', 'dist/**/*', '.storybook/**/*'] },
-  js.configs.recommended, // Astro
+
+  // JS recommended
+  js.configs.recommended,
+
+  // Astro files
   {
     files: ['**/*.astro'],
     languageOptions: {
@@ -31,7 +34,9 @@ export default [
     rules: {
       ...astro.configs.recommended.rules,
     },
-  }, // TS/TSX
+  },
+
+  // TS/TSX files
   {
     files: ['**/*.{ts,tsx}'],
     languageOptions: {
@@ -69,7 +74,9 @@ export default [
       ],
       'react/self-closing-comp': ['warn', { component: true, html: true }],
     },
-  }, // Node.js config files
+  },
+
+  // Node.js config files
   {
     files: ['**/*.config.js', '**/*.cjs'],
     languageOptions: {
@@ -81,7 +88,9 @@ export default [
     rules: {
       'no-undef': 'off',
     },
-  }, // Ignore generated files
+  },
+
+  // Ignore generated types
   {
     files: ['.astro/*.d.ts'],
     rules: {
@@ -90,6 +99,25 @@ export default [
       'no-undef': 'off',
     },
   },
+
+  // Test files
+  {
+    files: ['**/__tests__/**/*.{ts,tsx}', '**/*.test.{ts,tsx}'],
+    languageOptions: {
+      parser: tsParser,
+      globals: {
+        JSX: 'readonly',
+        document: 'readonly',
+        window: 'readonly',
+        NodeJS: 'readonly',
+        fetch: 'readonly',
+      },
+    },
+    rules: {
+      'no-undef': 'off',
+    },
+  },
+
+  // Prettier
   prettier,
-  // Storybook rules disabled
 ];
