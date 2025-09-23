@@ -6,6 +6,9 @@ import react from '@astrojs/react';
 // https://astro.build/config
 export default defineConfig({
   integrations: [tailwindcss(), react()],
+  redirects: {
+    '/': 'page/1/',
+  },
   i18n: {
     locales: ['es', 'en', 'pt-br', 'vi'],
     defaultLocale: 'en',
