@@ -8,10 +8,9 @@ const { title, description, noindex, image, url } = Astro.props;
   <meta name="viewport" content="width=device-width" />
   <meta name="generator" content={Astro.generator} />
   <title>{title}</title>
-  <meta property="og:title" content={title} />
-  <meta property="og:description" content={description} />
-  {image && <meta property="og:image" content={image} />}
-  {url && <meta property="og:url" content={url} />}
+  <meta property="description" content={description} />
+  {image && <meta property="image" content={image} />}
+  {url && <meta property="url" content={url} />}
 
   <meta
     name="robots"
