@@ -11,7 +11,7 @@ const {
   description = seo.description || 'My musings about the Astro framework',
   image = seo.image,
   url = seo.url,
-  noindex = false,
+  noindex = seo.noindex ?? false,
 } = Astro.props;
 ---
 
