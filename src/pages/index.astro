@@ -4,6 +4,12 @@ import BlogHero from '@/components/home/BLogHero/index.astro';
 import SectionTitle from '@/components/home/SectionTitle/index.astro';
 import BlogCard from '@/components/home/BlogCard/index.astro';
 import BlogGrid from '@/components/home/BlogGrid/index.astro';
+import { fetchPosts, getPopularPosts, getTrendingPosts } from '@/lib/api';
+
+const posts = await fetchPosts();
+const heroPost = posts[0];
+const popularPosts = await getPopularPosts();
+const trendingPosts = await getTrendingPosts();
 
 const popularTitle = {
   title: 'Popular Post',
@@ -14,31 +20,12 @@ const trendingTitle = {
   title: 'Trending Post',
   subTitle: 'Discover how innovation and creativity drive meaningful change',
 };
-
-const API_URL =
-  'https://68cbe88d716562cf50758d1c.mockapi.io/api/travel-blog/posts';
-
-const res = await fetch(API_URL);
-const posts = await res.json();
-console.log(posts);
-
-// Hero post
-const heroPost = posts[0];
-
-// Popular posts
-const popularPosts = (posts as Array<{ category: string }>)
-  .filter((p) => p.category === 'popular')
-  .slice(0, 3);
-
-// Trending posts
-const trendingPosts = (posts as Array<{ category: string }>).filter(
-  (p) => p.category === 'trending',
-);
 ---
 
 <BlogLayout>
   <BlogHero {...heroPost} />
   <SectionTitle {...popularTitle} />
+
   <div class="grid md:grid-cols-[1fr_1.4fr] gap-6 md:gap-4 lg:gap-10">
     <BlogCard
       {...popularPosts[0]}
@@ -52,6 +39,5 @@ const trendingPosts = (posts as Array<{ category: string }>).filter(
   </div>
 
   <SectionTitle {...trendingTitle} />
-
   <BlogGrid posts={trendingPosts} />
 </BlogLayout>

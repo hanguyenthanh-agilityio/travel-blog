@@ -4,11 +4,11 @@ import AuthorCard from '@/components/home/AuthorCard';
 import SocialIcons from '@/components/common/SocialIcons/index.astro';
 import { socials } from '@/contents/blog';
 
+import { fetchPosts } from '@/lib/api';
+import type { Post } from '@/types/blog';
+
 export async function getStaticPaths() {
-  const res = await fetch(
-    'https://68cbe88d716562cf50758d1c.mockapi.io/api/travel-blog/posts',
-  );
-  const posts: Array<{ id: string; [key: string]: any }> = await res.json();
+  const posts: Post[] = await fetchPosts();
 
   return posts.map((post) => ({
     params: { id: post.id },
@@ -16,7 +16,7 @@ export async function getStaticPaths() {
   }));
 }
 
-const { post } = Astro.props;
+const { post } = Astro.props as { post: Post };
 ---
 
 <BlogLayout>
@@ -24,8 +24,8 @@ const { post } = Astro.props;
     <div class="md:px-8">
       <AuthorCard
         {...post.author}
-        isBlogDetail="true"
-        isRole="true"
+        isBlogDetail={true}
+        isRole={true}
         classAvatar="w-14 h-14"
         classContainer="!justify-center pb-4"
         className="flex flex-col gap-1 justify-center items-center"

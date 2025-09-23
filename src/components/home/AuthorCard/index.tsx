@@ -1,21 +1,8 @@
 import React from 'react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import type { Author } from '@/types/blog';
 
-interface AuthorCardProps {
-  name: string;
-  role: string;
-  avatar: string;
-  date: Date | string;
-  dark?: boolean;
-  className?: string;
-  classContainer?: string;
-  classAvatar?: string;
-  layout?: string;
-  isBlogDetail?: boolean;
-  isRole?: boolean;
-}
-
-const AuthorCard: React.FC<AuthorCardProps> = ({
+const AuthorCard: React.FC<Author> = ({
   name,
   role,
   avatar,

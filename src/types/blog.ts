@@ -1,12 +1,16 @@
-export type Author = {
+export interface Author {
   name: string;
   role: string;
   avatar: string;
   date: Date | string;
   dark?: boolean;
   className?: string;
+  classContainer?: string;
+  classAvatar?: string;
   layout?: string;
-};
+  isBlogDetail?: boolean;
+  isRole?: boolean;
+}
 
 export type Blog = {
   title: string;
@@ -14,3 +18,17 @@ export type Blog = {
   author: Author;
   variant?: string;
 };
+
+export interface Post {
+  id: string;
+  title: string;
+  excerpt: string;
+  image: string;
+  category: string;
+  author: Author;
+  content: {
+    intro: string;
+    sections: { country: string; items: string[] }[];
+    conclusion: string;
+  };
+}

@@ -44,6 +44,7 @@ export default [
       globals: {
         JSX: 'readonly',
         HTMLButtonElement: 'readonly',
+        fetch: 'readonly',
       },
     },
     plugins: {
