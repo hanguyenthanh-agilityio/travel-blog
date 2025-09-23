@@ -1,6 +1,6 @@
 import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { Avatar, AvatarImage, AvatarFallback } from './index';
+import { Avatar, AvatarImage, AvatarFallback } from '../avatar';
 
 type AvatarStoryProps = {
   src?: string;

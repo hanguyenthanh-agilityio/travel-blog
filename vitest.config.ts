@@ -1,45 +1,43 @@
-import path from 'node:path';
-import fs from 'node:fs';
-import { fileURLToPath } from 'node:url';
+/// <reference types="vitest" />
 import { defineConfig } from 'vitest/config';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 const dirname = path.dirname(fileURLToPath(import.meta.url));
 
-// Try to load Storybook Vitest addon only if available and configured
-let storybookTestPlugin: any = null;
-const storybookDir = path.join(dirname, '.storybook');
-const hasStorybookDir = fs.existsSync(storybookDir);
-
-try {
-  if (hasStorybookDir) {
-    // Dynamic import; types may not be present if addon not installed
-    // @ts-expect-error optional dependency types may be missing
-    const mod = (await import('@storybook/addon-vitest/vitest-plugin')) as any;
-    storybookTestPlugin = mod?.storybookTest?.({ configDir: storybookDir });
-  }
-} catch {
-  // Silently skip if addon is not installed; keeps pre-push from failing
-}
-
 export default defineConfig({
+  resolve: {
+    alias: {
+      '@': path.resolve(dirname, './src'),
+    },
+  },
   test: {
-    projects: storybookTestPlugin
-      ? [
-          {
-            extends: true,
-            plugins: [storybookTestPlugin],
-            test: {
-              name: 'storybook',
-              browser: {
-                enabled: true,
-                headless: true,
-                provider: 'playwright',
-                instances: [{ browser: 'chromium' }],
-              },
-              setupFiles: ['.storybook/vitest.setup.ts'],
-            },
-          },
-        ]
-      : [],
+    globals: true,
+    environment: 'jsdom',
+    setupFiles: './src/setupTests.ts',
+    include: ['src/**/*.{test,spec}.{js,ts,jsx,tsx}'],
+    coverage: {
+      reporter: ['text', 'json', 'html'],
+      exclude: [
+        'node_modules/',
+        'dist/',
+        '**/*.stories.*',
+        'src/components/ui/storybook',
+        'src/components/icon',
+        'src/pages',
+        'src/contents',
+        'src/layouts',
+        'src/pages/posts',
+        'src/types',
+        '.storybook',
+        '.astro',
+        'astro.config.mjs',
+        'commitlint.config.js',
+        'eslint.config.js',
+        'postcss.config.cjs',
+        'tailwind.config.js',
+        'vitest.config.ts',
+      ],
+    },
   },
 });

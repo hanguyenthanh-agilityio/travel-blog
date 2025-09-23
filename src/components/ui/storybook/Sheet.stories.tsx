@@ -10,8 +10,8 @@ import {
   SheetDescription,
   SheetFooter,
   SheetClose,
-} from './index.tsx';
-import { Button } from '@/components/ui/button/index.tsx';
+} from '../sheet';
+import { Button } from '../button';
 
 const meta: Meta = {
   title: 'UI/Sheet',

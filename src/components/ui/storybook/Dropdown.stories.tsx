@@ -10,7 +10,7 @@ import {
   DropdownMenuSub,
   DropdownMenuSubTrigger,
   DropdownMenuSubContent,
-} from './index';
+} from '../dropdown';
 
 const meta: Meta<typeof DropdownMenu> = {
   title: 'UI/DropdownMenu',
