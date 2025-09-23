@@ -5,6 +5,7 @@ interface LinkProps {
   text?: string;
   classes?: string;
   external?: boolean;
+  spanClass?: string;
 }
 
 const {
@@ -12,6 +13,7 @@ const {
   label,
   text,
   classes,
+  spanClass,
   external = false,
 } = Astro.props as LinkProps;
 ---
@@ -24,5 +26,5 @@ const {
   rel={external ? 'noopener noreferrer' : undefined}
 >
   <slot />
-  {text && <span class="ml-1">{text}</span>}
+  {text && <span class={`ml-1 ${spanClass}`}>{text}</span>}
 </a>
