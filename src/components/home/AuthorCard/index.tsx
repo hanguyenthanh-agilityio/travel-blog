@@ -12,6 +12,7 @@ interface AuthorCardProps {
   classAvatar?: string;
   layout?: string;
   isBlogDetail?: boolean;
+  isRole?: boolean;
 }
 
 const AuthorCard: React.FC<AuthorCardProps> = ({
@@ -25,6 +26,7 @@ const AuthorCard: React.FC<AuthorCardProps> = ({
   classAvatar = '',
   layout = 'card',
   isBlogDetail = false,
+  isRole = false,
 }) => {
   return (
     <div
@@ -33,7 +35,7 @@ const AuthorCard: React.FC<AuthorCardProps> = ({
       {/* Create date */}
       {!isBlogDetail && (
         <p
-          className={`${layout === 'hero' ? 'order-1' : 'order-2'} text-sm ${dark ? 'text-white' : 'text-date'}`}
+          className={`${layout === 'hero' ? 'order-1' : 'order-2'} text-sm ${dark ? 'text-white' : 'text-gray-500'}`}
         >
           {date instanceof Date ? date.toLocaleDateString() : date}
         </p>
@@ -51,7 +53,7 @@ const AuthorCard: React.FC<AuthorCardProps> = ({
           className={`${dark ? 'text-white' : 'text-primary'} ${layout === 'hero' ? 'flex flex-col gap-1.5' : 'flex flex-col items-center'}`}
         >
           <p className="text-sm font-medium">{name}</p>
-          <p className="text-xs opacity-70">{role}</p>
+          {isRole && <p className="text-xs opacity-70">{role}</p>}
         </div>
       </div>
     </div>

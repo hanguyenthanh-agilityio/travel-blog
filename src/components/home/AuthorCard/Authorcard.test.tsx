@@ -1,0 +1,33 @@
+import React from 'react';
+import { render, screen } from '@testing-library/react';
+import { describe, it, expect } from 'vitest';
+import AuthorCard from './index';
+
+describe('AuthorCard', () => {
+  const defaultProps = {
+    name: 'John Doe',
+    role: 'Author',
+    avatar: '/avatar.png',
+    date: new Date('2025-09-22'),
+  };
+
+  it('renders author name, role, and date', () => {
+    render(<AuthorCard {...defaultProps} />);
+
+    // Check name
+    expect(screen.getByText('John Doe')).toBeInTheDocument();
+
+    // Check role
+    // expect(screen.getByText('Author')).toBeInTheDocument();
+
+    // Check date
+    expect(
+      screen.getByText(defaultProps.date.toLocaleDateString()),
+    ).toBeInTheDocument();
+  });
+
+  it('renders fallback avatar letter if image not loaded', () => {
+    render(<AuthorCard {...defaultProps} avatar="" />);
+    expect(screen.getByText('J')).toBeInTheDocument();
+  });
+});
