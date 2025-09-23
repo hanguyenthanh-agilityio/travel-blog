@@ -1,5 +1,5 @@
 ---
-const { title, description, noindex, image, url } = Astro.props;
+const { title, description, noindex = false } = Astro.props;
 ---
 
 <head>
@@ -8,10 +8,9 @@ const { title, description, noindex, image, url } = Astro.props;
   <meta name="viewport" content="width=device-width" />
   <meta name="generator" content={Astro.generator} />
   <title>{title}</title>
-  <meta property="description" content={description} />
-  {image && <meta property="image" content={image} />}
-  {url && <meta property="url" content={url} />}
+  <meta name="description" content={description} />
 
+  <!-- robots meta -->
   <meta
     name="robots"
     content={noindex ? 'noindex, nofollow' : 'index, follow'}
