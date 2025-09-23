@@ -14,5 +14,12 @@ export const onRequest = defineMiddleware(async ({ request, locals }, next) => {
     noindex: false,
   };
 
-  return next();
+  const response = await next();
+
+  if ((locals as any).seo.noindex === false) {
+    response.headers.delete('x-robots-tag');
+    response.headers.set('x-robots-tag', 'index, follow');
+  }
+
+  return response;
 });
