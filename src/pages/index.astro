@@ -1,43 +1,17 @@
 ---
-import BlogLayout from '@/layouts/BlogLayout.astro';
-import BlogHero from '@/components/home/BLogHero/index.astro';
-import SectionTitle from '@/components/home/SectionTitle/index.astro';
-import BlogCard from '@/components/home/BlogCard/index.astro';
-import BlogGrid from '@/components/home/BlogGrid/index.astro';
-import { fetchPosts, getPopularPosts, getTrendingPosts } from '@/lib/api';
 
-const posts = await fetchPosts();
-const heroPost = posts[0];
-const popularPosts = await getPopularPosts();
-const trendingPosts = await getTrendingPosts();
-
-const popularTitle = {
-  title: 'Popular Post',
-  subTitle: 'Ideas, trends, and inspiration for a brighter future',
-};
-
-const trendingTitle = {
-  title: 'Trending Post',
-  subTitle: 'Discover how innovation and creativity drive meaningful change',
-};
 ---
 
-<BlogLayout>
-  <BlogHero {...heroPost} />
-  <SectionTitle {...popularTitle} />
-
-  <div class="grid md:grid-cols-[1fr_1.4fr] gap-6 md:gap-4 lg:gap-10">
-    <BlogCard
-      {...popularPosts[0]}
-      className="md:max-h-[200px] lg:max-h-[230px] xl:max-h-[340px]"
-    />
-
-    <div class="flex flex-col gap-6 md:gap-2 justify-between">
-      <BlogCard {...popularPosts[1]} variant="horizontal" />
-      <BlogCard {...popularPosts[2]} variant="horizontal" />
-    </div>
-  </div>
-
-  <SectionTitle {...trendingTitle} />
-  <BlogGrid posts={trendingPosts} />
-</BlogLayout>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="refresh" content="0; url=/page/1" />
+    <title>Redirecting...</title>
+  </head>
+  <body>
+    <p>Redirecting to <a href="/page/1">/page/1</a>...</p>
+    <script>
+      window.location.href = '/page/1';
+    </script>
+  </body>
+</html>
