@@ -117,6 +117,12 @@ export default [
     rules: {
       'no-undef': 'off',
     },
+    env: {
+      browser: true,
+      es2021: true,
+      node: true,
+      'vitest/globals': true,
+    },
   },
 
   // Prettier
