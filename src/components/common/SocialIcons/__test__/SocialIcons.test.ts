@@ -15,10 +15,8 @@ describe('SocialIcons.astro', () => {
       props: { socials },
     });
 
-    // Kiểm tra số lượng link
     expect(result.match(/<a /g)?.length).toBe(socials.length);
 
-    // Kiểm tra từng href và alt icon
     socials.forEach((s) => {
       expect(result).toContain(`href="${s.href}"`);
       expect(result).toContain(`alt="${s.label}"`);
