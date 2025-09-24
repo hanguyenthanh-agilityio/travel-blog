@@ -21,6 +21,7 @@ export async function renderAstroComponent<T extends AstroComponentFactory>(
   const container = await AstroContainer.create();
   const result = await container.renderToString(Component, options);
 
+  // eslint-disable-next-line no-undef
   const div = document.createElement('div');
   div.innerHTML = result;
   return div;
