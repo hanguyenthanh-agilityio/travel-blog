@@ -3,20 +3,20 @@ import BlogLayout from '@/layouts/BlogLayout.astro';
 import AuthorCard from '@/components/home/AuthorCard';
 import SocialIcons from '@/components/common/SocialIcons/index.astro';
 import { socials } from '@/contents/blog';
-
-import { fetchPosts } from '@/lib/api';
-import type { Post } from '@/types/blog';
+import { fetchPostById, fetchPosts } from '@/lib/api';
+import type { Post } from '@/lib/schema';
 
 export async function getStaticPaths() {
-  const posts: Post[] = await fetchPosts();
+  const posts = await fetchPosts();
 
   return posts.map((post) => ({
     params: { id: post.id },
-    props: { post },
   }));
 }
 
-const { post } = Astro.props as { post: Post };
+const { id } = Astro.params;
+const post: Post | null = await fetchPostById(id);
+if (!post) throw new Error(`Post with id ${id} not found`);
 ---
 
 <BlogLayout>
