@@ -1,6 +1,6 @@
 import React from 'react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import type { Author } from '@/lib/schema'; // từ Zod schema nhé
+import type { Author } from '@/lib/schema';
 
 export interface AuthorCardProps extends Author {
   dark?: boolean;
