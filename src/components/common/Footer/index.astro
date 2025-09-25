@@ -5,6 +5,9 @@ import Link from '@/components/ui/link/index.astro';
 
 import { socials, contactItems, bottomLinks } from '@/contents/blog';
 import { Image } from 'astro:assets';
+
+// Lấy năm hiện tại server-side
+const year = new Date().getFullYear();
 ---
 
 <footer class="container mx-auto bg-white text-gray-800 px-4">
@@ -33,21 +36,16 @@ import { Image } from 'astro:assets';
   </div>
 
   <div
-    class="flex flex-col lg:flex-row justify-between lg:item-center text-sm pt-0 pb-6 lg:py-10 text-secondary gap-4 lg:gap-0"
+    class="flex flex-col lg:flex-row justify-between lg:items-center text-sm pt-0 pb-6 lg:py-10 text-secondary gap-4 lg:gap-0"
   >
     <p class="order-2 lg:order-1 font-medium">
-      &copy; <span id="copyright"></span> Blog Template. All rights reserved.
+      &copy; {year} Blog Template. All rights reserved.
     </p>
+
     <div
-      class="order-1 lg: order-2 flex flex-col lg:flex-row space-y-3 lg:space-y-0 lg:space-x-6"
+      class="order-1 lg:order-2 flex flex-col lg:flex-row space-y-3 lg:space-y-0 lg:space-x-6"
     >
       {bottomLinks.map((link) => <Link href={link.href} text={link.text} />)}
     </div>
   </div>
 </footer>
-
-<script>
-  document.querySelector('#copyright')!.textContent = new Date()
-    .getFullYear()
-    .toString();
-</script>

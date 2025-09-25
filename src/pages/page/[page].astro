@@ -5,11 +5,26 @@ import SectionTitle from '@/components/home/SectionTitle/index.astro';
 import BlogCard from '@/components/home/BlogCard/index.astro';
 import BlogGrid from '@/components/home/BlogGrid/index.astro';
 import { fetchPosts, getPopularPosts, getTrendingPosts } from '@/lib/api';
+import PaginationWrapper from '@/components/common/PaginationWrapper';
 
+const { page } = Astro.params;
+const currentPage = Number(page) || 1;
+const POSTS_PER_PAGE = 6;
+
+// Fetch data
 const posts = await fetchPosts();
 const heroPost = posts[0];
 const popularPosts = await getPopularPosts();
-const trendingPosts = await getTrendingPosts();
+
+// All trending posts
+const allTrendingPosts = await getTrendingPosts();
+const totalPages = Math.ceil(allTrendingPosts.length / POSTS_PER_PAGE);
+
+// Slice for current page
+const trendingPosts = allTrendingPosts.slice(
+  (currentPage - 1) * POSTS_PER_PAGE,
+  currentPage * POSTS_PER_PAGE,
+);
 
 const popularTitle = {
   title: 'Popular Post',
@@ -20,6 +35,16 @@ const trendingTitle = {
   title: 'Trending Post',
   subTitle: 'Discover how innovation and creativity drive meaningful change',
 };
+
+export async function getStaticPaths() {
+  const allTrendingPosts = await getTrendingPosts();
+  const POSTS_PER_PAGE = 6;
+  const totalPages = Math.ceil(allTrendingPosts.length / POSTS_PER_PAGE);
+
+  return Array.from({ length: totalPages }).map((_, i) => ({
+    params: { page: String(i + 1) },
+  }));
+}
 ---
 
 <BlogLayout>
@@ -31,7 +56,6 @@ const trendingTitle = {
       {...popularPosts[0]}
       className="md:max-h-[200px] lg:max-h-[230px] xl:max-h-[340px]"
     />
-
     <div class="flex flex-col gap-6 md:gap-2 justify-between">
       <BlogCard {...popularPosts[1]} variant="horizontal" />
       <BlogCard {...popularPosts[2]} variant="horizontal" />
@@ -40,4 +64,13 @@ const trendingTitle = {
 
   <SectionTitle {...trendingTitle} />
   <BlogGrid posts={trendingPosts} />
+
+  <div class="mt-10 flex justify-center">
+    <PaginationWrapper
+      currentPage={currentPage}
+      totalPages={totalPages}
+      basePath="/page"
+      client:load
+    />
+  </div>
 </BlogLayout>

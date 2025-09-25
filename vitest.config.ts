@@ -1,20 +1,12 @@
 /// <reference types="vitest" />
-import { defineConfig } from 'vitest/config';
-import path from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { getViteConfig } from 'astro/config';
 
-const dirname = path.dirname(fileURLToPath(import.meta.url));
-
-export default defineConfig({
-  resolve: {
-    alias: {
-      '@': path.resolve(dirname, './src'),
-    },
-  },
+export default getViteConfig({
+  // @ts-expect-error: 'test' is a Vitest config, not a Vite config
   test: {
     globals: true,
-    environment: 'jsdom',
-    setupFiles: './src/setupTests.ts',
+    environment: 'happy-dom',
+    setupFiles: ['./vitest.setup.ts'],
     include: ['src/**/*.{test,spec}.{js,ts,jsx,tsx}'],
     coverage: {
       reporter: ['text', 'json', 'html'],
