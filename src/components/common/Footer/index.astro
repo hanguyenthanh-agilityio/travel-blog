@@ -1,10 +1,13 @@
 ---
+import { Image } from 'astro:assets';
+
+// Components
 import SocialIcons from '@/components/common/SocialIcons/index.astro';
 import ContactInfo from '@/components/common/ContactInfo/index.astro';
 import Link from '@/components/ui/link/index.astro';
 
+// Contents
 import { socials, contactItems, bottomLinks } from '@/contents/blog';
-import { Image } from 'astro:assets';
 
 const year = new Date().getFullYear();
 ---

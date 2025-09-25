@@ -1,5 +1,7 @@
 import { experimental_AstroContainer as AstroContainer } from 'astro/container';
 import { describe, it, expect } from 'vitest';
+
+// Components
 import BlogCard from '../index.astro';
 
 vi.mock('@/components/home/AuthorCard', () => ({

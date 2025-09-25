@@ -1,4 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
+
+// Components
 import AuthorCard from './index';
 
 const meta = {

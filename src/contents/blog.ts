@@ -50,6 +50,17 @@ export const heroPost = {
   },
 };
 
+export const menu = [
+  { href: '/', text: 'Home' },
+  { href: '/blog', text: 'Blog' },
+  { href: '/post/example', text: 'Single Post' },
+];
+
+export const otherPages = [
+  { href: '/about', text: 'About' },
+  { href: '/contact', text: 'Contact' },
+];
+
 export const popularPost = [
   {
     title: 'Sustainable Travel Tips: Reducing Your Carbon Footprint',

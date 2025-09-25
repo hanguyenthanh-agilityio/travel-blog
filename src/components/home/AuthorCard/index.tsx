@@ -1,5 +1,9 @@
 import React from 'react';
+
+// Components
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+
+// Libs
 import type { Author } from '@/lib/schema';
 
 export interface AuthorCardProps extends Author {

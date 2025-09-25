@@ -1,4 +1,6 @@
 import React from 'react';
+
+// Components
 import {
   Sheet,
   SheetTrigger,
@@ -9,16 +11,8 @@ import NavDropdownMenu from '@/components/common/NavDropdownMenu';
 import Hamburger from '@/components/icon/hamburger';
 import { Button } from '@/components/ui/button';
 
-const menu = [
-  { href: '/', text: 'Home' },
-  { href: '/blog', text: 'Blog' },
-  { href: '/post/example', text: 'Single Post' },
-];
-
-const otherPages = [
-  { href: '/about', text: 'About' },
-  { href: '/contact', text: 'Contact' },
-];
+// Contents
+import { menu, otherPages } from '@/contents/blog';
 
 export default function MobileSheetMenu() {
   return (
