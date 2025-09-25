@@ -6,7 +6,7 @@ vi.mock('@/components/home/AuthorCard', () => ({
   default: (props: any) => `<div>Author: ${props.name}</div>`,
 }));
 
-describe('BlogCard.astro', () => {
+describe('BlogCard', () => {
   it.skip('renders horizontal variant', async () => {
     const container = await AstroContainer.create();
 
