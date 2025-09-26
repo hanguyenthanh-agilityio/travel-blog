@@ -1,28 +1,43 @@
 ---
+import { Image } from 'astro:assets';
+
 // Components
 import Link from '@/components/ui/link/index.astro';
+
+// Libs
+import { cn } from '@/lib/utils';
 
 interface SocialItem {
   href: string;
   label: string;
-  icon: string;
-  class?: string;
-  linkCustom?: string;
+  iconSrc: string;
+  linkClassName?: string;
 }
 
-const { socials } = Astro.props as { socials: SocialItem[] };
+const { socials, containerClassName, linkClassName } = Astro.props as {
+  socials: SocialItem[];
+  containerClassName?: string;
+  linkClassName?: string;
+};
 ---
 
-<div class={`flex mt-0 md:mt-4 md:mt-0 ${Astro.props.class ?? ''}`}>
+<div class={cn('flex mt-0 md:mt-4', containerClassName)}>
   {
     socials.map((s) => (
       <Link
         href={s.href}
         label={s.label}
         external
-        classes={`flex items-center ${Astro.props.linkCustom ?? ''}`}
+        classes={cn('flex items-center', linkClassName, s.linkClassName)}
       >
-        <img src={s.icon} alt={s.label} class="h-6 w-6" />
+        <Image
+          src={s.iconSrc}
+          alt={s.label}
+          width={48}
+          height={48}
+          class="h-6 w-6 object-contain"
+          loading="lazy"
+        />
       </Link>
     ))
   }
