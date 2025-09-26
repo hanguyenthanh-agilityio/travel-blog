@@ -5,7 +5,7 @@ import SectionTitle from '@/components/home/SectionTitle/index.astro';
 import BlogCard from '@/components/home/BlogCard/index.astro';
 import BlogGrid from '@/components/home/BlogGrid/index.astro';
 import { fetchPosts, getPopularPosts, getTrendingPosts } from '@/lib/api';
-import PaginationWrapper from '@/components/common/PaginationWrapper';
+import Paginator from '@/components/common/Paginator';
 
 const { page } = Astro.params;
 const currentPage = Number(page) || 1;
@@ -66,7 +66,7 @@ export async function getStaticPaths() {
   <BlogGrid posts={trendingPosts} />
 
   <div class="mt-10 flex justify-center">
-    <PaginationWrapper
+    <Paginator
       currentPage={currentPage}
       totalPages={totalPages}
       basePath="/page"
