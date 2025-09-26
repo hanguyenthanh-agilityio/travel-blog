@@ -4,6 +4,10 @@
   "exclude": ["dist"],
   "compilerOptions": {
     "types": ["node", "vitest/globals", "astro/client"],
+    "moduleResolution": "bundler",
+    "module": "esnext",
+    "jsx": "preserve",
+    "jsxImportSource": "react",
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"]
