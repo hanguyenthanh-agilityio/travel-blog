@@ -1,7 +1,6 @@
 ---
 import BlogLayout from '@/layouts/BlogLayout.astro';
-import AuthorCard from '@/components/home/AuthorCard';
-import SocialIcons from '@/components/common/SocialIcons/index.astro';
+import { AuthorCard, SocialIcons } from '@/components';
 import { socials } from '@/contents/blog';
 import { fetchPostById, fetchPosts } from '@/lib/api';
 import type { Post } from '@/lib/schema';
