@@ -20,7 +20,7 @@ import {
 } from '@/constants/blog';
 
 const { page } = Astro.params;
-const currentPage = Number(page) || 1;
+const rawPage = Number(page) || 1;
 
 // Fetch data
 const posts = await fetchPosts();
@@ -29,18 +29,23 @@ const popularPosts = await getPopularPosts();
 
 // All trending posts
 const allTrendingPosts = await getTrendingPosts();
-const totalPages = Math.ceil(allTrendingPosts.length / POSTS_PER_PAGE);
+const totalPages = Math.max(
+  1,
+  Math.ceil(allTrendingPosts.length / POSTS_PER_PAGE),
+);
+const currentPage = Math.min(Math.max(rawPage, 1), totalPages);
 
 // Slice for current page
-const trendingPosts = allTrendingPosts.slice(
-  (currentPage - 1) * POSTS_PER_PAGE,
-  currentPage * POSTS_PER_PAGE,
-);
+const start = (currentPage - 1) * POSTS_PER_PAGE;
+const end = currentPage * POSTS_PER_PAGE;
+const trendingPosts = allTrendingPosts.slice(start, end);
 
 export async function getStaticPaths() {
   const allTrendingPosts = await getTrendingPosts();
-  const POSTS_PER_PAGE = 6;
-  const totalPages = Math.ceil(allTrendingPosts.length / POSTS_PER_PAGE);
+  const totalPages = Math.max(
+    1,
+    Math.ceil(allTrendingPosts.length / POSTS_PER_PAGE),
+  );
 
   return Array.from({ length: totalPages }).map((_, i) => ({
     params: { page: String(i + 1) },
