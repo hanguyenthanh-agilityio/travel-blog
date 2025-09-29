@@ -3,15 +3,24 @@
 import BlogLayout from '@/layouts/BlogLayout.astro';
 
 // Components
-import { BlogGrid, BLogHero, SectionTitle, BlogCard } from '@/components';
-import Paginator from '@/components/common/Paginator';
+import {
+  BlogGrid,
+  BLogHero,
+  SectionTitle,
+  BlogCard,
+  Paginator,
+} from '@/components';
 
 // Libs
 import { fetchPosts, getPopularPosts, getTrendingPosts } from '@/lib/api';
+import {
+  POPULAR_TITLE,
+  POSTS_PER_PAGE,
+  TRENDING_TITLE,
+} from '@/constants/blog';
 
 const { page } = Astro.params;
 const currentPage = Number(page) || 1;
-const POSTS_PER_PAGE = 6;
 
 // Fetch data
 const posts = await fetchPosts();
@@ -28,16 +37,6 @@ const trendingPosts = allTrendingPosts.slice(
   currentPage * POSTS_PER_PAGE,
 );
 
-const popularTitle = {
-  title: 'Popular Post',
-  subTitle: 'Ideas, trends, and inspiration for a brighter future',
-};
-
-const trendingTitle = {
-  title: 'Trending Post',
-  subTitle: 'Discover how innovation and creativity drive meaningful change',
-};
-
 export async function getStaticPaths() {
   const allTrendingPosts = await getTrendingPosts();
   const POSTS_PER_PAGE = 6;
@@ -51,12 +50,12 @@ export async function getStaticPaths() {
 
 <BlogLayout>
   <BLogHero {...heroPost} />
-  <SectionTitle {...popularTitle} />
+  <SectionTitle {...POPULAR_TITLE} />
 
   <div class="grid md:grid-cols-[1fr_1.4fr] gap-6 md:gap-4 lg:gap-10">
     <BlogCard
       {...popularPosts[0]}
-      className="md:max-h-[200px] lg:max-h-[230px] xl:max-h-[340px]"
+      className="md:max-h-blog-sm lg:max-h-blog-md xl:max-h-blog-lg"
     />
     <div class="flex flex-col gap-6 md:gap-2 justify-between">
       <BlogCard {...popularPosts[1]} variant="horizontal" />
@@ -64,7 +63,7 @@ export async function getStaticPaths() {
     </div>
   </div>
 
-  <SectionTitle {...trendingTitle} />
+  <SectionTitle {...TRENDING_TITLE} />
   <BlogGrid posts={trendingPosts} />
 
   <div class="mt-10 flex justify-center">
