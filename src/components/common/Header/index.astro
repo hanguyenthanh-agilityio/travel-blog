@@ -2,35 +2,32 @@
 import { Image } from 'astro:assets';
 
 // Components
-import Navigation from '../Navigation/index.astro';
-import MobileSheetMenu from '@/components/common/SheetMenu';
+import { Navigation, SheetMenu } from '@/components';
 import Link from '@/components/ui/link/index.astro';
 ---
 
-<header class="w-full bg-white">
-  <div class="container mx-auto px-4 py-4">
-    <div class="flex items-center justify-between">
-      <div class="flex items-center">
-        <Link href="/">
-          <Image
-            src="/images/logo.svg"
-            alt="logo image"
-            width="194"
-            height="40"
-            class="hero-image"
-          />
-        </Link>
-      </div>
+<header class="w-full">
+  <div class="container mx-auto px-4 py-4 flex items-center justify-between">
+    <div class="flex items-center">
+      <Link href="/">
+        <Image
+          src="/images/logo.svg"
+          alt="logo image"
+          width="194"
+          height="40"
+          class="hero-image"
+        />
+      </Link>
+    </div>
 
-      <!-- Desktop -->
-      <div class="hidden md:block">
-        <Navigation />
-      </div>
+    <!-- Desktop -->
+    <div class="hidden md:block">
+      <Navigation />
+    </div>
 
-      <!-- Mobile -->
-      <div class="md:hidden">
-        <MobileSheetMenu client:load />
-      </div>
+    <!-- Mobile -->
+    <div class="md:hidden">
+      <SheetMenu client:load />
     </div>
   </div>
 </header>

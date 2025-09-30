@@ -2,8 +2,8 @@
 import { Image } from 'astro:assets';
 
 // Components
-import SocialIcons from '@/components/common/SocialIcons/index.astro';
-import ContactInfo from '@/components/common/ContactInfo/index.astro';
+import { SocialIcons, ContactInfo } from '@/components';
+
 import Link from '@/components/ui/link/index.astro';
 
 // Contents
@@ -28,7 +28,7 @@ const year = new Date().getFullYear();
         quality={80}
         class="pb-6"
       />
-      <SocialIcons socials={socials} class="space-x-6" />
+      <SocialIcons socials={socials} containerClassName="space-x-6" />
     </div>
 
     <!-- Contact info -->

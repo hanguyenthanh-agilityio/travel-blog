@@ -27,7 +27,7 @@ const NavDropdownMenu = ({
       <Button
         type="button"
         variant="outline"
-        className="border-none p-0 shadow-none text-sm font-normal hover:text-gray-600 hover:bg-[none]"
+        className="border-none p-0 shadow-none text-base font-normal hover:text-gray-600 hover:bg-[none]"
       >
         {label}
         <ArrowIcon />

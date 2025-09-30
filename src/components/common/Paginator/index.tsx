@@ -14,7 +14,7 @@ interface PaginationProps {
   basePath?: string;
 }
 
-const PaginationWrapper = ({
+const Paginator = ({
   currentPage,
   totalPages,
   basePath = '/',
@@ -57,4 +57,4 @@ const PaginationWrapper = ({
   );
 };
 
-export default PaginationWrapper;
+export default Paginator;
