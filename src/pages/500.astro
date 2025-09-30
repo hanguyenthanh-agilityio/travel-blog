@@ -1,0 +1,35 @@
+---
+import BlogLayout from '@/layouts/BlogLayout.astro';
+---
+
+<BlogLayout
+  title="Server error"
+  description="Something went wrong on our side. Please try again later."
+  noindex={true}
+>
+  <section
+    class="min-h-[60vh] flex flex-col items-center justify-center text-center gap-4"
+  >
+    <p class="text-6xl font-bold">500</p>
+    <h1 class="text-2xl md:text-3xl font-semibold">Something went wrong</h1>
+    <p class="text-primary max-w-prose">
+      We encountered an unexpected error. Please try again in a moment, or go
+      back to the homepage.
+    </p>
+    <div class="flex gap-3 pt-2">
+      <a
+        href="/"
+        class="inline-flex items-center px-4 py-2 rounded-md bg-foreground text-background"
+      >
+        Go Home
+      </a>
+      <button
+        type="button"
+        class="inline-flex items-center px-4 py-2 rounded-md border border-line"
+        onclick="location.reload()"
+      >
+        Retry
+      </button>
+    </div>
+  </section>
+</BlogLayout>

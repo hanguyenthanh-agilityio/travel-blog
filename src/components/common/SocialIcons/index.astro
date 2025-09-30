@@ -1,8 +1,7 @@
 ---
-import { Image } from 'astro:assets';
-
 // Components
 import Link from '@/components/ui/link/index.astro';
+import Image from '@/components/ui/image/index.astro';
 
 // Libs
 import { cn } from '@/lib/utils';
@@ -14,31 +13,57 @@ interface SocialItem {
   linkClassName?: string;
 }
 
-const { socials, containerClassName, linkClassName } = Astro.props as {
+interface Props {
   socials: SocialItem[];
   containerClassName?: string;
   linkClassName?: string;
-};
+  dark?: boolean;
+}
+
+const {
+  socials,
+  containerClassName,
+  linkClassName,
+  dark = false,
+} = Astro.props as Props;
 ---
 
-<div class={cn('flex mt-0 md:mt-4', containerClassName)}>
+<div
+  class={cn('flex items-center', containerClassName)}
+  role="list"
+  aria-label="Social media links"
+>
   {
-    socials.map((s) => (
-      <Link
-        href={s.href}
-        label={s.label}
-        external
-        classes={cn('flex items-center', linkClassName, s.linkClassName)}
-      >
-        <Image
-          src={s.iconSrc}
-          alt={s.label}
-          width={48}
-          height={48}
-          class="h-6 w-6 object-contain"
-          loading="lazy"
-        />
-      </Link>
+    socials.map((social) => (
+      <div role="listitem" class="md:mr-4">
+        <Link
+          href={social.href}
+          label={social.label}
+          external
+          classes={cn(
+            'flex items-center justify-center p-2 rounded-lg transition-all duration-200',
+            'hover:scale-110 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2',
+            dark
+              ? 'hover:bg-white/10 text-white'
+              : 'hover:bg-gray-100 text-gray-600 hover:text-primary',
+            linkClassName,
+            social.linkClassName,
+          )}
+          aria-label={`Visit our ${social.label} page`}
+        >
+          <Image
+            src={social.iconSrc}
+            alt=""
+            width={24}
+            height={24}
+            format="webp"
+            fit="contain"
+            quality={90}
+            loading="lazy"
+            class="h-6 w-6 object-contain"
+          />
+        </Link>
+      </div>
     ))
   }
 </div>
