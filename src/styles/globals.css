@@ -124,6 +124,12 @@
   --container-padding: 1rem;
   --container-padding-md: 2rem;
 
+  /* height custom */
+  --spacing-blog-sm: 250px;
+  --spacing-blog-md: 300px;
+  --spacing-blog-lg: 400px;
+  --spacing-hero: 400px;
+
   /* max-height custom */
   --max-h-blog-sm: 200px;
   --max-h-blog-md: 230px;

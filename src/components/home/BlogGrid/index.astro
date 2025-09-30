@@ -15,7 +15,7 @@ const { posts, column = '3' } = Astro.props as BlogCardProps;
 <div class={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-${column} gap-10`}>
   {
     posts.map((post) => (
-      <BlogCard {...post} className="h-[250px] md:h-[300px] xl:h-[400px]" />
+      <BlogCard {...post} className="h-blog-sm md:h-blog-md xl:h-blog-lg" />
     ))
   }
 </div>
