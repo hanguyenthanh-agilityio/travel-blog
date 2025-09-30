@@ -3,29 +3,25 @@
 import { NavDropdownMenu } from '@/components';
 import Link from '@/components/ui/link/index.astro';
 
-const menu = [
-  { href: '/', text: 'Home' },
-  { href: '/blog', text: 'Blog' },
-  { href: '/post/example', text: 'Single Post' },
-];
-
-const otherPages = [
-  { href: '/about', text: 'About' },
-  { href: '/contact', text: 'Contact' },
-];
+// Contents
+import { menu, otherPages } from '@/contents/blog';
 ---
 
 <div class="flex items-center gap-6">
-  <nav class="flex items-center space-x-6">
+  <!-- Main Navigation -->
+  <nav class="flex items-center space-x-6" aria-label="Main navigation">
     {
       menu.map((item) => (
         <Link
+          key={item.href}
           href={item.href}
           text={item.text}
-          class="text-sm hover:text-gray-600"
+          classes="text-md text-gray-700 hover:text-primary transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-md px-2 py-1"
         />
       ))
     }
   </nav>
+
+  <!-- Dropdown Menu -->
   <NavDropdownMenu client:idle label="Other Pages" items={otherPages} />
 </div>
