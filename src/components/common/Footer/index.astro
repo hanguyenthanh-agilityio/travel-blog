@@ -1,9 +1,7 @@
 ---
-import { Image } from 'astro:assets';
-
 // Components
 import { SocialIcons, ContactInfo } from '@/components';
-
+import Image from '@/components/ui/image/index.astro';
 import Link from '@/components/ui/link/index.astro';
 
 // Contents
@@ -13,41 +11,55 @@ const year = new Date().getFullYear();
 ---
 
 <footer class="container mx-auto bg-white text-gray-800 px-4">
+  <!-- Main Footer Content -->
   <div
     class="py-10 flex flex-col lg:flex-row justify-between lg:items-center gap-10 lg:gap-0"
   >
-    <!-- Logo and social icons -->
+    <!-- Brand Section -->
     <div class="pr-20 xl:pr-0">
       <Image
         src="/images/logo.svg"
-        alt="logo image"
-        width="250"
-        height="50"
-        format="avif"
-        fit="cover"
-        quality={80}
+        alt="Blog Template Logo"
+        width={250}
+        height={50}
+        format="webp"
+        fit="contain"
+        quality={90}
         class="pb-6"
+        loading="eager"
       />
       <SocialIcons socials={socials} containerClassName="space-x-6" />
     </div>
 
-    <!-- Contact info -->
+    <!-- Contact Information -->
     <div class="md:col-span-2 lg:col-span-3 2xl:pr-32">
       <ContactInfo items={contactItems} />
     </div>
   </div>
 
+  <!-- Footer Bottom -->
   <div
     class="flex flex-col lg:flex-row justify-between lg:items-center text-sm pt-0 pb-6 lg:py-10 text-secondary gap-4 lg:gap-0"
   >
+    <!-- Copyright -->
     <p class="order-2 lg:order-1 font-medium">
       &copy; {year} Blog Template. All rights reserved.
     </p>
 
-    <div
+    <!-- Bottom Links -->
+    <nav
       class="order-1 lg:order-2 flex flex-col lg:flex-row space-y-3 lg:space-y-0 lg:space-x-6"
+      aria-label="Footer navigation"
     >
-      {bottomLinks.map((link) => <Link href={link.href} text={link.text} />)}
-    </div>
+      {
+        bottomLinks.map((link) => (
+          <Link
+            href={link.href}
+            text={link.text}
+            class="hover:text-primary transition-colors duration-200"
+          />
+        ))
+      }
+    </nav>
   </div>
 </footer>
