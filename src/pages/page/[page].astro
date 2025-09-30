@@ -1,11 +1,13 @@
 ---
+// Layouts
 import BlogLayout from '@/layouts/BlogLayout.astro';
-import BlogHero from '@/components/home/BLogHero/index.astro';
-import SectionTitle from '@/components/home/SectionTitle/index.astro';
-import BlogCard from '@/components/home/BlogCard/index.astro';
-import BlogGrid from '@/components/home/BlogGrid/index.astro';
-import { fetchPosts, getPopularPosts, getTrendingPosts } from '@/lib/api';
+
+// Components
+import { BlogGrid, BLogHero, SectionTitle, BlogCard } from '@/components';
 import Paginator from '@/components/common/Paginator';
+
+// Libs
+import { fetchPosts, getPopularPosts, getTrendingPosts } from '@/lib/api';
 
 const { page } = Astro.params;
 const currentPage = Number(page) || 1;
@@ -48,7 +50,7 @@ export async function getStaticPaths() {
 ---
 
 <BlogLayout>
-  <BlogHero {...heroPost} />
+  <BLogHero {...heroPost} />
   <SectionTitle {...popularTitle} />
 
   <div class="grid md:grid-cols-[1fr_1.4fr] gap-6 md:gap-4 lg:gap-10">
