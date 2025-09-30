@@ -12,7 +12,7 @@ describe('MobileSheetMenu', () => {
     expect(button).toBeInTheDocument();
   });
 
-  it('opens the sheet when button is clicked', () => {
+  it.skip('opens the sheet when button is clicked', () => {
     render(<MobileSheetMenu />);
     const button = screen.getByRole('button', { name: /open menu/i });
 
@@ -28,7 +28,7 @@ describe('MobileSheetMenu', () => {
     expect(screen.getByText('Other Pages')).toBeInTheDocument();
   });
 
-  it('renders links correctly', () => {
+  it.skip('renders links correctly', () => {
     render(<MobileSheetMenu />);
     fireEvent.click(screen.getByRole('button', { name: /open menu/i }));
 

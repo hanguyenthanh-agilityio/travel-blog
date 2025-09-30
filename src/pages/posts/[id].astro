@@ -3,7 +3,7 @@
 import BlogLayout from '@/layouts/BlogLayout.astro';
 
 // Components
-import { AuthorCard, SocialIcons } from '@/components';
+import { AuthorCard, SocialIcons, LazyImage } from '@/components';
 
 // Contents
 import { socials } from '@/contents/blog';
@@ -65,7 +65,7 @@ if (!post) throw new Error(`Post with id ${id} not found`);
         {post.excerpt}
       </p>
 
-      <img
+      <LazyImage
         src={post.image}
         alt={post.title}
         class="rounded-xl my-6 w-full h-[400px] md:h-auto"

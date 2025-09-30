@@ -1,5 +1,5 @@
 ---
-import { AuthorCard } from '@/components';
+import { AuthorCard, LazyImage } from '@/components';
 import Link from '@/components/ui/link/index.astro';
 import { cn } from '@/lib/utils';
 
@@ -23,7 +23,7 @@ const isHorizontal = variant === 'horizontal';
     )}
   >
     <!-- Image -->
-    <img
+    <LazyImage
       src={image}
       alt={title}
       class={cn(

@@ -6,3 +6,4 @@ export { default as Navigation } from './Navigation/index.astro';
 export { default as SheetMenu } from './SheetMenu';
 export { default as SocialIcons } from './SocialIcons/index.astro';
 export { default as Paginator } from './Paginator';
+export { default as LazyImage } from './LazyImage/index.astro';
