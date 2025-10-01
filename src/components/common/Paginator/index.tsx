@@ -1,5 +1,4 @@
 import React from 'react';
-
 // Components
 import {
   Pagination,
@@ -7,7 +6,9 @@ import {
   PaginationItem,
   PaginationLink,
 } from '@/components/ui/pagination';
+import { HOME_PAGE, PAGE_PATH } from '@/constants/route';
 
+// Types
 interface PaginationProps {
   currentPage: number;
   totalPages: number;
@@ -17,31 +18,25 @@ interface PaginationProps {
 const Paginator = ({
   currentPage,
   totalPages,
-  basePath = '/',
+  basePath = PAGE_PATH,
 }: PaginationProps) => {
-  const total = Number(totalPages);
-  const pages = Array.from({ length: total }, (_, i) => i + 1);
-
-  const normalizePath = (path: string) =>
-    path.endsWith('/') ? path.slice(0, -1) : path;
-
-  const base = normalizePath(basePath);
+  const pages = Array.from({ length: totalPages }, (_, i) => i + 1);
 
   return (
     <Pagination>
       <PaginationContent>
         {pages.map((page) => {
-          const href = `${base}/${page}/`;
+          const href = page === 1 ? HOME_PAGE : `${basePath}/${page}/`;
 
           return (
             <PaginationItem key={page}>
               <PaginationLink
                 href={href}
-                isActive={page === Number(currentPage)}
+                isActive={page === currentPage}
                 className={`
                   flex h-12 w-12 items-center justify-center rounded-xl text-sm font-medium
                   ${
-                    page === Number(currentPage)
+                    page === currentPage
                       ? 'bg-[#2980b9] text-white'
                       : 'text-gray-600 hover:bg-gray-100'
                   }

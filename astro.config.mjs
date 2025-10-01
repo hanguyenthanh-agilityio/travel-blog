@@ -7,9 +7,6 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
   },
-  redirects: {
-    '/': 'page/1/',
-  },
   i18n: {
     locales: ['es', 'en', 'pt-br', 'vi'],
     defaultLocale: 'en',
