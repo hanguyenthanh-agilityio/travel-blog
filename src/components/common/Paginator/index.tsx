@@ -6,6 +6,7 @@ import {
   PaginationItem,
   PaginationLink,
 } from '@/components/ui/pagination';
+import { HOME_PAGE, PAGE_PATH } from '@/constants/route';
 
 // Types
 interface PaginationProps {
@@ -17,7 +18,7 @@ interface PaginationProps {
 const Paginator = ({
   currentPage,
   totalPages,
-  basePath = '/page',
+  basePath = PAGE_PATH,
 }: PaginationProps) => {
   const pages = Array.from({ length: totalPages }, (_, i) => i + 1);
 
@@ -25,7 +26,7 @@ const Paginator = ({
     <Pagination>
       <PaginationContent>
         {pages.map((page) => {
-          const href = page === 1 ? '/' : `${basePath}/${page}/`;
+          const href = page === 1 ? HOME_PAGE : `${basePath}/${page}/`;
 
           return (
             <PaginationItem key={page}>
