@@ -24,11 +24,13 @@
     ]
   },
   "dependencies": {
+    "@otterlord/astro-critters": "^1.1.41",
     "@radix-ui/react-avatar": "^1.1.10",
     "@radix-ui/react-dialog": "^1.1.15",
     "@radix-ui/react-dropdown-menu": "^2.1.16",
     "@radix-ui/react-slot": "^1.2.3",
     "astro": "^5.14.0",
+    "astro-critters": "^2.2.1",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "lucide-react": "^0.543.0",
