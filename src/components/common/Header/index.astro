@@ -3,6 +3,9 @@
 import { Navigation, SheetMenu } from '@/components';
 import Image from '@/components/ui/image/index.astro';
 import Link from '@/components/ui/link/index.astro';
+
+// Constants
+import { HOME_PAGE } from '@/constants/route';
 ---
 
 <header class="w-full bg-white shadow-sm sticky top-0 z-50">
@@ -11,7 +14,7 @@ import Link from '@/components/ui/link/index.astro';
       <!-- Logo/Brand -->
       <div class="flex items-center">
         <Link
-          href="/"
+          href={HOME_PAGE}
           class="focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-md"
         >
           <Image

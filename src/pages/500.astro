@@ -1,5 +1,6 @@
 ---
 import BlogLayout from '@/layouts/BlogLayout.astro';
+import { HOME_PAGE } from '@/constants/route';
 ---
 
 <BlogLayout
@@ -18,7 +19,7 @@ import BlogLayout from '@/layouts/BlogLayout.astro';
     </p>
     <div class="flex gap-3 pt-2">
       <a
-        href="/"
+        href={HOME_PAGE}
         class="inline-flex items-center px-4 py-2 rounded-md bg-foreground text-background"
       >
         Go Home
