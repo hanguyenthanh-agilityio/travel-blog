@@ -33,7 +33,7 @@ export const contactItems = [
 ];
 
 export const bottomLinks = [
-  { href: '/privacy', text: 'privacy Policy' },
+  { href: '/privacy', text: 'Privacy Policy' },
   { href: '/term', text: 'Terms of Service' },
   { href: '/setting', text: 'Cookies Settings' },
 ];
