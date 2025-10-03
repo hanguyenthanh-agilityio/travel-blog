@@ -4,14 +4,14 @@ import Image from '@/components/ui/image/index.astro';
 
 import { cn } from '@/lib/utils';
 
-interface Props {
+interface LogoProps {
   href: string;
   width: string;
   height: string;
   classes: string;
 }
 
-const { href, width, height, classes } = Astro.Props;
+const { href, width, height, classes } = Astro.props as LogoProps;
 ---
 
 <Link
