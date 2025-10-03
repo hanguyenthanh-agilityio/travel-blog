@@ -22,7 +22,7 @@ export default function MobileSheetMenu() {
         <Button
           aria-label="Open menu"
           variant="ghost"
-          className="p-2 !border-[none] rounded-[none] hover:bg-gray-100 bg-[none]"
+          className="p-2 hover:bg-[none] hover:text-[none] cursor-pointer"
         >
           <Hamburger />
         </Button>
@@ -32,7 +32,7 @@ export default function MobileSheetMenu() {
         <nav className="mt-6 space-y-4">
           {menu.map((it) => (
             <SheetClose asChild key={it.href}>
-              <Link href={it.href} classes="block text-sm hover:text-gray-600">
+              <Link href={it.href} classes="block text-sm hover:text-accent">
                 {it.text}
               </Link>
             </SheetClose>

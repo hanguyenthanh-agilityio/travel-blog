@@ -7,3 +7,4 @@ export { default as SheetMenu } from './SheetMenu';
 export { default as SocialIcons } from './SocialIcons/index.astro';
 export { default as Paginator } from './Paginator';
 export { default as LazyImage } from './LazyImage/index.astro';
+export { default as Logo } from './Logo/index.astro';

@@ -1,11 +1,13 @@
 ---
 // Components
-import { SocialIcons, ContactInfo } from '@/components';
-import Image from '@/components/ui/image/index.astro';
+import { SocialIcons, ContactInfo, Logo } from '@/components';
 import Link from '@/components/ui/link';
 
 // Contents
 import { socials, contactItems, bottomLinks } from '@/contents/blog';
+
+// Constants
+import { HOME_PAGE } from '@/constants/route';
 
 const year = new Date().getFullYear();
 ---
@@ -17,17 +19,7 @@ const year = new Date().getFullYear();
   >
     <!-- Brand Section -->
     <div class="pr-20 xl:pr-0">
-      <Image
-        src="/images/logo.svg"
-        alt="Blog Template Logo"
-        width={250}
-        height={50}
-        format="webp"
-        fit="contain"
-        quality={90}
-        class="pb-3 md:pb-5"
-        loading="eager"
-      />
+      <Logo href={HOME_PAGE} width={190} height={40} classes="pb-3 md:pb-5" />
       <SocialIcons socials={socials} />
     </div>
 

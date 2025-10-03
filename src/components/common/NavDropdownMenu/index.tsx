@@ -9,6 +9,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown';
 import { Button } from '@/components/ui/button';
+import Link from '@/components/ui/link';
 
 interface ItemProps {
   href: string;
@@ -27,7 +28,7 @@ const NavDropdownMenu = ({
       <Button
         type="button"
         variant="outline"
-        className="border-none p-0 shadow-none text-base font-normal hover:text-gray-600 hover:bg-[none]"
+        className="border-none p-0 shadow-none text-base font-normal hover:text-gray-600 hover:bg-[none] hover:text-accent cursor-pointer"
       >
         {label}
         <ArrowIcon />
@@ -37,7 +38,9 @@ const NavDropdownMenu = ({
     <DropdownMenuContent>
       {items.map((item) => (
         <DropdownMenuItem key={item.href} asChild>
-          <a href={item.href}>{item.text}</a>
+          <Link href={item.href} classes="flex flex-col p-1 hover:text-accent">
+            {item.text}
+          </Link>
         </DropdownMenuItem>
       ))}
     </DropdownMenuContent>

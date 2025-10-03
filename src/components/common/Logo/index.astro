@@ -1,0 +1,32 @@
+---
+import Link from '@/components/ui/link';
+import Image from '@/components/ui/image/index.astro';
+
+import { cn } from '@/lib/utils';
+
+interface Props {
+  href: string;
+  width: string;
+  height: string;
+  classes: string;
+}
+
+const { href, width, height, classes } = Astro.Props;
+---
+
+<Link
+  href={href}
+  class="focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-md"
+>
+  <Image
+    src="/images/logo.svg"
+    alt="Blog Template - Home"
+    width={width}
+    height={height}
+    format="webp"
+    fit="contain"
+    quality={90}
+    loading="eager"
+    class={cn('transition-transform duration-200 hover:scale-105', classes)}
+  />
+</Link>
