@@ -2,16 +2,20 @@
 // Components
 const { heroPost, popularPosts, trendingPosts, currentPage, totalPages } =
   Astro.props;
-import { BlogGrid, SectionTitle, BlogCard, Paginator } from '@/components';
-
-import BlogHero from '@/components/home/BlogHero/index.astro';
+import {
+  BlogGrid,
+  SectionTitle,
+  BlogCard,
+  Paginator,
+  Hero,
+} from '@/components';
 
 // Constants
 import { POPULAR_TITLE, TRENDING_TITLE } from '@/constants/blog';
 import { PAGE_PATH } from '@/constants/route';
 ---
 
-<BlogHero {...heroPost} />
+<Hero {...heroPost} />
 <SectionTitle {...POPULAR_TITLE} />
 
 <div class="grid md:grid-cols-[1fr_1.4fr] gap-6 md:gap-4 lg:gap-10">
