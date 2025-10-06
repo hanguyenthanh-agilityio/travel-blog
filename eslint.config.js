@@ -42,8 +42,14 @@ export default [
       parser: tsParser,
       globals: {
         JSX: 'readonly',
-        HTMLButtonElement: 'readonly',
         fetch: 'readonly',
+        window: 'readonly',
+        document: 'readonly',
+        navigator: 'readonly',
+        HTMLElement: 'readonly',
+        HTMLDivElement: 'readonly',
+        HTMLButtonElement: 'readonly',
+        Node: 'readonly',
       },
     },
     plugins: {

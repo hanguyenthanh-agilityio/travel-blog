@@ -32,3 +32,13 @@ export interface Post {
     conclusion: string;
   };
 }
+
+// eslint-disable-next-line no-undef
+export interface Icon extends React.SVGProps<SVGSVGElement> {
+  size?: number;
+  color?: string;
+  width?: number;
+  height?: number;
+  colorPrimary?: string;
+  colorSecondary?: string;
+}

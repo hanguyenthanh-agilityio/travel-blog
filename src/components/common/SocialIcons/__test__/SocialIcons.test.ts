@@ -2,7 +2,7 @@ import { experimental_AstroContainer as AstroContainer } from 'astro/container';
 import { describe, it, expect } from 'vitest';
 
 // Components
-import SocialIcons from '../index.astro';
+import SocialIcons from '../index.tsx';
 
 describe('SocialIcons.astro', () => {
   it.skip('renders social links', async () => {

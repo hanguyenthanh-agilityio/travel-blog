@@ -1,13 +1,14 @@
 ---
 import Link from '@/components/ui/link';
-import Image from '@/components/ui/image/index.astro';
 
 import { cn } from '@/lib/utils';
 
+import { LogoIcon } from '@/icons';
+
 interface LogoProps {
   href: string;
-  width: string;
-  height: string;
+  width: number;
+  height: number;
   classes: string;
 }
 
@@ -16,17 +17,12 @@ const { href, width, height, classes } = Astro.props as LogoProps;
 
 <Link
   href={href}
-  class="focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-md"
+  classes="focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-md"
 >
-  <Image
-    src="/images/logo.svg"
-    alt="Blog Template - Home"
+  <LogoIcon
     width={width}
     height={height}
     format="webp"
-    fit="contain"
-    quality={90}
-    loading="eager"
-    class={cn('transition-transform duration-200 hover:scale-105', classes)}
+    className={cn('transition-transform duration-200 hover:scale-105', classes)}
   />
 </Link>
