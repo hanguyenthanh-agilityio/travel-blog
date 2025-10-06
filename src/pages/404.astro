@@ -2,6 +2,8 @@
 import BlogLayout from '@/layouts/BlogLayout.astro';
 import Link from '@/components/ui/link';
 import { HOME_PAGE } from '@/constants/route';
+
+const path = Astro.url.pathname;
 ---
 
 <BlogLayout title="Page Not Found" description="Oops! Page not found">
@@ -18,8 +20,9 @@ import { HOME_PAGE } from '@/constants/route';
       Oops! We can’t find that page
     </p>
     <p class="text-gray-500 mt-2 max-w-md">
-      The page you’re looking for might have been moved, deleted, or never
-      existed.
+      {
+        `The page at "${path}" might have been moved, deleted, or never existed.`
+      }
     </p>
 
     <!-- Back home button -->
