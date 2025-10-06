@@ -4,7 +4,7 @@ export { default as Header } from './Header/index.astro';
 export { default as NavDropdownMenu } from './NavDropdownMenu';
 export { default as Navigation } from './Navigation/index.astro';
 export { default as SheetMenu } from './SheetMenu';
-export { default as SocialIcons } from './SocialIcons/index.astro';
+export { default as SocialIcons } from './SocialIcons/index.tsx';
 export { default as Paginator } from './Paginator';
 export { default as LazyImage } from './LazyImage/index.astro';
 export { default as Logo } from './Logo/index.astro';

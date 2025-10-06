@@ -1,28 +1,36 @@
+import {
+  FacebookIcon,
+  InstagramIcon,
+  LinkedinIcon,
+  TwitterIcon,
+  YoutubeIcon,
+} from '@/icons';
+
 export const socials = [
   {
     href: 'https://instagram.com',
     label: 'Instagram',
-    iconSrc: '/images/instagram.svg',
+    Icon: InstagramIcon,
   },
   {
     href: 'https://twitter.com',
     label: 'Twitter',
-    iconSrc: '/images/twitter.svg',
+    Icon: FacebookIcon,
   },
   {
     href: 'https://facebook.com',
     label: 'Facebook',
-    iconSrc: '/images/facebook.svg',
+    Icon: LinkedinIcon,
   },
   {
     href: 'https://linkedin.com',
     label: 'LinkedIn',
-    iconSrc: '/images/linkedin.svg',
+    Icon: TwitterIcon,
   },
   {
     href: 'https://youtube.com',
     label: 'YouTube',
-    iconSrc: '/images/youtube.svg',
+    Icon: YoutubeIcon,
   },
 ];
 
