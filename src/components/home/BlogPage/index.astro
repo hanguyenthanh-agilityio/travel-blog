@@ -2,13 +2,9 @@
 // Components
 const { heroPost, popularPosts, trendingPosts, currentPage, totalPages } =
   Astro.props;
-import {
-  BlogGrid,
-  BlogHero,
-  SectionTitle,
-  BlogCard,
-  Paginator,
-} from '@/components';
+import { BlogGrid, SectionTitle, BlogCard, Paginator } from '@/components';
+
+import BlogHero from '@/components/home/BlogHero/index.astro';
 
 // Constants
 import { POPULAR_TITLE, TRENDING_TITLE } from '@/constants/blog';
