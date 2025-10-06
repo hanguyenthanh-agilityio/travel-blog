@@ -32,7 +32,10 @@ export default function MobileSheetMenu() {
         <nav className="mt-6 space-y-4">
           {menu.map((it) => (
             <SheetClose asChild key={it.href}>
-              <Link href={it.href} classes="block text-sm hover:text-accent">
+              <Link
+                href={it.href}
+                classes="block text-sm hover:text-accent border-b border-solid pb-2"
+              >
                 {it.text}
               </Link>
             </SheetClose>

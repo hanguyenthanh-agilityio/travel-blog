@@ -25,14 +25,16 @@ const NavDropdownMenu = ({
 }) => (
   <DropdownMenu>
     <DropdownMenuTrigger asChild>
-      <Button
-        type="button"
-        variant="outline"
-        className="border-none p-0 shadow-none text-base font-normal hover:text-gray-600 hover:bg-[none] hover:text-accent cursor-pointer"
-      >
-        {label}
-        <ArrowIcon />
-      </Button>
+      <div className="border-b border-solid lg:border-b-0">
+        <Button
+          type="button"
+          variant="outline"
+          className="border-none p-0 shadow-none text-base font-normal hover:text-gray-600 hover:bg-[none] hover:text-accent cursor-pointer"
+        >
+          {label}
+          <ArrowIcon />
+        </Button>
+      </div>
     </DropdownMenuTrigger>
 
     <DropdownMenuContent>
