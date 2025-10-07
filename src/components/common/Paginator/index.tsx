@@ -26,7 +26,7 @@ const Paginator = ({
     <Pagination>
       <PaginationContent>
         {pages.map((page) => {
-          const href = page === 1 ? HOME_PAGE : `${basePath}/${page}/`;
+          const href = page === 1 ? HOME_PAGE : `${basePath}/${page}/#trending`;
 
           return (
             <PaginationItem key={page}>

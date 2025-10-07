@@ -1,8 +1,8 @@
 ---
-const { title, subTitle } = Astro.props;
+const { id, title, subTitle } = Astro.props;
 ---
 
-<div class="text-center text-primary my-8">
+<div class="text-center text-primary my-8" id={id}>
   <h2 class="text-xl md:text-2xl font-bold">{title}</h2>
   {subTitle && <p class="mt-2">{subTitle}</p>}
 </div>
