@@ -9,21 +9,20 @@ import { AuthorCard, SocialIcons, LazyImage } from '@/components';
 import { socials } from '@/contents/blog';
 
 // Libs
-import { fetchPostById, fetchPosts } from '@/lib/api';
-import type { Post } from '@/lib/schema';
+import { fetchPostBySlug, fetchPosts } from '@/lib/api';
+
 import { slugify } from '@/lib/utils';
 
 export async function getStaticPaths() {
   const posts = await fetchPosts();
-
   return posts.map((post) => ({
-    params: { id: post.id },
+    params: { slug: post.slug },
   }));
 }
 
-const { id } = Astro.params;
-const post: Post | null = await fetchPostById(id);
-if (!post) throw new Error(`Post with id ${id} not found`);
+const { slug } = Astro.params;
+const post = await fetchPostBySlug(slug);
+if (!post) throw new Error(`Post with slug ${slug} not found`);
 ---
 
 <BlogLayout>

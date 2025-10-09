@@ -8,7 +8,7 @@ export const AuthorSchema = z.object({
 });
 
 export const PostSummarySchema = z.object({
-  id: z.string(),
+  slug: z.string(),
   title: z.string(),
   image: z.string(),
   category: z.enum(['hero', 'popular', 'trending']).optional(),
