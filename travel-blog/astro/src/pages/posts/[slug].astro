@@ -10,26 +10,40 @@ import { socials } from '@/contents/blog';
 
 // Libs
 import { fetchPostBySlug, fetchPosts } from '@/lib/api';
-
 import { slugify } from '@/lib/utils';
 
+// Static paths
 export async function getStaticPaths() {
   const posts = await fetchPosts();
+
   return posts.map((post) => ({
-    params: { slug: post.slug },
+    params: { slug: typeof post.slug === 'string' ? post.slug : post.slug?.current || '' },
   }));
 }
 
+  // Get post by slug
 const { slug } = Astro.params;
 const post = await fetchPostBySlug(slug);
-if (!post) throw new Error(`Post with slug ${slug} not found`);
+
+// Handle not found
+if (!post) throw new Error(`Post with slug "${slug}" not found`);
+
+// Normalize data for safe rendering
+const safePost = {
+  ...post,
+  slug: typeof post.slug === 'string' ? post.slug : post.slug?.current || '',
+  image: typeof post.image === 'string' ? post.image : post.image?.asset?.url || '',
+  author: post.author ?? { name: 'Unknown', role: '', avatar: '', date: '' },
+  content: post.content ?? { intro: '', sections: [], conclusion: '' },
+};
 ---
 
 <BlogLayout>
   <article class="max-w-3xl mx-auto py-8">
     <header class="md:px-8">
+      <!-- Author -->
       <AuthorCard
-        {...post.author}
+        {...safePost.author}
         isBlogDetail={true}
         isRole={true}
         classAvatar="w-14 h-14"
@@ -37,16 +51,22 @@ if (!post) throw new Error(`Post with slug ${slug} not found`);
         className="flex flex-col gap-1 justify-center items-center"
         client:load
       />
+
+      <!-- Title -->
       <h1 class="text-xl md:text-3xl lg:text-4xl font-bold mb-4 text-center">
-        {post.title}
+        {safePost.title}
       </h1>
 
-      <p
-        class="text-center text-sm text-primary mt-2 pb-5 border-b border-line"
-      >
-        {post.author.date}
-      </p>
+      <!-- Date -->
+      {safePost.author.date && (
+        <p class="text-center text-sm text-primary mt-2 pb-5 border-b border-line">
+          {typeof safePost.author.date === 'string'
+            ? safePost.author.date
+            : safePost.author.date.toString()}
+        </p>
+      )}
     </header>
+
     <div class="lg:relative">
       <!-- Social Icons -->
       <aside
@@ -60,44 +80,51 @@ if (!post) throw new Error(`Post with slug ${slug} not found`);
         />
       </aside>
 
-      <p class="pt-5 text-primary text-base md:px-8">
-        {post.excerpt}
-      </p>
+      <!-- Excerpt -->
+      {safePost.excerpt && (
+        <p class="pt-5 text-primary text-base md:px-8">
+          {safePost.excerpt}
+        </p>
+      )}
 
-      <LazyImage
-        src={post.image}
-        alt={post.title}
-        class="rounded-xl my-6 w-full h-blog-lg md:h-auto"
-        loading="lazy"
-        decoding="async"
-      />
+      <!-- Feature image -->
+      {safePost.image && (
+        <LazyImage
+          src={safePost.image}
+          alt={safePost.title}
+          class="rounded-xl my-6 w-full h-blog-lg md:h-auto"
+          loading="lazy"
+          decoding="async"
+        />
+      )}
 
+      <!-- Post content -->
       <div class="prose lg:prose-lg md:px-8">
-        <div class="border-l-2 border-line">
-          <p class="pl-4 text-primary text-base">{post.content.intro}</p>
-        </div>
+        {safePost.content?.intro && (
+          <div class="border-l-2 border-line">
+            <p class="pl-4 text-primary text-base">{safePost.content.intro}</p>
+          </div>
+        )}
 
-        {
-          post.content?.sections?.map(
-            (section: { country: string; items: string[] }) => {
-              const headingId = slugify(section.country);
-              return (
-                <section aria-labelledby={headingId}>
-                  <h2 id={headingId} class="text-lg font-semibold mt-6">
-                    {section.country}
-                  </h2>
-                  <ul class="list-disc ml-6 text-primary text-base">
-                    {section.items.map((item: string) => (
-                      <li>{item}</li>
-                    ))}
-                  </ul>
-                </section>
-              );
-            },
-          )
-        }
+        {safePost.content?.sections?.map((section) => {
+          const headingId = slugify(section.country);
+          return (
+            <section aria-labelledby={headingId}>
+              <h2 id={headingId} class="text-lg font-semibold mt-6">
+                {section.country}
+              </h2>
+              <ul class="list-disc ml-6 text-primary text-base">
+                {section.items.map((item) => (
+                  <li>{item}</li>
+                ))}
+              </ul>
+            </section>
+          );
+        })}
 
-        <p class="mt-8 font-medium">{post.content.conclusion}</p>
+        {safePost.content?.conclusion && (
+          <p class="mt-8 font-medium">{safePost.content.conclusion}</p>
+        )}
       </div>
     </div>
   </article>
