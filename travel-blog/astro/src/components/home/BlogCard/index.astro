@@ -4,7 +4,7 @@ import Link from '@/components/ui/link';
 import { cn } from '@/lib/utils';
 
 const {
-  id,
+  slug,
   title,
   image,
   author,
@@ -15,7 +15,7 @@ const {
 const isHorizontal = variant === 'horizontal';
 ---
 
-<Link href={`/posts/${id}`}>
+<Link href={`/posts/${slug}`}>
   <div
     class={cn(
       'overflow-hidden rounded-xl bg-transparent transition-transform duration-300 ease-in-out hover:shadow-lg hover:-translate-y-1 hover:scale-[1.01]',

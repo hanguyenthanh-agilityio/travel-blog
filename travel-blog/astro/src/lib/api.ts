@@ -1,4 +1,3 @@
-import { sanityClient } from './sanity';
 import { z } from 'astro:content';
 import {
   PostSchema,
@@ -6,13 +5,14 @@ import {
   type Post,
   type PostSummary,
 } from './schema';
+import { loadQuery } from '@/sanity/load-query';
 
 /**
  * Fetch all posts (summary)
  */
 export async function fetchPosts(): Promise<PostSummary[]> {
-  const data = await sanityClient.fetch(`
-    *[_type == "post"]{
+  const query = `
+    *[_type == "post"] | order(_createdAt desc) {
       title,
       slug,
       excerpt,
@@ -33,25 +33,22 @@ export async function fetchPosts(): Promise<PostSummary[]> {
         date
       }
     }
-  `);
+  `;
 
-  const normalized = data.map((data: any) => ({
-    ...data,
-    slug: data.slug?.current || '',
-    image: data.image?.asset?.url || '',
-    author: data.author
+  const { data } = await loadQuery<any[]>({ query });
+
+  const normalized = data.map((item) => ({
+    ...item,
+    slug: item.slug?.current || '',
+    image: item.image?.asset?.url || '',
+    author: item.author
       ? {
-          name: data.author.name || 'Unknown',
-          role: data.author.role || '',
-          avatar: data.author.avatar?.asset?.url || '',
-          date: data.author.date || '',
+          name: item.author.name || 'Unknown',
+          role: item.author.role || '',
+          avatar: item.author.avatar?.asset?.url || '',
+          date: item.author.date || '',
         }
       : { name: 'Unknown', role: '', avatar: '', date: '' },
-    content: data.content ?? {
-      intro: '',
-      sections: [],
-      conclusion: '',
-    },
   }));
 
   return z.array(PostSummarySchema).parse(normalized);
@@ -61,8 +58,7 @@ export async function fetchPosts(): Promise<PostSummary[]> {
  * Fetch single post by slug
  */
 export async function fetchPostBySlug(slug: string): Promise<Post | null> {
-  const data = await sanityClient.fetch(
-    `
+  const query = `
     *[_type == "post" && slug.current == $slug][0]{
       title,
       slug,
@@ -83,18 +79,18 @@ export async function fetchPostBySlug(slug: string): Promise<Post | null> {
         },
         date
       },
-    content{
-      "intro": pt::text(intro),
-      sections[] {
-        country,
-        items
-      },
-      "conclusion": pt::text(conclusion)
+      content{
+        "intro": pt::text(intro),
+        sections[] {
+          country,
+          items
+        },
+        "conclusion": pt::text(conclusion)
+      }
     }
-  }
-  `,
-    { slug },
-  );
+  `;
+
+  const { data } = await loadQuery<any>({ query, params: { slug } });
 
   if (!data) return null;
 

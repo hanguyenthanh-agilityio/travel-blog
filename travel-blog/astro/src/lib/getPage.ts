@@ -4,7 +4,7 @@ import { POSTS_PER_PAGE } from '@/constants/blog';
 export async function getPage(page: number = 1) {
   // Fetch posts
   const posts = await fetchPosts();
-  const heroPost = posts[0];
+  const heroPost = posts.find((p) => p.category === 'hero') || null;
   const popularPosts = await getPopularPosts();
   const allTrendingPosts = await getTrendingPosts();
 
