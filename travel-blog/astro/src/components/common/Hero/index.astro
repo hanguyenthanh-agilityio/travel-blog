@@ -3,13 +3,13 @@
 import { AuthorCard, LazyImage } from '@/components';
 import Link from '@/components/ui/link';
 
-const { title, image, author, id } = Astro.props;
+const { title, image, author, slug } = Astro.props;
 
 const parts = title.split(':');
 ---
 
 <section class="relative w-full h-blog-lg rounded-2xl overflow-hidden">
-  <Link href={`/posts/${id}`}>
+  <Link href={`/posts/${slug}`}>
     <LazyImage
       src={image}
       alt={title}

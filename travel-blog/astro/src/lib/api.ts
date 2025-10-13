@@ -1,32 +1,136 @@
-import {
-  PostSummarySchema,
-  PostSchema,
-  type PostSummary,
-  type Post,
-} from '@/lib/schema';
+import { sanityClient } from './sanity';
 import { z } from 'astro:content';
+import {
+  PostSchema,
+  PostSummarySchema,
+  type Post,
+  type PostSummary,
+} from './schema';
 
-const API_URL =
-  'https://68cbe88d716562cf50758d1c.mockapi.io/api/travel-blog/posts';
-
+/**
+ * Fetch all posts (summary)
+ */
 export async function fetchPosts(): Promise<PostSummary[]> {
-  const res = await fetch(API_URL);
-  const data = await res.json();
-  return z.array(PostSummarySchema).parse(data);
+  const data = await sanityClient.fetch(`
+    *[_type == "post"]{
+      title,
+      slug,
+      excerpt,
+      image{
+        asset->{
+          url
+        }
+      },
+      category,
+      author->{
+        name,
+        role,
+        avatar{
+          asset->{
+            url
+          }
+        },
+        date
+      }
+    }
+  `);
+
+  const normalized = data.map((data: any) => ({
+    ...data,
+    slug: data.slug?.current || '',
+    image: data.image?.asset?.url || '',
+    author: data.author
+      ? {
+          name: data.author.name || 'Unknown',
+          role: data.author.role || '',
+          avatar: data.author.avatar?.asset?.url || '',
+          date: data.author.date || '',
+        }
+      : { name: 'Unknown', role: '', avatar: '', date: '' },
+    content: data.content ?? {
+      intro: '',
+      sections: [],
+      conclusion: '',
+    },
+  }));
+
+  return z.array(PostSummarySchema).parse(normalized);
 }
 
-export async function fetchPostById(id: string): Promise<Post | null> {
-  const res = await fetch(`${API_URL}/${id}`);
-  if (!res.ok) return null;
-  const data = await res.json();
-  return PostSchema.parse(data);
+/**
+ * Fetch single post by slug
+ */
+export async function fetchPostBySlug(slug: string): Promise<Post | null> {
+  const data = await sanityClient.fetch(
+    `
+    *[_type == "post" && slug.current == $slug][0]{
+      title,
+      slug,
+      excerpt,
+      image{
+        asset->{
+          url
+        }
+      },
+      category,
+      author->{
+        name,
+        role,
+        avatar{
+          asset->{
+            url
+          }
+        },
+        date
+      },
+    content{
+      "intro": pt::text(intro),
+      sections[] {
+        country,
+        items
+      },
+      "conclusion": pt::text(conclusion)
+    }
+  }
+  `,
+    { slug },
+  );
+
+  if (!data) return null;
+
+  const normalized = {
+    ...data,
+    slug: data.slug?.current || '',
+    image: data.image?.asset?.url || '',
+    author: data.author
+      ? {
+          name: data.author.name || 'Unknown',
+          role: data.author.role || '',
+          avatar: data.author.avatar?.asset?.url || '',
+          date: data.author.date || '',
+        }
+      : { name: 'Unknown', role: '', avatar: '', date: '' },
+    content: data.content ?? {
+      intro: '',
+      sections: [],
+      conclusion: '',
+    },
+  };
+
+  return PostSchema.parse(normalized);
 }
 
+/**
+ * Get popular posts
+ */
 export async function getPopularPosts(): Promise<PostSummary[]> {
   const posts = await fetchPosts();
   return posts.filter((p) => p.category === 'popular').slice(0, 3);
 }
 
+/**
+ * Get trending posts
+ */
 export async function getTrendingPosts(): Promise<PostSummary[]> {
   const posts = await fetchPosts();
   return posts.filter((p) => p.category === 'trending');

@@ -1,20 +1,14 @@
 import { z } from 'astro:content';
 
+// Author schema
 export const AuthorSchema = z.object({
-  name: z.string(),
+  name: z.string().default(''),
   role: z.string().optional(),
   avatar: z.string().optional(),
   date: z.union([z.string(), z.date()]).optional(),
 });
 
-export const PostSummarySchema = z.object({
-  id: z.string(),
-  title: z.string(),
-  image: z.string(),
-  category: z.enum(['hero', 'popular', 'trending']).optional(),
-  author: AuthorSchema,
-});
-
+// Content schema
 const ContentSchema = z.object({
   intro: z.string().default(''),
   sections: z
@@ -28,11 +22,32 @@ const ContentSchema = z.object({
   conclusion: z.string().default(''),
 });
 
+// Post summary (for list pages)
+export const PostSummarySchema = z.object({
+  slug: z.union([z.string(), z.object({ current: z.string() })]),
+  title: z.string(),
+  image: z.union([
+    z.string(),
+    z.object({
+      asset: z
+        .object({
+          _ref: z.string().optional(),
+          url: z.string().optional(),
+        })
+        .optional(),
+    }),
+  ]),
+  category: z.enum(['hero', 'popular', 'trending']).optional(),
+  author: AuthorSchema.nullable().default(null),
+});
+
+// Full post schema (for detail page)
 export const PostSchema = PostSummarySchema.extend({
   excerpt: z.string().default(''),
   content: ContentSchema.default({}),
 });
 
+// Types
 export type Author = z.infer<typeof AuthorSchema>;
 export type PostSummary = z.infer<typeof PostSummarySchema>;
 export type Post = z.infer<typeof PostSchema>;
