@@ -3,6 +3,9 @@ import react from '@astrojs/react';
 import tailwindcss from '@tailwindcss/vite';
 import critters from 'astro-critters';
 import sanity from '@sanity/astro';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 export default defineConfig({
   integrations: [
@@ -13,8 +16,8 @@ export default defineConfig({
     }),
 
     sanity({
-      projectId: 'd5zc7aiu',
-      dataset: 'production',
+      projectId: process.env.PUBLIC_SANITY_PROJECT_ID,
+      dataset: process.env.PUBLIC_SANITY_DATASET,
       apiVersion: '2025-01-01',
       useCdn: true,
     }),
