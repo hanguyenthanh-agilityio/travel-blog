@@ -89,6 +89,7 @@ export default [
       globals: {
         module: 'readonly',
         require: 'readonly',
+        process: 'readonly',
       },
     },
     rules: {
