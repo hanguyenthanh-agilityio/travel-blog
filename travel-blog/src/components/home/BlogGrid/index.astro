@@ -7,9 +7,9 @@ import type { Blog } from '@/types/blog';
 
 interface BlogCardProps {
   posts: Blog[];
-  column: string;
+  column?: number | string;
 }
-const { posts, column = '3' } = Astro.props as BlogCardProps;
+const { posts, column = 3 } = Astro.props as BlogCardProps;
 ---
 
 <div class={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-${column} gap-10`}>
