@@ -2,12 +2,17 @@
 import { urlForImage } from '@/sanity/url-for-image';
 
 const { asset, alt } = Astro.props.node;
-
-const url = urlForImage(asset).url();
-const webUrl = urlForImage(asset).format('webp').url();
+const url = urlForImage(asset).width(800).url();
+const webpUrl = urlForImage(asset).width(800).format('webp').url();
 ---
 
 <picture>
-  <source srcset={webUrl} type="image/webp" />
-  <img src={url} alt={alt} />
+  <source srcset={webpUrl} type="image/webp" />
+  <img
+    src={url}
+    alt={alt || ''}
+    class="rounded-xl my-6 mx-auto w-full h-auto object-cover"
+    loading="lazy"
+    decoding="async"
+  />
 </picture>
