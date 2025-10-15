@@ -4,6 +4,7 @@ import BlogLayout from '@/layouts/BlogLayout.astro';
 
 // Components
 import { AuthorCard, SocialIcons, LazyImage } from '@/components';
+import PortableText from '@/components/common/PortableText/index.astro';
 
 // Contents
 import { socials } from '@/contents/blog';
@@ -17,31 +18,36 @@ export async function getStaticPaths() {
   const posts = await fetchPosts();
 
   return posts.map((post) => ({
-    params: { slug: typeof post.slug === 'string' ? post.slug : post.slug?.current || '' },
+    params: {
+      slug:
+        typeof post.slug === 'string' ? post.slug : post.slug?.current || '',
+    },
   }));
 }
 
-  // Get post by slug
+// Fetch single post
 const { slug } = Astro.params;
 const post = await fetchPostBySlug(slug);
 
 // Handle not found
 if (!post) throw new Error(`Post with slug "${slug}" not found`);
 
-// Normalize data for safe rendering
+// Normalize data
 const safePost = {
   ...post,
   slug: typeof post.slug === 'string' ? post.slug : post.slug?.current || '',
-  image: typeof post.image === 'string' ? post.image : post.image?.asset?.url || '',
+  image:
+    typeof post.image === 'string' ? post.image : post.image?.asset?.url || '',
   author: post.author ?? { name: 'Unknown', role: '', avatar: '', date: '' },
-  content: post.content ?? { intro: '', sections: [], conclusion: '' },
+  content: post.content ?? { intro: [], sections: [], conclusion: [] },
+  excerpt: post.excerpt ?? '',
 };
 ---
 
 <BlogLayout>
   <article class="max-w-3xl mx-auto py-8">
-    <header class="md:px-8">
-      <!-- Author -->
+    <!-- Header -->
+    <header class="md:px-8 text-center">
       <AuthorCard
         {...safePost.author}
         isBlogDetail={true}
@@ -52,23 +58,24 @@ const safePost = {
         client:load
       />
 
-      <!-- Title -->
-      <h1 class="text-xl md:text-3xl lg:text-4xl font-bold mb-4 text-center">
+      <h1 class="text-xl md:text-3xl lg:text-4xl font-bold mb-4">
         {safePost.title}
       </h1>
 
-      <!-- Date -->
-      {safePost.author.date && (
-        <p class="text-center text-sm text-primary mt-2 pb-5 border-b border-line">
-          {typeof safePost.author.date === 'string'
-            ? safePost.author.date
-            : safePost.author.date.toString()}
-        </p>
-      )}
+      {
+        safePost.author.date && (
+          <p class="text-sm text-primary mt-2 pb-5 border-b border-line">
+            {typeof safePost.author.date === 'string'
+              ? safePost.author.date
+              : safePost.author.date.toString()}
+          </p>
+        )
+      }
     </header>
 
+    <!-- Main body -->
     <div class="lg:relative">
-      <!-- Social Icons -->
+      <!-- Social icons -->
       <aside
         class="lg:absolute lg:right-[-100px] pt-5"
         aria-label="Share on social networks"
@@ -81,50 +88,63 @@ const safePost = {
       </aside>
 
       <!-- Excerpt -->
-      {safePost.excerpt && (
-        <p class="pt-5 text-primary text-base md:px-8">
-          {safePost.excerpt}
-        </p>
-      )}
+      {
+        safePost.excerpt && (
+          <p class="pt-5 text-primary text-base md:px-8">{safePost.excerpt}</p>
+        )
+      }
 
       <!-- Feature image -->
-      {safePost.image && (
-        <LazyImage
-          src={safePost.image}
-          alt={safePost.title}
-          class="rounded-xl my-6 w-full h-blog-lg md:h-auto"
-          loading="lazy"
-          decoding="async"
-        />
-      )}
+      {
+        safePost.image && (
+          <LazyImage
+            src={safePost.image}
+            alt={safePost.title}
+            class="rounded-xl my-6 w-full h-blog-lg md:h-auto"
+            loading="lazy"
+            decoding="async"
+          />
+        )
+      }
 
       <!-- Post content -->
       <div class="prose lg:prose-lg md:px-8">
-        {safePost.content?.intro && (
-          <div class="border-l-2 border-line">
-            <p class="pl-4 text-primary text-base">{safePost.content.intro}</p>
-          </div>
-        )}
+        <!-- Intro -->
+        {
+          safePost.content?.intro && (
+            <div class="border-l-2 border-line pl-4">
+              <PortableText portableText={safePost.content.intro} />
+            </div>
+          )
+        }
 
-        {safePost.content?.sections?.map((section) => {
-          const headingId = slugify(section.country);
-          return (
-            <section aria-labelledby={headingId}>
-              <h2 id={headingId} class="text-lg font-semibold mt-6">
-                {section.country}
-              </h2>
-              <ul class="list-disc ml-6 text-primary text-base">
-                {section.items.map((item) => (
-                  <li>{item}</li>
-                ))}
-              </ul>
-            </section>
-          );
-        })}
+        <!-- Sections -->
+        {
+          safePost.content?.sections?.map((section) => {
+            const headingId = slugify(section.country);
+            return (
+              <section aria-labelledby={headingId}>
+                <h2 id={headingId} class="text-lg font-semibold mt-6">
+                  {section.country}
+                </h2>
+                <ul class="list-disc ml-6 text-primary text-base">
+                  {section.items.map((item) => (
+                    <li>{item}</li>
+                  ))}
+                </ul>
+              </section>
+            );
+          })
+        }
 
-        {safePost.content?.conclusion && (
-          <p class="mt-8 font-medium">{safePost.content.conclusion}</p>
-        )}
+        <!-- Conclusion -->
+        {
+          safePost.content?.conclusion && (
+            <div class="mt-8 font-medium">
+              <PortableText portableText={safePost.content.conclusion} />
+            </div>
+          )
+        }
       </div>
     </div>
   </article>

@@ -10,7 +10,7 @@ export const AuthorSchema = z.object({
 
 // Content schema
 const ContentSchema = z.object({
-  intro: z.string().default(''),
+  intro: z.any().optional(),
   sections: z
     .array(
       z.object({
@@ -19,7 +19,7 @@ const ContentSchema = z.object({
       }),
     )
     .default([]),
-  conclusion: z.string().default(''),
+  conclusion: z.any().optional(),
 });
 
 // Post summary (for list pages)
