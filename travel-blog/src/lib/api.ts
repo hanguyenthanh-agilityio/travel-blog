@@ -59,36 +59,28 @@ export async function fetchPosts(): Promise<PostSummary[]> {
  */
 export async function fetchPostBySlug(slug: string): Promise<Post | null> {
   const query = `
-    *[_type == "post" && slug.current == $slug][0]{
-      title,
-      slug,
-      excerpt,
-      image{
-        asset->{
-          url
-        }
+  *[_type == "post" && slug.current == $slug][0]{
+    title,
+    slug,
+    excerpt,
+    image { asset->{ url } },
+    category,
+    author->{
+      name,
+      role,
+      avatar{ asset->{ url } },
+      date
+    },
+    content {
+      intro[],
+      sections[] {
+        country,
+        items
       },
-      category,
-      author->{
-        name,
-        role,
-        avatar{
-          asset->{
-            url
-          }
-        },
-        date
-      },
-      content{
-        "intro": pt::text(intro),
-        sections[] {
-          country,
-          items
-        },
-        "conclusion": pt::text(conclusion)
-      }
+      conclusion[]
     }
-  `;
+  }
+`;
 
   const { data } = await loadQuery<any>({ query, params: { slug } });
 

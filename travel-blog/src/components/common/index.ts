@@ -9,3 +9,5 @@ export { default as Paginator } from './Paginator';
 export { default as LazyImage } from './LazyImage/index.astro';
 export { default as Logo } from './Logo/index.astro';
 export { default as Hero } from './Hero/index.astro';
+export { default as PortableText } from './PortableText/index.astro';
+export { default as PortableTextImage } from './PortableTextImage/index.astro';
