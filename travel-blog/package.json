@@ -1,7 +1,8 @@
 {
   "name": "travel-blog",
+  "private": true,
   "type": "module",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
@@ -13,7 +14,9 @@
     "test:run": "vitest run --passWithNoTests",
     "prepare": "husky",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "studio:deploy": "sanity deploy",
+    "studio:graphql": "sanity graphql deploy"
   },
   "lint-staged": {
     "*.{js,ts,tsx,astro}": [
@@ -24,6 +27,7 @@
     ]
   },
   "dependencies": {
+    "22": "^0.0.0",
     "@otterlord/astro-critters": "^1.1.41",
     "@radix-ui/react-avatar": "^1.1.10",
     "@radix-ui/react-dialog": "^1.1.15",
@@ -32,7 +36,7 @@
     "@sanity/astro": "^3.2.10",
     "@sanity/client": "^7.12.0",
     "@sanity/image-url": "^1.2.0",
-    "@types/react-dom": "^19.2.1",
+    "@sanity/vision": "^4.10.3",
     "astro": "^5.14.0",
     "astro-critters": "^2.2.1",
     "astro-portabletext": "^0.11.3",
@@ -43,7 +47,7 @@
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "react-is": "^19.2.0",
-    "sanity": "^4.10.2",
+    "sanity": "^4.10.3",
     "styled-components": "^6.1.19",
     "tailwind-merge": "^3.3.1",
     "tailwindcss-animate": "^1.0.7"
@@ -54,6 +58,7 @@
     "@commitlint/cli": "^19.8.1",
     "@commitlint/config-conventional": "^19.8.1",
     "@eslint/js": "^9.35.0",
+    "@sanity/eslint-config-studio": "^5.0.2",
     "@storybook/addon-a11y": "9.1.6",
     "@storybook/addon-docs": "9.1.6",
     "@storybook/addon-onboarding": "9.1.6",
@@ -68,6 +73,7 @@
     "@testing-library/user-event": "^14.6.1",
     "@types/node": "^24.5.2",
     "@types/react": "^19.2.2",
+    "@types/react-dom": "^19.2.1",
     "@typescript-eslint/eslint-plugin": "^8.43.0",
     "@typescript-eslint/parser": "^8.43.0",
     "@vitejs/plugin-react": "^5.0.3",
@@ -97,5 +103,11 @@
     "typescript": "^5.9.3",
     "vite": "^5.4.20",
     "vitest": "^3.2.4"
+  },
+  "prettier": {
+    "semi": false,
+    "printWidth": 100,
+    "bracketSpacing": false,
+    "singleQuote": true
   }
 }

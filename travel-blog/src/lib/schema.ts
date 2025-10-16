@@ -37,7 +37,15 @@ export const PostSummarySchema = z.object({
         .optional(),
     }),
   ]),
-  category: z.enum(['hero', 'popular', 'trending']).optional(),
+  category: z
+    .string()
+    .transform((val) =>
+      val?.replace(/[\u200B-\u200D\uFEFF\u2060\u00A0]/g, '').trim(),
+    )
+    .refine((val) => ['hero', 'popular', 'trending', undefined].includes(val), {
+      message: 'Invalid category',
+    })
+    .optional(),
   author: AuthorSchema.nullable().default(null),
 });
 
