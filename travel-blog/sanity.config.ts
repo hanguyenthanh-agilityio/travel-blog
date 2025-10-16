@@ -1,7 +1,7 @@
 import {defineConfig} from 'sanity'
 import {structureTool} from 'sanity/structure'
-import {visionTool} from '@sanity/vision'
-import {schemaTypes} from './schemaTypes'
+import {schemaTypes} from './sanity/schemaTypes'
+import {presentationTool} from 'sanity/presentation'
 
 export default defineConfig({
   name: 'default',
@@ -10,7 +10,12 @@ export default defineConfig({
   projectId: 'd5zc7aiu',
   dataset: 'production',
 
-  plugins: [structureTool(), visionTool()],
+  plugins: [
+    structureTool(),
+    presentationTool({
+      previewUrl: import.meta.env.SANITY_STUDIO_PREVIEW_URL || 'http://localhost:4321',
+    }),
+  ],
 
   schema: {
     types: schemaTypes,
