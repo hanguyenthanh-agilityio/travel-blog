@@ -4,6 +4,7 @@ import tailwindcss from '@tailwindcss/vite'
 import critters from 'astro-critters'
 import sanity from '@sanity/astro'
 import dotenv from 'dotenv'
+import vercel from '@astrojs/vercel/serverless'
 
 dotenv.config()
 
@@ -26,4 +27,5 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
   },
+  adapter: vercel(),
 })
