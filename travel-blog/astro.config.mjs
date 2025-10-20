@@ -5,6 +5,7 @@ import critters from 'astro-critters'
 import sanity from '@sanity/astro'
 import dotenv from 'dotenv'
 import vercel from '@astrojs/vercel/serverless'
+import viteCompression from 'vite-plugin-compression'
 
 dotenv.config()
 
@@ -25,7 +26,23 @@ export default defineConfig({
     }),
   ],
   vite: {
-    plugins: [tailwindcss()],
+    build: {
+      rollupOptions: {
+        output: {
+          manualChunks: {
+            vendor: ['react', 'react-dom'],
+          },
+        },
+      },
+    },
+    plugins: [
+      tailwindcss(),
+      viteCompression({
+        algorithm: 'brotliCompress',
+        ext: '.br',
+        threshold: 1024,
+      }),
+    ],
   },
   adapter: vercel(),
 })

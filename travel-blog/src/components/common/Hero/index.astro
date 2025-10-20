@@ -1,8 +1,7 @@
 ---
 // Components
-import {AuthorCard} from '@/components'
+import {AuthorCard, LazyImage} from '@/components'
 import Link from '@/components/ui/link'
-import Image from '@/components/ui/image/index.astro'
 
 const {title, image, author, slug} = Astro.props
 
@@ -11,7 +10,13 @@ const parts = title.split(':')
 
 <section class="relative w-full h-blog-lg rounded-2xl overflow-hidden">
   <Link href={`/posts/${slug}`}>
-    <Image src={image} alt={title} class="w-full h-full object-cover" loading="eager" />
+    <LazyImage
+      src={image}
+      alt={title}
+      class="w-full h-full object-cover"
+      fetchpriority="high"
+      loading="eager"
+    />
 
     <div class="absolute inset-0 bg-gradient-to-b from-[#2980B9]/0 to-[#2980B9]"></div>
 

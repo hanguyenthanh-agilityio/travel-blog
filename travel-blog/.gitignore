@@ -50,3 +50,6 @@ coverage
 
 # Dotenv and similar local-only files
 *.local
+
+# Vercel local config
+.vercel

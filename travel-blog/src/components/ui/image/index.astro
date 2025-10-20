@@ -1,18 +1,17 @@
 ---
-import {urlForImage} from '@/sanity/url-for-image'
-import {Image} from 'astro:assets'
+import { Image } from 'astro:assets';
 
 interface Props {
-  src: any
-  alt?: string
-  class?: string
-  width?: number
-  height?: number
-  sizes?: string
-  loading?: 'lazy' | 'eager'
-  format?: 'webp' | 'avif' | 'png' | 'jpeg'
-  fit?: 'clip' | 'crop' | 'fill' | 'fillmax' | 'max' | 'scale' | 'min'
-  quality?: number
+  src: string;
+  alt?: string;
+  class?: string;
+  width?: number;
+  height?: number;
+  sizes?: string;
+  loading?: 'lazy' | 'eager';
+  format?: 'webp' | 'avif' | 'png' | 'jpeg';
+  fit?: 'cover' | 'contain' | 'fill' | 'inside' | 'outside';
+  quality?: number;
 }
 
 const {
@@ -24,18 +23,16 @@ const {
   sizes,
   loading = 'lazy',
   format = 'webp',
-  fit = 'fill',
+  fit = 'cover',
   quality = 80,
-} = Astro.props
+} = Astro.props;
 
-const defaultSizes = sizes || '(max-width: 640px) 100vw, (max-width: 1024px) 100vw, 1920px'
-
-// Build Sanity image URL with optimization
-const imageUrl = urlForImage(src).width(width).height(height).fit(fit).quality(quality).url()
+const defaultSizes =
+  sizes || '(max-width: 640px) 100vw, (max-width: 1024px) 100vw, 1920px';
 ---
 
 <Image
-  src={imageUrl}
+  src={src}
   alt={alt}
   width={width}
   height={height}
