@@ -1,7 +1,6 @@
 ---
-import {AuthorCard} from '@/components'
+import {AuthorCard, LazyImage} from '@/components'
 import Link from '@/components/ui/link'
-import Image from '@/components/ui/image/index.astro'
 
 import {cn} from '@/lib/utils'
 
@@ -18,7 +17,7 @@ const isHorizontal = variant === 'horizontal'
     )}
   >
     <!-- Image -->
-    <Image
+    <LazyImage
       src={image}
       alt={title}
       class={cn(
