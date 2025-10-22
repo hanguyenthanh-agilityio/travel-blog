@@ -3,12 +3,14 @@
 const { heroPost, popularPosts, trendingPosts, currentPage, totalPages } =
   Astro.props;
 import {
-  BlogGrid,
-  SectionTitle,
-  BlogCard,
   Paginator,
   Hero,
 } from '@/components';
+
+// Sections
+import {  BlogGrid,
+  HeadingBlock,
+  BlogCard} from '@/sections'
 
 // Constants
 import { POPULAR_TITLE, TRENDING_TITLE } from '@/constants/blog';
@@ -16,7 +18,7 @@ import { PAGE_PATH } from '@/constants/route';
 ---
 
 <Hero {...heroPost} />
-<SectionTitle {...POPULAR_TITLE} />
+<HeadingBlock {...POPULAR_TITLE} />
 
 <div class="grid md:grid-cols-[1fr_1.4fr] gap-6 md:gap-4 lg:gap-10">
   <BlogCard
@@ -29,7 +31,7 @@ import { PAGE_PATH } from '@/constants/route';
   </div>
 </div>
 
-<SectionTitle {...TRENDING_TITLE} id="trending" />
+<HeadingBlock {...TRENDING_TITLE} id="trending" />
 <BlogGrid posts={trendingPosts} />
 
 <div class="mt-10 flex justify-center">

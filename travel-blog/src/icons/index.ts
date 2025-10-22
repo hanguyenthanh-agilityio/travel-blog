@@ -5,3 +5,5 @@ export { default as LogoIcon } from './logo';
 export { default as SuitcaseIcon } from './suitcase';
 export { default as TwitterIcon } from './twitter';
 export { default as YoutubeIcon } from './youtube';
+export { default as ArrowIcon } from './arrow';
+export { default as Hamburger } from './hamburger';

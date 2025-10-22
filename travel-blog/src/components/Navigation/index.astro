@@ -1,10 +1,9 @@
 ---
 // Components
-import { NavDropdownMenu } from '@/components';
-import Link from '@/components/ui/link';
+import { NavDropdownMenu ,Link} from '@/components';
 
 // Contents
-import { menu, otherPages } from '@/contents/blog';
+import { menu, otherPages } from '@/mockData/blog';
 ---
 
 <div class="flex items-center gap-6">
@@ -13,7 +12,6 @@ import { menu, otherPages } from '@/contents/blog';
     {
       menu.map((item) => (
         <Link
-          key={item.href}
           href={item.href}
           text={item.text}
           classes="text-base text-gray-700 hover:text-accent transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-md px-2 py-1"

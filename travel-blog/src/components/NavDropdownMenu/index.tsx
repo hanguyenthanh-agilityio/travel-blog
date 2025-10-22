@@ -1,20 +1,26 @@
 import React from 'react';
 
+// Icons
+import { ArrowIcon } from '@/icons';
+
+// UI
+import { Button } from '@/ui/button';
+import Dropdown from '@/ui/dropdown';
+
 // Components
-import ArrowIcon from '@/components/icon/arrow';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown';
-import { Button } from '@/components/ui/button';
-import Link from '@/components/ui/link';
+import { Link } from '@/components';
 
 interface ItemProps {
   href: string;
   text: string;
 }
+
+const {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuItem,
+} = Dropdown;
 
 const NavDropdownMenu = ({
   label,

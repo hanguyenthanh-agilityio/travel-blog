@@ -1,8 +1,7 @@
 import { experimental_AstroContainer as AstroContainer } from 'astro/container';
 import { describe, it, expect } from 'vitest';
-// @ts-expect-error: Astro does not provide type declarations for .astro files
 import Footer from '../index.astro';
-import { socials, contactItems, bottomLinks } from '@/contents/blog';
+import { socials, contactItems, bottomLinks } from '@/mockData/blog';
 
 describe('Footer.astro', () => {
   it.skip('renders social icons', async () => {

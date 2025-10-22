@@ -1,12 +1,15 @@
 ---
 // Layouts
-import BlogLayout from '@/layouts/BlogLayout.astro'
+import PageLayout from '@/layouts/PageLayout.astro'
 
 // Components
-import {AuthorCard, SocialIcons, LazyImage, PortableText} from '@/components'
+import {SocialIcons, LazyImage, PortableText} from '@/components'
+
+// Sections
+import {AuthorCard} from '@/sections'
 
 // Contents
-import {socials} from '@/contents/blog'
+import {socials} from '@/mockData/blog'
 
 // Libs
 import {fetchPostBySlug, fetchPosts} from '@/lib/api'
@@ -41,7 +44,7 @@ const safePost = {
 }
 ---
 
-<BlogLayout>
+<PageLayout>
   <article class="max-w-3xl mx-auto py-8">
     <!-- Header -->
     <header class="md:px-8 text-center">
@@ -137,4 +140,4 @@ const safePost = {
       </div>
     </div>
   </article>
-</BlogLayout>
+</PageLayout>

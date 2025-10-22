@@ -2,14 +2,14 @@ import { experimental_AstroContainer as AstroContainer } from 'astro/container';
 import { describe, it, expect } from 'vitest';
 
 // Components
-import SectionTitle from '../index.astro';
+import HeadingBlock from '../index.astro';
 
-describe('SectionTitle', () => {
+describe('HeadingBlock', () => {
   it('renders title only', async () => {
     const container = await AstroContainer.create();
 
     const props = { title: 'Popular Posts' };
-    const result = await container.renderToString(SectionTitle, { props });
+    const result = await container.renderToString(HeadingBlock, { props });
 
     expect(result).toContain('<h2');
     expect(result).toContain('Popular Posts');
@@ -25,7 +25,7 @@ describe('SectionTitle', () => {
       subTitle:
         'Discover how innovation and creativity drive meaningful change',
     };
-    const result = await container.renderToString(SectionTitle, { props });
+    const result = await container.renderToString(HeadingBlock, { props });
 
     expect(result).toContain('<h2');
     expect(result).toContain('Trending Posts');

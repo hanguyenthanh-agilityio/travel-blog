@@ -1,19 +1,17 @@
 import React from 'react';
 
 // Components
-import {
-  Sheet,
-  SheetTrigger,
-  SheetContent,
-  SheetClose,
-} from '@/components/ui/sheet';
-import { NavDropdownMenu } from '@/components';
-import Hamburger from '@/components/icon/hamburger';
-import { Button } from '@/components/ui/button';
-import Link from '@/components/ui/link';
+import { Sheet, SheetTrigger, SheetContent, SheetClose } from '@/ui/sheet';
+import { NavDropdownMenu, Link } from '@/components';
+
+// Icons
+import { Hamburger } from '@/icons';
+
+// UI
+import { Button } from '@/ui';
 
 // Contents
-import { menu, otherPages } from '@/contents/blog';
+import { menu, otherPages } from '@/mockData/blog';
 
 export default function MobileSheetMenu() {
   return (

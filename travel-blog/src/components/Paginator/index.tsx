@@ -5,8 +5,10 @@ import {
   PaginationContent,
   PaginationItem,
   PaginationLink,
-} from '@/components/ui/pagination';
-import { HOME_PAGE, PAGE_PATH } from '@/constants/route';
+} from '@/ui/pagination';
+
+// Constants
+import { HOME_PAGE, PAGE_PATH } from '@/constants';
 
 // Types
 interface PaginationProps {

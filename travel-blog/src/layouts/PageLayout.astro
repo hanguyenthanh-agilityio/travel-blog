@@ -1,11 +1,16 @@
 ---
-import Header from '@/components/common/Header/index.astro';
-import Footer from '@/components/common/Footer/index.astro';
-import SeoHead from './SeoHead.astro';
-
 import { VisualEditing } from "@sanity/astro/visual-editing";
 
+// Components
+import { Footer, Header } from '@/components';
+
+// Layouts
+import SeoHead from './SeoHead.astro';
+
+
+// Styles
 import '../styles/globals.css';
+
 
 const seo = Astro.props.seo || {};
 

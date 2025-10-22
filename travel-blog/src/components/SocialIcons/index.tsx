@@ -1,8 +1,14 @@
 import * as React from 'react';
-import Link from '@/components/ui/link';
-import { cn } from '@/lib/utils';
-import type { Icon as IconProps } from '@/types/blog';
 import type { FC } from 'react';
+
+// Components
+import { Link } from '@/components';
+
+// Libs
+import { cn } from '@/lib/utils';
+
+// Types
+import type { Icon as IconProps } from '@/types/blog';
 
 export interface SocialItem {
   href: string;
