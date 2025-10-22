@@ -1,14 +1,18 @@
 import React from 'react';
 
 // Components
-import { Sheet, SheetTrigger, SheetContent, SheetClose } from '@/ui/sheet';
-import { NavDropdownMenu, Link } from '@/components';
+import { SheetContent } from '@/components';
+
+// UI
+import {
+  Button,
+  Sheet,
+  SheetTrigger,
+  SheetContent as UISheetContent,
+} from '@/ui';
 
 // Icons
 import { Hamburger } from '@/icons';
-
-// UI
-import { Button } from '@/ui';
 
 // Contents
 import { menu, otherPages } from '@/mockData/blog';
@@ -26,22 +30,13 @@ export default function MobileSheetMenu() {
         </Button>
       </SheetTrigger>
 
-      <SheetContent side="left" className="w-64">
-        <nav className="mt-6 space-y-4">
-          {menu.map((it) => (
-            <SheetClose asChild key={it.href}>
-              <Link
-                href={it.href}
-                classes="block text-sm hover:text-accent border-b border-solid pb-2"
-              >
-                {it.text}
-              </Link>
-            </SheetClose>
-          ))}
-
-          <NavDropdownMenu label="Other Pages" items={otherPages} />
-        </nav>
-      </SheetContent>
+      <UISheetContent
+        side="left"
+        className="w-64"
+        aria-label="Mobile menu panel"
+      >
+        <SheetContent menu={menu} otherPages={otherPages} />
+      </UISheetContent>
     </Sheet>
   );
 }

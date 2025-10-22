@@ -13,7 +13,7 @@ import {socials} from '@/mockData/blog'
 
 // Libs
 import {fetchPostBySlug, fetchPosts} from '@/lib/api'
-import {slugify} from '@/lib/utils'
+import {generateSlug} from '@/lib/utils'
 
 // Static paths
 export async function getStaticPaths() {
@@ -113,7 +113,7 @@ const safePost = {
         <!-- Sections -->
         {
           safePost.content?.sections?.map((section) => {
-            const headingId = slugify(section.country)
+            const headingId = generateSlug(section.country)
             return (
               <section aria-labelledby={headingId}>
                 <h2 id={headingId} class="text-lg font-semibold mt-6">

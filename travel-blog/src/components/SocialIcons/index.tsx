@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import type { FC } from 'react';
 
 // Components
@@ -31,17 +31,16 @@ const SocialIcons: FC<Props> = ({
   dark = false,
 }) => {
   return (
-    <div
-      className={cn('flex items-center', containerClassName)}
-      role="list"
+    <ul
+      className={cn('flex items-center gap-2', containerClassName)}
       aria-label="Social media links"
     >
       {socials.map((social) => (
-        <div key={social.href} role="listitem" className="md:mr-4">
+        <li key={social.href} className="list-none">
           <Link
             href={social.href}
-            label={social.label}
             external
+            aria-label={`Visit our ${social.label} profile`}
             classes={cn(
               'flex items-center justify-center p-2 rounded-lg transition-all duration-200',
               'hover:scale-110 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2',
@@ -51,13 +50,17 @@ const SocialIcons: FC<Props> = ({
               linkClassName,
               social.linkClassName,
             )}
-            aria-label={`Visit our ${social.label} page`}
           >
-            <social.Icon width={24} height={24} />
+            <social.Icon
+              width={24}
+              height={24}
+              aria-hidden="true"
+              focusable="false"
+            />
           </Link>
-        </div>
+        </li>
       ))}
-    </div>
+    </ul>
   );
 };
 
