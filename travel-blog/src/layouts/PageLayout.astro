@@ -30,7 +30,7 @@ const visualEditingEnabled =
   <SeoHead {title} {description} {image} {url} {noindex} />
   <body>
     <Header />
-    <main class="flex-1 container mx-auto px-4 py-8">
+    <main class="flex-1 container mx-auto px-4 py-8 pt-[80px]">
       <slot />
     </main>
     <Footer />
@@ -39,12 +39,3 @@ const visualEditingEnabled =
     <VisualEditing enabled={visualEditingEnabled} />
   </body>
 </html>
-
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
-</style>

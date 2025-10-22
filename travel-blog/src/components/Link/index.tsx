@@ -22,10 +22,12 @@ const Link: React.FC<LinkProps> = ({
   const target = external ? '_blank' : '_self';
   const rel = external ? 'noopener noreferrer' : undefined;
 
+  const ariaLabel = label || text;
+
   return (
     <a
       href={href}
-      aria-label={label}
+      aria-label={ariaLabel}
       className={classes}
       target={target}
       rel={rel}
