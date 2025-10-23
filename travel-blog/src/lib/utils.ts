@@ -5,7 +5,7 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-export function slugify(input: string): string {
+export function generateSlug(input: string): string {
   return input
     .toLowerCase()
     .trim()

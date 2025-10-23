@@ -1,0 +1,30 @@
+---
+// Components
+import {Navigation, SheetMenu, Logo} from '@/components'
+
+// Constants
+import {HOME_PAGE} from '@/constants/route'
+---
+
+<header class="w-full bg-white shadow-sm fixed top-0 z-50" role="banner">
+  <div class="container mx-auto px-4 py-4 flex items-center justify-between">
+      <!-- Logo/Brand -->
+      <h1 class="flex items-center">
+        <Logo href={HOME_PAGE} className="text-primary" aria-label="Go to homepage" />
+      </h1>
+
+      <!-- Desktop Navigation -->
+      <nav 
+        class="hidden md:block" 
+        aria-label="Main navigation"
+        role="navigation"
+      >
+        <Navigation />
+      </nav>
+
+      <!-- Mobile Menu -->
+      <div class="md:hidden" aria-label="Mobile menu">
+        <SheetMenu client:load />
+      </div>
+  </div>
+</header>

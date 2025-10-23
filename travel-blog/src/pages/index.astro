@@ -1,13 +1,18 @@
 ---
-import BlogLayout from '@/layouts/BlogLayout.astro';
+// Layouts
+import PageLayout from '@/layouts/PageLayout.astro';
+
+// Libs
 import { getPage } from '@/lib/getPage';
-import { BlogPage } from '@/components';
+
+// Sections
+import { BlogPage } from '@/sections';
 
 const { heroPost, popularPosts, trendingPosts, currentPage, totalPages } =
   await getPage(1);
 ---
 
-<BlogLayout>
+<PageLayout>
   <BlogPage
     heroPost={heroPost}
     popularPosts={popularPosts}
@@ -15,4 +20,4 @@ const { heroPost, popularPosts, trendingPosts, currentPage, totalPages } =
     currentPage={currentPage}
     totalPages={totalPages}
   />
-</BlogLayout>
+</PageLayout>

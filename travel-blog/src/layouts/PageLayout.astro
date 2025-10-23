@@ -1,0 +1,41 @@
+---
+import { VisualEditing } from "@sanity/astro/visual-editing";
+
+// Components
+import { Footer, Header } from '@/components';
+
+// Layouts
+import SeoHead from './SeoHead.astro';
+
+
+// Styles
+import '../styles/globals.css';
+
+
+const seo = Astro.props.seo || {};
+
+const {
+  title = seo.title || 'My Astro Blog',
+  description = seo.description || 'My musings about the Astro framework',
+  image = seo.image,
+  url = seo.url,
+  noindex = seo.noindex ?? false,
+} = Astro.props;
+
+const visualEditingEnabled =
+  import.meta.env.PUBLIC_SANITY_VISUAL_EDITING_ENABLED === "true";
+---
+
+<html lang="en">
+  <SeoHead {title} {description} {image} {url} {noindex} />
+  <body>
+    <Header />
+    <main class="flex-1 container mx-auto px-4 py-8 pt-[80px]">
+      <slot />
+    </main>
+    <Footer />
+
+    <!-- Sanity Visual Editing overlay -->
+    <VisualEditing enabled={visualEditingEnabled} />
+  </body>
+</html>

@@ -1,16 +1,19 @@
 ---
 // Layouts
-import BlogLayout from '@/layouts/BlogLayout.astro'
+import PageLayout from '@/layouts/PageLayout.astro'
 
 // Components
-import {AuthorCard, SocialIcons, LazyImage, PortableText} from '@/components'
+import {SocialIcons, LazyImage, PortableText} from '@/components'
+
+// Sections
+import {AuthorCard} from '@/sections'
 
 // Contents
-import {socials} from '@/contents/blog'
+import {socials} from '@/mockData/blog'
 
 // Libs
 import {fetchPostBySlug, fetchPosts} from '@/lib/api'
-import {slugify} from '@/lib/utils'
+import {generateSlug} from '@/lib/utils'
 
 // Static paths
 export async function getStaticPaths() {
@@ -41,7 +44,7 @@ const safePost = {
 }
 ---
 
-<BlogLayout>
+<PageLayout>
   <article class="max-w-3xl mx-auto py-8">
     <!-- Header -->
     <header class="md:px-8 text-center">
@@ -110,7 +113,7 @@ const safePost = {
         <!-- Sections -->
         {
           safePost.content?.sections?.map((section) => {
-            const headingId = slugify(section.country)
+            const headingId = generateSlug(section.country)
             return (
               <section aria-labelledby={headingId}>
                 <h2 id={headingId} class="text-lg font-semibold mt-6">
@@ -137,4 +140,4 @@ const safePost = {
       </div>
     </div>
   </article>
-</BlogLayout>
+</PageLayout>

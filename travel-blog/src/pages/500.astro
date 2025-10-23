@@ -1,9 +1,9 @@
 ---
-import BlogLayout from '@/layouts/BlogLayout.astro';
-import { HOME_PAGE } from '@/constants/route';
+import PageLayout from '@/layouts/PageLayout.astro';
+import { HOME_PAGE } from '@/constants';
 ---
 
-<BlogLayout
+<PageLayout
   title="Server error"
   description="Something went wrong on our side. Please try again later."
   noindex={true}
@@ -33,4 +33,4 @@ import { HOME_PAGE } from '@/constants/route';
       </button>
     </div>
   </section>
-</BlogLayout>
+</PageLayout>

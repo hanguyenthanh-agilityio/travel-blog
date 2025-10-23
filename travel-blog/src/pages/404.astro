@@ -1,12 +1,17 @@
 ---
-import BlogLayout from '@/layouts/BlogLayout.astro';
-import Link from '@/components/ui/link';
-import { HOME_PAGE } from '@/constants/route';
+// Layouts
+import PageLayout from '@/layouts/PageLayout.astro';
+
+// Components
+import {Link} from '@/components';
+
+// Constants
+import { HOME_PAGE } from '@/constants';
 
 const path = Astro.url.pathname;
 ---
 
-<BlogLayout title="Page Not Found" description="Oops! Page not found">
+<PageLayout title="Page Not Found" description="Oops! Page not found">
   <section
     class="min-h-[70vh] flex flex-col items-center justify-center text-center px-4"
   >
@@ -29,10 +34,9 @@ const path = Astro.url.pathname;
     <div class="mt-6">
       <Link
         href={HOME_PAGE}
-        style="primary"
         text="← Back to Home"
         spanClass="text-blue-600 font-medium hover:underline transition"
       />
     </div>
   </section>
-</BlogLayout>
+</PageLayout>

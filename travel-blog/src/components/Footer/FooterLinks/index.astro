@@ -1,0 +1,26 @@
+---
+import { Link } from '@/components';
+import type { FooterLink } from '@/types/blog';
+
+interface Props {
+  bottomLinks: FooterLink[];
+}
+
+const { bottomLinks } = Astro.props;
+---
+
+<nav
+  class="order-1 lg:order-2 flex flex-col lg:flex-row space-y-3 lg:space-y-0 lg:space-x-6 text-center lg:text-right"
+  aria-label="Footer navigation"
+  role="navigation"
+>
+  {
+    bottomLinks.map((link) => (
+      <Link
+        href={link.href}
+        text={link.text}
+        classes="hover:text-accent transition-colors duration-200 hover:underline"
+      />
+    ))
+  }
+</nav>
