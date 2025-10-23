@@ -13,3 +13,5 @@ export { default as SheetMenu } from './SheetMenu';
 export { default as SocialIcons } from './SocialIcons';
 export { default as Image } from './Image/index.astro';
 export { default as Link } from './Link';
+export { default as FooterLinks } from './Footer/FooterLinks/index.astro';
+export { default as SheetContent } from './SheetMenu/SheetContent';

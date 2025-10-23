@@ -1,25 +1,34 @@
 ---
-// Components
-import { NavDropdownMenu ,Link} from '@/components';
-
-// Contents
+import { NavDropdownMenu, Link } from '@/components';
 import { menu, otherPages } from '@/mockData/blog';
 ---
 
-<div class="flex items-center gap-6">
-  <!-- Main Navigation -->
-  <nav class="flex items-center space-x-6" aria-label="Main navigation">
-    {
-      menu.map((item) => (
+<nav
+  class="flex items-center gap-6"
+  aria-label="Main site navigation"
+  role="navigation"
+>
+  <!-- Primary Links -->
+  <ul class="flex items-center space-x-6">
+    {menu.map((item) => (
+      <li>
         <Link
           href={item.href}
           text={item.text}
+          aria-label={`Navigate to ${item.text} page`}
           classes="text-base text-gray-700 hover:text-accent transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-md px-2 py-1"
         />
-      ))
-    }
-  </nav>
+      </li>
+    ))}
+  </ul>
 
-  <!-- Dropdown Menu -->
-  <NavDropdownMenu client:idle label="Other Pages" items={otherPages} />
-</div>
+  <!-- Secondary Dropdown -->
+  <div class="flex-shrink-0">
+    <NavDropdownMenu
+      client:idle
+      label="Other Pages"
+      items={otherPages}
+      aria-label="Other pages dropdown menu"
+    />
+  </div>
+</nav>

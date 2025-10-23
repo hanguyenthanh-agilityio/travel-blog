@@ -1,6 +1,6 @@
 ---
 // Components
-import { SocialIcons, ContactInfo, Logo, Link } from '@/components';
+import { SocialIcons, ContactInfo, Logo, FooterLinks } from '@/components';
 
 // Contents
 import { socials, contactItems, bottomLinks } from '@/mockData/blog';
@@ -38,19 +38,6 @@ const year = new Date().getFullYear();
     </p>
 
     <!-- Bottom Links -->
-    <nav
-      class="order-1 lg:order-2 flex flex-col lg:flex-row space-y-3 lg:space-y-0 lg:space-x-6"
-      aria-label="Footer navigation"
-    >
-      {
-        bottomLinks.map((link) => (
-          <Link
-            href={link.href}
-            text={link.text}
-            classes="hover:text-accent transition-colors duration-200 hover:underline"
-          />
-        ))
-      }
-    </nav>
+    <FooterLinks bottomLinks={bottomLinks} />
   </div>
 </footer>
