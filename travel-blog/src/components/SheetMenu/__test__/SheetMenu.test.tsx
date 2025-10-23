@@ -3,7 +3,7 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import { describe, it, expect } from 'vitest';
 
 // Components
-import MobileSheetMenu from './index';
+import MobileSheetMenu from '../index';
 
 describe('MobileSheetMenu', () => {
   it('renders the open menu button', () => {
