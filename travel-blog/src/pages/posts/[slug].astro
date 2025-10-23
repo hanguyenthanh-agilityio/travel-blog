@@ -116,14 +116,20 @@ const safePost = {
             const headingId = generateSlug(section.country)
             return (
               <section aria-labelledby={headingId}>
-                <h2 id={headingId} class="text-lg font-semibold mt-6">
+                <h2 
+                  id={headingId}
+                  aria-labelledby={headingId} 
+                  class="text-lg font-semibold mt-6"
+                >
                   {section.country}
                 </h2>
-                <ul class="list-disc ml-6 text-primary text-base">
-                  {section.items.map((item) => (
-                    <li>{item}</li>
-                  ))}
-                </ul>
+                {Array.isArray(section.items) && (
+                  <ul class="list-disc ml-6 text-base space-y-1">
+                    {section.items.map((item) => (
+                  <li>{item}</li>
+                ))}
+              </ul>
+            )}
               </section>
             )
           })

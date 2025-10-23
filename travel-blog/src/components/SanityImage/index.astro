@@ -4,10 +4,10 @@ import { urlForImage } from '@/sanity/url-for-image'
 const {
   node,
   className = '',
-  width = 960,
-  height,
+  width = 1200,
+  height = 800,
   srcSetWidths = [320, 640, 960, 1280, 1600, 1920],
-  sizes = '(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 960px',
+  sizes = '(max-width: 640px) 100vw, (max-width: 1024px) 80vw, 1200px',
   fallbackAspectRatio = 16 / 9,
   loading = 'lazy',
 } = Astro.props;
