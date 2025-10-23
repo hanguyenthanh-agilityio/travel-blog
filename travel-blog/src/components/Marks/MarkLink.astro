@@ -1,0 +1,11 @@
+---
+const { value } = Astro.props;
+---
+<a
+  href={value?.href}
+  rel="noopener noreferrer"
+  target={value?.href?.startsWith('http') ? '_blank' : '_self'}
+  class="text-accent hover:underline focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 rounded-md"
+>
+  <slot />
+</a>

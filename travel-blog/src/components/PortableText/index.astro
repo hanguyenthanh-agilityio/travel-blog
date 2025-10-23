@@ -1,13 +1,24 @@
 ---
 import { PortableText as PortableTextInternal } from 'astro-portabletext';
-import { PortableTextImage } from '@/components';
+import { SanityImage } from '@/components';
+import { BlockH2, BlockH3, BlockNormal } from '@/components/Blocks';
+import {MarkStrong, MarkLink} from "@/components/Marks"
 
 const { portableText } = Astro.props;
 
 const components = {
   type: {
-    image: PortableTextImage,
+    image: SanityImage,
   },
+  block: {
+    h2: BlockH2,
+    h3: BlockH3,
+    normal: BlockNormal
+  },
+  masks: {
+    strong: MarkStrong,
+    link: MarkLink
+  }
 };
 ---
 
