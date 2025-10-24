@@ -1,23 +1,55 @@
 ---
-// Layouts
 import PageLayout from '@/layouts/PageLayout.astro';
+
+// Components
+import { Hero, Paginator } from '@/components';
+import { POPULAR_TITLE, TRENDING_TITLE } from '@/constants';
+
+// Sections
+import { BlogCard, BlogGrid, HeadingBlock } from '@/sections';
 
 // Libs
 import { getPage } from '@/lib/getPage';
-
-// Sections
-import { BlogPage } from '@/sections';
 
 const { heroPost, popularPosts, trendingPosts, currentPage, totalPages } =
   await getPage(1);
 ---
 
 <PageLayout>
-  <BlogPage
-    heroPost={heroPost}
-    popularPosts={popularPosts}
-    trendingPosts={trendingPosts}
-    currentPage={currentPage}
-    totalPages={totalPages}
-  />
+  <!-- HERO SECTION -->
+  <section class="mb-12 md:mb-20">
+    <Hero {...heroPost} />
+  </section>
+
+  <!-- POPULAR POSTS -->
+  <section class="container mx-auto mb-16 md:mb-24">
+    <HeadingBlock {...POPULAR_TITLE} />
+
+    <div class="grid md:grid-cols-[1fr_1.4fr] gap-6 md:gap-4 lg:gap-10">
+
+      {popularPosts.length > 0 && (
+        <BlogCard
+          {...popularPosts[0]}
+          className="md:max-h-blog-sm lg:max-h-blog-md xl:max-h-blog-lg"
+          titleClassName="h-full"
+        />
+      )}
+
+      <div class="flex flex-col gap-6 md:gap-2 justify-between">
+        {popularPosts.slice(1, 3).map((post) => (
+          <BlogCard {...post} variant="horizontal" />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- TRENDING POSTS -->
+  <section class="container flex flex-col mx-auto mb-20">
+    <HeadingBlock {...TRENDING_TITLE} />
+    <BlogGrid posts={trendingPosts} class="mt-8" />
+
+    <div class="mt-10 flex justify-center">
+      <Paginator currentPage={currentPage} totalPages={totalPages} client:idle />
+    </div>
+  </section>
 </PageLayout>
