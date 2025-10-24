@@ -1,0 +1,48 @@
+---
+import { urlForImage } from '@/sanity/url-for-image'
+
+const {
+  node,
+  className = '',
+  width = 1200,
+  height = 800,
+  srcSetWidths = [320, 640, 960, 1280, 1600, 1920],
+  sizes = '(max-width: 640px) 100vw, (max-width: 1024px) 80vw, 1200px',
+  fallbackAspectRatio = 16 / 9,
+  loading = 'lazy',
+} = Astro.props;
+
+if (!node?.asset) {
+  console.warn('[SanityImage] Missing asset:', node);
+}
+
+const image = urlForImage(node, { width, quality: 80 });
+const intrinsicWidth = node?.asset?.metadata?.dimensions?.width || width;
+const intrinsicHeight =
+  node?.asset?.metadata?.dimensions?.height ||
+  height ||
+  width / fallbackAspectRatio;
+
+const srcSet = srcSetWidths.map((w: number) => `${urlForImage(node, { width: w }).url()} ${w}w`).join(', ');
+---
+
+{image ? (
+  <img
+    src={image.url()}
+    srcset={srcSet}
+    sizes={sizes}
+    width={intrinsicWidth}
+    height={intrinsicHeight}
+    alt={node.alt || ''}
+    title={node.alt}
+    class={className}
+    loading={loading}
+    decoding="async"
+    style={`aspect-ratio: ${intrinsicWidth / intrinsicHeight};`}
+  />
+) : (
+  <div
+    class={`bg-gray-100 rounded-xl ${className}`}
+    style={`aspect-ratio: ${fallbackAspectRatio};`}
+  />
+)}

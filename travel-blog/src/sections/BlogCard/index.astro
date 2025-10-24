@@ -1,6 +1,6 @@
 ---
 // Components
-import { LazyImage, Link} from '@/components'
+import { Link, SanityImage} from '@/components'
 
 // Sections
 import {AuthorCard} from '@/sections'
@@ -10,10 +10,12 @@ import {cn} from '@/lib/utils'
 
 const {slug, title, image, author, variant = 'default', className} = Astro.props
 
+const postSlug = typeof slug === 'string' ? slug : slug?.current || '';
+
 const isHorizontal = variant === 'horizontal'
 ---
 
-<Link href={`/posts/${slug}`}>
+<Link href={`/posts/${postSlug}`}>
   <div
     class={cn(
       'overflow-hidden rounded-xl bg-transparent transition-transform duration-300 ease-in-out hover:shadow-lg hover:-translate-y-1 hover:scale-[1.01]',
@@ -21,23 +23,32 @@ const isHorizontal = variant === 'horizontal'
     )}
   >
     <!-- Image -->
-    <LazyImage
-      src={image}
-      alt={title}
-      class={cn(
-        'object-cover rounded-xl',
-        isHorizontal ? 'w-full md:w-1/2 max-h-blog-md' : 'w-full',
-        className
-      )}
-      loading="lazy"
-    />
+    {image ? (
+      <SanityImage
+        node={image}
+        alt={image.alt || title}
+        class={cn(
+          'object-cover rounded-xl',
+          isHorizontal ? 'w-full md:w-1/2 max-h-blog-md' : 'w-full',
+          className
+        )}
+        loading="lazy"
+      />
+    ) : null}
 
     <!-- Content -->
     <div class={cn('px-2', isHorizontal ? 'flex-1 py-4 flex flex-col justify-between' : 'py-4')}>
       <h3 class="text-lg md:text-xl font-bold mb-4 line-clamp-2">
         {title}
       </h3>
-      <AuthorCard {...author} classAvatar="w-10 h-10" client:load />
+      
+      {author && (
+        <AuthorCard
+          {...author}
+          classAvatar="w-10 h-10"
+          client:load
+        />
+      )}
     </div>
   </div>
 </Link>

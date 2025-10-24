@@ -8,7 +8,7 @@ export { default as NavDropdownMenu } from './NavDropdownMenu';
 export { default as Navigation } from './Navigation/index.astro';
 export { default as Paginator } from './Paginator';
 export { default as PortableText } from './PortableText/index.astro';
-export { default as PortableTextImage } from './PortableTextImage/index.astro';
+export { default as SanityImage } from './SanityImage/index.astro';
 export { default as SheetMenu } from './SheetMenu';
 export { default as SocialIcons } from './SocialIcons';
 export { default as Image } from './Image/index.astro';
