@@ -1,7 +1,7 @@
-import {defineConfig} from 'sanity'
-import {structureTool} from 'sanity/structure'
-import {schemaTypes} from './sanity/schemaTypes'
-import {presentationTool} from 'sanity/presentation'
+import { defineConfig } from 'sanity';
+import { structureTool } from 'sanity/structure';
+import { schemaTypes } from './sanity/schemaTypes';
+import { presentationTool } from 'sanity/presentation';
 
 export default defineConfig({
   name: 'default',
@@ -13,11 +13,14 @@ export default defineConfig({
   plugins: [
     structureTool(),
     presentationTool({
-      previewUrl: import.meta.env.SANITY_STUDIO_PREVIEW_URL || 'http://localhost:4321',
+      previewUrl:
+        (typeof import.meta !== 'undefined' &&
+          import.meta.env?.SANITY_STUDIO_PREVIEW_URL) ||
+        'http://localhost:4321',
     }),
   ],
 
   schema: {
     types: schemaTypes,
   },
-})
+});
