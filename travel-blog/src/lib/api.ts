@@ -1,13 +1,4 @@
-import { z } from 'astro:content';
-
-import {
-  PostSchema,
-  PostSummarySchema,
-  SocialSchema,
-  type Post,
-  type PostSummary,
-  type Social,
-} from '@/lib/schema';
+import { z } from 'zod';
 import { loadQuery } from '@/sanity/load-query';
 import {
   allPostsQuery,
@@ -15,17 +6,26 @@ import {
   type PostResolved,
 } from '@/queries/post';
 import { allSocialsQuery, type SocialResolved } from '@/queries/social';
+import {
+  PostSchema,
+  PostSummarySchema,
+  SocialSchema,
+  type Post,
+  type PostSummary,
+  type Social,
+} from './schema';
 
 /**
- * Fetch all posts (summary)
+ * Fetch all posts
  */
 export async function fetchPosts(): Promise<PostSummary[]> {
   const { data } = await loadQuery<PostResolved[]>({ query: allPostsQuery });
 
   const normalized = data.map((item) => ({
-    ...item,
     slug: item.slug?.current || '',
+    title: item.title || '',
     image: item.image?.asset?.url || '',
+    category: item.category || '',
     author: item.author
       ? {
           name: item.author.name || 'Unknown',
@@ -51,9 +51,10 @@ export async function fetchPostBySlug(slug: string): Promise<Post | null> {
   if (!data) return null;
 
   const normalized = {
-    ...data,
     slug: data.slug?.current || '',
+    title: data.title || '',
     image: data.image?.asset?.url || '',
+    category: data.category || '',
     author: data.author
       ? {
           name: data.author.name || 'Unknown',
@@ -62,6 +63,7 @@ export async function fetchPostBySlug(slug: string): Promise<Post | null> {
           date: data.author.date || '',
         }
       : { name: 'Unknown', role: '', avatar: '', date: '' },
+    excerpt: data.excerpt || '',
     content: data.content ?? { intro: '', sections: [], conclusion: '' },
   };
 
@@ -99,4 +101,22 @@ export async function getSocials(): Promise<Social[]> {
   }));
 
   return z.array(SocialSchema).parse(normalized);
+}
+
+/**
+ * Get page data (for Astro layout)
+ */
+export async function getPage() {
+  const posts = await fetchPosts();
+  const heroPost = posts.find((p) => p.category === 'hero') || null;
+  const popularPosts = await getPopularPosts();
+  const trendingPosts = await getTrendingPosts();
+  const socials = await getSocials();
+
+  return {
+    heroPost,
+    popularPosts,
+    trendingPosts,
+    socials,
+  };
 }

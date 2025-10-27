@@ -1,15 +1,19 @@
-import { z } from 'astro:content';
+import { z } from 'zod';
 
-// Author schema
+/**
+ * Author schema
+ */
 export const AuthorSchema = z.object({
-  name: z.string().default(''),
+  name: z.string().default('Unknown'),
   role: z.string().optional(),
   avatar: z.string().optional(),
   date: z.union([z.string(), z.date()]).optional(),
 });
 
-// Content schema
-const ContentSchema = z.object({
+/**
+ * Content schema
+ */
+export const ContentSchema = z.object({
   intro: z.any().optional(),
   sections: z
     .array(
@@ -22,49 +26,43 @@ const ContentSchema = z.object({
   conclusion: z.any().optional(),
 });
 
-// Post summary (for list pages)
+/**
+ * Post summary schema (list pages)
+ */
 export const PostSummarySchema = z.object({
-  slug: z.union([z.string(), z.object({ current: z.string() })]),
+  slug: z.string(),
   title: z.string(),
-  image: z.union([
-    z.string(),
-    z.object({
-      asset: z
-        .object({
-          _ref: z.string().optional(),
-          url: z.string().optional(),
-        })
-        .optional(),
-    }),
-  ]),
+  image: z.string().optional(),
   category: z
     .string()
+    .optional()
     .transform((val) =>
       val?.replace(/[\u200B-\u200D\uFEFF\u2060\u00A0]/g, '').trim(),
-    )
-    .refine((val) => ['hero', 'popular', 'trending', undefined].includes(val), {
-      message: 'Invalid category',
-    })
-    .optional(),
+    ),
   author: AuthorSchema.nullable().default(null),
 });
 
-// Full post schema (for detail page)
+/**
+ * Full post schema (detail page)
+ */
 export const PostSchema = PostSummarySchema.extend({
   excerpt: z.string().default(''),
-  content: ContentSchema.default({}),
+  content: ContentSchema.default({ sections: [] }),
 });
 
-// Social Schema
+/**
+ * Social schema
+ */
 export const SocialSchema = z.object({
   label: z.string(),
   href: z.string().url(),
   icon: z.string().optional(),
 });
 
-export type Social = z.infer<typeof SocialSchema>;
-
-// Types
+/**
+ * Types
+ */
 export type Author = z.infer<typeof AuthorSchema>;
 export type PostSummary = z.infer<typeof PostSummarySchema>;
 export type Post = z.infer<typeof PostSchema>;
+export type Social = z.infer<typeof SocialSchema>;
