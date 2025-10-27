@@ -3,8 +3,10 @@ import { z } from 'astro:content';
 import {
   PostSchema,
   PostSummarySchema,
+  SocialSchema,
   type Post,
   type PostSummary,
+  type Social,
 } from '@/lib/schema';
 import { loadQuery } from '@/sanity/load-query';
 import {
@@ -12,6 +14,7 @@ import {
   postBySlugQuery,
   type PostResolved,
 } from '@/queries/post';
+import { allSocialsQuery, type SocialResolved } from '@/queries/social';
 
 /**
  * Fetch all posts (summary)
@@ -79,4 +82,21 @@ export async function getPopularPosts(): Promise<PostSummary[]> {
 export async function getTrendingPosts(): Promise<PostSummary[]> {
   const posts = await fetchPosts();
   return posts.filter((p) => p.category === 'trending');
+}
+
+/**
+ * Fetch all socials from Sanity
+ */
+export async function getSocials(): Promise<Social[]> {
+  const { data } = await loadQuery<SocialResolved[]>({
+    query: allSocialsQuery,
+  });
+
+  const normalized = data.map((item) => ({
+    label: item.label,
+    href: item.href,
+    icon: item.icon?.asset?.url || '',
+  }));
+
+  return z.array(SocialSchema).parse(normalized);
 }
