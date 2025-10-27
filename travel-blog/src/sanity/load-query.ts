@@ -1,11 +1,13 @@
-import { type QueryParams } from 'sanity';
+import type { QueryParams } from 'sanity';
 import { sanityClient } from 'sanity:client';
+import type { AllSanitySchemaTypes } from '../../sanity.types';
 
 const visualEditingEnabled =
   import.meta.env.PUBLIC_SANITY_VISUAL_EDITING_ENABLED === 'true';
+
 const token = import.meta.env.SANITY_API_READ_TOKEN;
 
-export async function loadQuery<QueryResponse>({
+export async function loadQuery<T extends AllSanitySchemaTypes | any>({
   query,
   params,
 }: {
@@ -20,7 +22,7 @@ export async function loadQuery<QueryResponse>({
 
   const perspective = visualEditingEnabled ? 'previewDrafts' : 'published';
 
-  const { result, resultSourceMap } = await sanityClient.fetch<QueryResponse>(
+  const { result, resultSourceMap } = await sanityClient.fetch<T>(
     query,
     params ?? {},
     {

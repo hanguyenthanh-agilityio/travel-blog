@@ -1,41 +1,23 @@
 import { z } from 'astro:content';
+
 import {
   PostSchema,
   PostSummarySchema,
   type Post,
   type PostSummary,
-} from './schema';
+} from '@/lib/schema';
 import { loadQuery } from '@/sanity/load-query';
+import {
+  allPostsQuery,
+  postBySlugQuery,
+  type PostResolved,
+} from '@/queries/post';
 
 /**
  * Fetch all posts (summary)
  */
 export async function fetchPosts(): Promise<PostSummary[]> {
-  const query = `
-    *[_type == "post"] | order(_createdAt desc) {
-      title,
-      slug,
-      excerpt,
-      image{
-        asset->{
-          url
-        }
-      },
-      category,
-      author->{
-        name,
-        role,
-        avatar{
-          asset->{
-            url
-          }
-        },
-        date
-      }
-    }
-  `;
-
-  const { data } = await loadQuery<any[]>({ query });
+  const { data } = await loadQuery<PostResolved[]>({ query: allPostsQuery });
 
   const normalized = data.map((item) => ({
     ...item,
@@ -58,31 +40,10 @@ export async function fetchPosts(): Promise<PostSummary[]> {
  * Fetch single post by slug
  */
 export async function fetchPostBySlug(slug: string): Promise<Post | null> {
-  const query = `
-  *[_type == "post" && slug.current == $slug][0]{
-    title,
-    slug,
-    excerpt,
-    image { asset->{ url } },
-    category,
-    author->{
-      name,
-      role,
-      avatar{ asset->{ url } },
-      date
-    },
-    content {
-      intro[],
-      sections[] {
-        country,
-        items
-      },
-      conclusion[]
-    }
-  }
-`;
-
-  const { data } = await loadQuery<any>({ query, params: { slug } });
+  const { data } = await loadQuery<PostResolved>({
+    query: postBySlugQuery,
+    params: { slug },
+  });
 
   if (!data) return null;
 
@@ -98,11 +59,7 @@ export async function fetchPostBySlug(slug: string): Promise<Post | null> {
           date: data.author.date || '',
         }
       : { name: 'Unknown', role: '', avatar: '', date: '' },
-    content: data.content ?? {
-      intro: '',
-      sections: [],
-      conclusion: '',
-    },
+    content: data.content ?? { intro: '', sections: [], conclusion: '' },
   };
 
   return PostSchema.parse(normalized);

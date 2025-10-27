@@ -1,13 +1,13 @@
-import {defineConfig} from 'astro/config'
-import react from '@astrojs/react'
-import tailwindcss from '@tailwindcss/vite'
-import critters from 'astro-critters'
-import sanity from '@sanity/astro'
-import dotenv from 'dotenv'
-import vercel from '@astrojs/vercel/serverless'
-import viteCompression from 'vite-plugin-compression'
+import { defineConfig } from 'astro/config';
+import react from '@astrojs/react';
+import tailwindcss from '@tailwindcss/vite';
+import critters from 'astro-critters';
+import sanity from '@sanity/astro';
+import dotenv from 'dotenv';
+import vercel from '@astrojs/vercel/serverless';
+import viteCompression from 'vite-plugin-compression';
 
-dotenv.config()
+dotenv.config();
 
 export default defineConfig({
   integrations: [
@@ -22,7 +22,7 @@ export default defineConfig({
       apiVersion: '2025-01-01',
       useCdn: true,
       studioBasePath: '/studio',
-      stega: {studioUrl: '/studio'},
+      stega: { studioUrl: '/studio' },
     }),
   ],
   vite: {
@@ -45,4 +45,4 @@ export default defineConfig({
     ],
   },
   adapter: vercel(),
-})
+});
