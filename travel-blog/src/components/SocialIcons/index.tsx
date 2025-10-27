@@ -1,5 +1,4 @@
-import React from 'react';
-import type { FC } from 'react';
+import React, { type FC } from 'react';
 
 // Components
 import { Link } from '@/components';
@@ -7,13 +6,10 @@ import { Link } from '@/components';
 // Libs
 import { cn } from '@/lib/utils';
 
-// Types
-import type { Icon as IconProps } from '@/types/blog';
-
 export interface SocialItem {
   href: string;
   label: string;
-  Icon: FC<IconProps>;
+  icon?: string;
   linkClassName?: string;
 }
 
@@ -51,12 +47,17 @@ const SocialIcons: FC<Props> = ({
               social.linkClassName,
             )}
           >
-            <social.Icon
-              width={24}
-              height={24}
-              aria-hidden="true"
-              focusable="false"
-            />
+            {social.icon ? (
+              <img
+                src={social.icon}
+                alt={social.label}
+                width={24}
+                height={24}
+                className="object-contain"
+              />
+            ) : (
+              <span className="w-6 h-6 block bg-gray-300" />
+            )}
           </Link>
         </li>
       ))}
