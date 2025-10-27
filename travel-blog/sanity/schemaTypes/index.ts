@@ -3,6 +3,7 @@ import {blockContentType} from './blockContent'
 import {categoryType} from './category'
 import {contentSectionType} from './contentSection'
 import {postType} from './post'
+import {socialType} from './social'
 
 export const schemaTypes = [
   authorType,
@@ -10,4 +11,5 @@ export const schemaTypes = [
   categoryType,
   contentSectionType,
   postType,
+  socialType
 ]

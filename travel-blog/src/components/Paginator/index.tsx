@@ -1,5 +1,6 @@
 import React from 'react';
-// Components
+
+// UIs
 import {
   Pagination,
   PaginationContent,
@@ -7,48 +8,50 @@ import {
   PaginationLink,
 } from '@/ui/pagination';
 
-// Constants
-import { HOME_PAGE, PAGE_PATH } from '@/constants';
-
-// Types
-interface PaginationProps {
+interface PaginatorProps {
   currentPage: number;
   totalPages: number;
-  basePath?: string;
+  onPageChange: (page: number) => void;
 }
 
-const Paginator = ({
+const Paginator: React.FC<PaginatorProps> = ({
   currentPage,
   totalPages,
-  basePath = PAGE_PATH,
-}: PaginationProps) => {
+  onPageChange,
+}) => {
   const pages = Array.from({ length: totalPages }, (_, i) => i + 1);
+
+  // Handler click page
+  const handlePageClick = (page: number) => (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (page !== currentPage) {
+      onPageChange(page);
+    }
+  };
+
+  const pageItems = pages.map((page) => ({
+    page,
+    isActive: page === currentPage,
+    onClick: handlePageClick(page),
+  }));
 
   return (
     <Pagination>
       <PaginationContent>
-        {pages.map((page) => {
-          const href = page === 1 ? HOME_PAGE : `${basePath}/${page}/#trending`;
-
-          return (
-            <PaginationItem key={page}>
-              <PaginationLink
-                href={href}
-                isActive={page === currentPage}
-                className={`
-                  flex h-12 w-12 items-center justify-center rounded-xl text-sm font-medium
-                  ${
-                    page === currentPage
-                      ? 'bg-[#2980b9] text-white'
-                      : 'text-gray-600 hover:bg-gray-100'
-                  }
-                `}
-              >
-                {page}
-              </PaginationLink>
-            </PaginationItem>
-          );
-        })}
+        {pageItems.map(({ page, isActive, onClick }) => (
+          <PaginationItem key={page}>
+            <PaginationLink
+              onClick={onClick}
+              isActive={isActive}
+              className={`
+                flex h-12 w-12 items-center justify-center rounded-xl text-sm font-medium
+                ${isActive ? 'bg-[#2980b9] text-white' : 'text-gray-600 hover:bg-gray-100'}
+              `}
+            >
+              {page}
+            </PaginationLink>
+          </PaginationItem>
+        ))}
       </PaginationContent>
     </Pagination>
   );

@@ -13,6 +13,29 @@
  */
 
 // Source: schema.json
+export type Social = {
+  _id: string;
+  _type: 'social';
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  label?: string;
+  icon?: {
+    asset?: {
+      _ref: string;
+      _type: 'reference';
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    _type: 'image';
+  };
+  order?: number;
+};
+
 export type Post = {
   _id: string;
   _type: 'post';
@@ -329,6 +352,7 @@ export type SanityAssetSourceData = {
 };
 
 export type AllSanitySchemaTypes =
+  | Social
   | Post
   | ContentSection
   | Category

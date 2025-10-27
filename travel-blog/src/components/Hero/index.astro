@@ -7,7 +7,8 @@ import {AuthorCard} from '@/sections'
 
 const {title, image, author, slug} = Astro.props
 
-const parts = title.split(':')
+const safeTitle = title || '';
+const parts = safeTitle.split(':');
 ---
 
 <section 
@@ -19,11 +20,9 @@ const parts = title.split(':')
     <!-- Sanity Image Integration -->
     <SanityImage
       node={image}
-      alt={title}
       className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
       width={1600}
-      quality={85}
-      loading="eager"
+      client:idle
     />
 
     <!-- Overlay Gradient -->

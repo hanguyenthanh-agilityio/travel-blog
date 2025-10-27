@@ -3,12 +3,17 @@
 import { SocialIcons, ContactInfo, Logo, FooterLinks } from '@/components';
 
 // Contents
-import { socials, contactItems, bottomLinks } from '@/mockData/blog';
+import { contactItems, bottomLinks } from '@/mockData/blog';
 
 // Constants
 import { HOME_PAGE } from '@/constants/route';
+import { getSocials } from '@/lib/api';
+
+
+const  socials  = await getSocials();
 
 const year = new Date().getFullYear();
+
 ---
 
 <footer class="container mx-auto bg-white text-gray-800 px-4">

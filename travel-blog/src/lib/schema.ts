@@ -55,6 +55,15 @@ export const PostSchema = PostSummarySchema.extend({
   content: ContentSchema.default({}),
 });
 
+// Social Schema
+export const SocialSchema = z.object({
+  label: z.string(),
+  href: z.string().url(),
+  icon: z.string().optional(),
+});
+
+export type Social = z.infer<typeof SocialSchema>;
+
 // Types
 export type Author = z.infer<typeof AuthorSchema>;
 export type PostSummary = z.infer<typeof PostSummarySchema>;
