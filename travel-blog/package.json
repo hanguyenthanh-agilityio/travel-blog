@@ -16,7 +16,8 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "studio:deploy": "sanity deploy",
-    "studio:graphql": "sanity graphql deploy"
+    "studio:graphql": "sanity graphql deploy",
+    "typegen": "sanity schema extract --cwd sanity --path=schema.json && sanity typegen generate --cwd sanity --schema schema.json --output ./src/sanity-types/schema.ts"
   },
   "lint-staged": {
     "*.{js,ts,tsx,astro}": [
