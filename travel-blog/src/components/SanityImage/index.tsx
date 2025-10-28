@@ -28,6 +28,7 @@ interface SanityImageProps {
   sizes?: string;
   fallbackAspectRatio?: number;
   loading?: 'lazy' | 'eager' | 'auto';
+  priority?: boolean;
 }
 
 const SanityImage: React.FC<SanityImageProps> = ({
@@ -38,6 +39,7 @@ const SanityImage: React.FC<SanityImageProps> = ({
   srcSetWidths = [320, 640, 960, 1280, 1600, 1920],
   sizes = '(max-width: 640px) 100vw, (max-width: 1024px) 80vw, 1200px',
   fallbackAspectRatio = 16 / 9,
+  priority = false,
 }) => {
   const imageNode: SanityImageType | null =
     typeof node === 'string' ? { asset: { url: node } } : (node ?? null);
@@ -60,7 +62,15 @@ const SanityImage: React.FC<SanityImageProps> = ({
     width / fallbackAspectRatio;
 
   const srcSet = srcSetWidths
-    .map((w) => `${urlForImage(imageNode, { width: w }).url()} ${w}w`)
+    .map(
+      (w) =>
+        `${urlForImage(imageNode)
+          .width(w)
+          .fit('max')
+          .auto('format')
+          .quality(80)
+          .url()} ${w}w`,
+    )
     .join(', ');
 
   return (
@@ -74,6 +84,8 @@ const SanityImage: React.FC<SanityImageProps> = ({
       title={imageNode.alt || undefined}
       className={className}
       decoding="async"
+      fetchPriority={priority ? 'high' : 'auto'}
+      loading={priority ? 'eager' : 'lazy'}
       style={{ aspectRatio: intrinsicWidth / intrinsicHeight }}
     />
   );
