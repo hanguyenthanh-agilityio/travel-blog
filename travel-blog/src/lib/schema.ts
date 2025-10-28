@@ -30,9 +30,21 @@ export const ContentSchema = z.object({
  * Post summary schema (list pages)
  */
 export const PostSummarySchema = z.object({
-  slug: z.string(),
+  slug: z.union([
+    z.string(),
+    z.object({
+      current: z.string().optional(),
+    }),
+  ]),
   title: z.string(),
-  image: z.string().optional(),
+  image: z
+    .union([
+      z.string(),
+      z.object({
+        asset: z.object({ url: z.string().optional() }).optional(),
+      }),
+    ])
+    .optional(),
   category: z
     .string()
     .optional()

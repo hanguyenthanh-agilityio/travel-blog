@@ -8,11 +8,9 @@ import {SocialIcons, LazyImage, PortableText} from '@/components'
 // Sections
 import {AuthorCard} from '@/sections'
 
-// Contents
-import {socials} from '@/mockData/blog'
 
 // Libs
-import {fetchPostBySlug, fetchPosts} from '@/lib/api'
+import {fetchPostBySlug, fetchPosts, getSocials} from '@/lib/api'
 import {generateSlug} from '@/lib/utils'
 
 // Static paths
@@ -25,6 +23,8 @@ export async function getStaticPaths() {
     },
   }))
 }
+
+const  socials  = await getSocials();
 
 // Fetch single post
 const {slug} = Astro.params
