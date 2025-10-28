@@ -35,6 +35,7 @@ const NavDropdownMenu = ({
         <Button
           type="button"
           variant="outline"
+          aria-label={`Open ${label} menu`}
           className="border-none p-0 shadow-none text-base font-normal hover:bg-[none] hover:text-accent cursor-pointer"
         >
           {label}
@@ -46,7 +47,11 @@ const NavDropdownMenu = ({
     <DropdownMenuContent>
       {items.map((item) => (
         <DropdownMenuItem key={item.href} asChild>
-          <Link href={item.href} classes="flex flex-col p-1 hover:text-accent">
+          <Link
+            href={item.href}
+            classes="flex flex-col p-1 hover:text-accent"
+            aria-label={`Go to ${item.text} page`}
+          >
             {item.text}
           </Link>
         </DropdownMenuItem>

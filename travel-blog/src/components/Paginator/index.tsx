@@ -41,8 +41,10 @@ const Paginator: React.FC<PaginatorProps> = ({
         {pageItems.map(({ page, isActive, onClick }) => (
           <PaginationItem key={page}>
             <PaginationLink
+              href={`?page=${page}`}
               onClick={onClick}
               isActive={isActive}
+              aria-label={`Go to page ${page}`}
               className={`
                 flex h-12 w-12 items-center justify-center rounded-xl text-sm font-medium
                 ${isActive ? 'bg-[#2980b9] text-white' : 'text-gray-600 hover:bg-gray-100'}
