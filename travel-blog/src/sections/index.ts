@@ -4,3 +4,6 @@ export { default as BlogGrid } from './BlogGrid';
 export { default as HeadingBlock } from './HeadingBlock';
 export { default as TrendingPosts } from './TrendingPosts';
 export { default as PopularPosts } from './PopularPosts/index.astro';
+export { default as DetailHeader } from './DetailHeader/index.astro';
+export { default as DetailSidebar } from './DetailSidebar/index.astro';
+export { default as DetailContent } from './DetailContent/index.astro';

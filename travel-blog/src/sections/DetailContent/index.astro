@@ -1,0 +1,65 @@
+---
+import { PortableText, SanityImage } from '@/components'
+import { generateSlug } from '@/lib/utils'
+
+interface Section {
+  country: string
+  items: string[]
+}
+
+interface Props {
+  image?: string | { asset?: { url?: string } }
+  excerpt?: string
+  content: {
+    intro?: any[]
+    sections?: Section[]
+    conclusion?: any[]
+  }
+}
+
+const { image, excerpt, content } = Astro.props
+---
+
+<>
+  {excerpt && <p class="pt-5 text-primary text-base md:px-8">{excerpt}</p>}
+
+  {image && (
+    <SanityImage
+      node={image}
+      className="rounded-xl my-6 w-full h-blog-lg md:h-auto"
+      priority={true}
+      client:idle
+    />
+  )}
+
+  {content?.intro && (
+    <div class="border-l-2 border-line pl-4">
+      <PortableText portableText={content.intro} />
+    </div>
+  )}
+
+  {Array.isArray(content?.sections) &&
+    content.sections.map((section) => {
+      const headingId = generateSlug(section.country)
+      return (
+        <section aria-labelledby={headingId}>
+          <h2 id={headingId} class="text-lg font-semibold mt-6">
+            {section.country}
+          </h2>
+          {Array.isArray(section.items) && (
+            <ul class="list-disc ml-6 text-base space-y-1">
+              {section.items.map((item) => (
+                <li>{item}</li>
+              ))}
+            </ul>
+          )}
+        </section>
+      )
+    })}
+
+  {content?.conclusion && (
+    <div class="mt-8 font-medium">
+      <PortableText portableText={content.conclusion} />
+    </div>
+  )}
+</>
