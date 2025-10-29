@@ -3,7 +3,7 @@
 import PageLayout from '@/layouts/PageLayout.astro'
 
 // Components
-import {SocialIcons, LazyImage, PortableText} from '@/components'
+import {SocialIcons, PortableText, SanityImage} from '@/components'
 
 // Sections
 import {AuthorCard} from '@/sections'
@@ -90,11 +90,11 @@ const safePost = {
       <!-- Feature image -->
       {
         safePost.image && (
-          <LazyImage
-            src={safePost.image}
-            alt={safePost.title}
-            class="rounded-xl my-6 w-full h-blog-lg md:h-auto"
-            loading="lazy"
+          <SanityImage 
+            node={safePost.image}
+            className="rounded-xl my-6 w-full h-blog-lg md:h-auto"
+            priority={true}
+            client:idle
           />
         )
       }
