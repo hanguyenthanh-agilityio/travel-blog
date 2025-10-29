@@ -5,22 +5,20 @@ import { ArrowIcon } from '@/icons';
 
 // UI
 import { Button } from '@/ui/button';
-import Dropdown from '@/ui/dropdown';
 
 // Components
-import { Link } from '@/components';
+import Link from '@/components/Link';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/ui';
 
 interface ItemProps {
   href: string;
   text: string;
 }
-
-const {
-  DropdownMenu,
-  DropdownMenuTrigger,
-  DropdownMenuContent,
-  DropdownMenuItem,
-} = Dropdown;
 
 const NavDropdownMenu = ({
   label,

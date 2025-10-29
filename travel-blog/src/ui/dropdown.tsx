@@ -180,7 +180,7 @@ const DropdownMenuShortcut = ({
 };
 DropdownMenuShortcut.displayName = 'DropdownMenuShortcut';
 
-export default {
+export {
   DropdownMenu,
   DropdownMenuTrigger,
   DropdownMenuContent,

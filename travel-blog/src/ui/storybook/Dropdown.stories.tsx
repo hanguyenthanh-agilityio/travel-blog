@@ -1,18 +1,18 @@
 import React from 'react';
-import type { Meta, StoryObj } from '@storybook/react-vite';
+import type { StoryObj } from '@storybook/react-vite';
 import {
   DropdownMenu,
-  DropdownMenuTrigger,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuSeparator,
   DropdownMenuLabel,
+  DropdownMenuSeparator,
   DropdownMenuSub,
-  DropdownMenuSubTrigger,
   DropdownMenuSubContent,
+  DropdownMenuSubTrigger,
+  DropdownMenuTrigger,
 } from '../dropdown';
 
-const meta: Meta<typeof DropdownMenu> = {
+const meta = {
   title: 'UI/DropdownMenu',
   component: DropdownMenu,
   tags: ['autodocs'],
