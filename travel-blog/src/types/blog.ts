@@ -44,6 +44,6 @@ export interface Icon extends React.SVGProps<SVGSVGElement> {
 }
 
 export interface FooterLink {
-  href: string;
-  text: string;
+  href?: string;
+  text?: string;
 }

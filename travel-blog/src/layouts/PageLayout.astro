@@ -10,8 +10,9 @@ import Footer from './Footer/index.astro'
 // Styles
 import '../styles/globals.css';
 import { loadQuery } from "@/sanity/load-query";
-import type { HeaderType } from "@/types/home";
+import type { FooterType, HeaderType } from "@/types/home";
 import { headerQuery } from "@/queries/header";
+import { footerQuery } from "@/queries/footer";
 
 
 const seo = Astro.props.seo || {};
@@ -27,8 +28,8 @@ const {
 const visualEditingEnabled =
   import.meta.env.PUBLIC_SANITY_VISUAL_EDITING_ENABLED === "true";
 
-  let headerData: HeaderType | null = null;
-
+// --- Header data
+let headerData: HeaderType | null = null;
 try {
   const { data } = await loadQuery<HeaderType>({ query: headerQuery });
   headerData = data;
@@ -36,7 +37,20 @@ try {
   console.error('Failed to fetch header data');
 }
 
+// --- Footer data
+let footerData: FooterType | null = null;
+try {
+  const { data } = await loadQuery<FooterType>({ query: footerQuery });
+  footerData = data;
+} catch {
+  console.error('Failed to fetch footer data');
+}
+
 const { logo, menuItems = [], otherPages = [] } = headerData ?? {};
+const { contactItems = [], socials = [] } = footerData ?? {};
+
+console.log(socials);
+
 ---
 
 <html lang="en">
@@ -46,9 +60,8 @@ const { logo, menuItems = [], otherPages = [] } = headerData ?? {};
     <main class="flex-1 container mx-auto px-4 py-8 pt-[80px]">
       <slot />
     </main>
-    <Footer />
+    <Footer {logo} {contactItems} {socials} />
 
-    <!-- Sanity Visual Editing overlay -->
     <VisualEditing enabled={visualEditingEnabled} />
   </body>
 </html>

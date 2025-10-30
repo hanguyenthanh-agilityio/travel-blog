@@ -1,22 +1,30 @@
 ---
 // Components
-import { SocialIcons, ContactInfo, Logo } from '@/components';
+import { SocialIcons, ContactInfo, SanityImage } from '@/components';
 
 // Layouts
 import FooterLinks from './FooterLinks/index.astro'
 
 // Contents
-import { contactItems, bottomLinks } from '@/mockData/blog';
+import { bottomLinks } from '@/mockData/blog';
 
 // Constants
 import { HOME_PAGE } from '@/constants/route';
-import { getSocials } from '@/lib/api';
 
-
-const  socials  = await getSocials();
 
 const year = new Date().getFullYear();
 
+interface Props {
+  logo?: { asset?: { url?: string } };
+  contactItems?: { label: string; value: string }[];
+  socials?: {
+    href: string;
+    label?: string;
+    icon?: string | { asset?: { url?: string } };
+  }[];
+}
+
+const { logo, contactItems = [], socials = [] } = Astro.props;
 ---
 
 <footer class="container mx-auto bg-white text-gray-800 px-4">
@@ -26,7 +34,17 @@ const year = new Date().getFullYear();
   >
     <!-- Brand Section -->
     <div class="pr-20 xl:pr-0">
-      <Logo href={HOME_PAGE} width={280} height={100} classes="pb-3 md:pb-5" />
+      <a href={HOME_PAGE} aria-label="Go to homepage">
+          {logo?.asset?.url && (
+            <SanityImage
+              node={logo.asset.url}
+              width={280}
+              height={100}
+              className="object-contain transition-transform duration-200 hover:scale-105"
+            />
+          )}
+        </a>
+        
       <SocialIcons socials={socials} />
     </div>
 

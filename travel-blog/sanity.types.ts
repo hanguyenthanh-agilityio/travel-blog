@@ -13,6 +13,46 @@
  */
 
 // Source: schema.json
+export type Footer = {
+  _id: string;
+  _type: 'footer';
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  logo?: {
+    asset?: {
+      _ref: string;
+      _type: 'reference';
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    _type: 'image';
+  };
+  contactItems?: Array<{
+    label?: string;
+    value?: string;
+    _type: 'item';
+    _key: string;
+  }>;
+  bottomLinks?: Array<{
+    text?: string;
+    href?: string;
+    _type: 'link';
+    _key: string;
+  }>;
+  socials?: Array<{
+    _ref: string;
+    _type: 'reference';
+    _weak?: boolean;
+    _key: string;
+    [internalGroqTypeReferenceTo]?: 'social';
+  }>;
+};
+
 export type Header = {
   _id: string;
   _type: 'header';
@@ -383,6 +423,7 @@ export type SanityAssetSourceData = {
 };
 
 export type AllSanitySchemaTypes =
+  | Footer
   | Header
   | Social
   | Post
