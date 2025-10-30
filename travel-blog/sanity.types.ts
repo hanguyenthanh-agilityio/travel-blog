@@ -13,6 +13,36 @@
  */
 
 // Source: schema.json
+export type Header = {
+  _id: string;
+  _type: 'header';
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  logo?: {
+    asset?: {
+      _ref: string;
+      _type: 'reference';
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: 'image';
+  };
+  menuItems?: Array<{
+    text?: string;
+    href?: string;
+    _key: string;
+  }>;
+  otherPages?: Array<{
+    text?: string;
+    href?: string;
+    _key: string;
+  }>;
+};
+
 export type Social = {
   _id: string;
   _type: 'social';
@@ -20,6 +50,7 @@ export type Social = {
   _updatedAt: string;
   _rev: string;
   label?: string;
+  href?: string;
   icon?: {
     asset?: {
       _ref: string;
@@ -352,6 +383,7 @@ export type SanityAssetSourceData = {
 };
 
 export type AllSanitySchemaTypes =
+  | Header
   | Social
   | Post
   | ContentSection

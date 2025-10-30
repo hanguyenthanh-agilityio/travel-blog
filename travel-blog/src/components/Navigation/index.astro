@@ -1,6 +1,12 @@
 ---
 import { NavDropdownMenu, Link } from '@/components';
-import { menu, otherPages } from '@/mockData/blog';
+
+interface Props {
+  items?: { text?: string; href?: string }[];
+  otherPages?: { text?: string; href?: string }[];
+}
+
+const { items = [], otherPages = [] } = Astro.props as Props;
 ---
 
 <nav
@@ -10,10 +16,10 @@ import { menu, otherPages } from '@/mockData/blog';
 >
   <!-- Primary Links -->
   <ul class="flex items-center space-x-6">
-    {menu.map((item) => (
+    {items.map((item) => (
       <li>
         <Link
-          href={item.href}
+          href={item.href ?? '#'}
           text={item.text}
           aria-label={`Navigate to ${item.text} page`}
           classes="text-base text-gray-700 hover:text-accent transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-md px-2 py-1"
@@ -27,7 +33,7 @@ import { menu, otherPages } from '@/mockData/blog';
     <NavDropdownMenu
       client:idle
       label="Other Pages"
-      items={otherPages}
+      items={otherPages.filter((p) => p?.href && p?.text) as { href: string; text: string }[]}
       aria-label="Other pages dropdown menu"
     />
   </div>

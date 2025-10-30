@@ -9,6 +9,9 @@ import Footer from './Footer/index.astro'
 
 // Styles
 import '../styles/globals.css';
+import { loadQuery } from "@/sanity/load-query";
+import type { HeaderType } from "@/types/home";
+import { headerQuery } from "@/queries/header";
 
 
 const seo = Astro.props.seo || {};
@@ -23,12 +26,23 @@ const {
 
 const visualEditingEnabled =
   import.meta.env.PUBLIC_SANITY_VISUAL_EDITING_ENABLED === "true";
+
+  let headerData: HeaderType | null = null;
+
+try {
+  const { data } = await loadQuery<HeaderType>({ query: headerQuery });
+  headerData = data;
+} catch {
+  console.error('Failed to fetch header data');
+}
+
+const { logo } = headerData ?? {};
 ---
 
 <html lang="en">
   <SeoHead {title} {description} {image} {url} {noindex} />
   <body>
-    <Header />
+    <Header {logo} />
     <main class="flex-1 container mx-auto px-4 py-8 pt-[80px]">
       <slot />
     </main>
