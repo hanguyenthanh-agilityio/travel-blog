@@ -1,12 +1,12 @@
 ---
 import { SocialIcons } from '@/components'
-import type { Social } from '@/lib/schema'
+import type { SocialIconType } from '@/types/detail'
 
 interface Props {
-  socials: Social[]
+  socials: SocialIconType[]
 }
 
-const { socials } = Astro.props
+const { socials = [] } = Astro.props
 ---
 
 <aside

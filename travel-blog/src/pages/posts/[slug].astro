@@ -1,32 +1,53 @@
 ---
 // Layouts
 import PageLayout from '@/layouts/PageLayout.astro'
+import { postDetailQuery, postSlugsQuery, socialsQuery } from '@/queries/detailPage';
+import { loadQuery } from '@/sanity/load-query';
 
 // Sections
 import { DetailHeader, DetailSidebar, DetailContent} from '@/sections'
+import type { PostDetailType, SocialIconType } from '@/types/detail';
 
-// Libs
-import {fetchPostBySlug, fetchPosts, getSocials} from '@/lib/api'
 
 // Static paths
 export async function getStaticPaths() {
-  const posts = await fetchPosts()
+  const { data } = await loadQuery<{ slug: string }[]>({
+    query: postSlugsQuery,
+  });
 
-  return posts.map((post) => ({
-    params: {
-      slug: typeof post.slug === 'string' ? post.slug : post.slug?.current || '',
-    },
-  }))
+  return data.map((post) => ({
+    params: { slug: post.slug },
+  }));
 }
 
-const  socials  = await getSocials();
+const { slug } = Astro.params;
 
-// Fetch single post
-const {slug} = Astro.params
-const post = await fetchPostBySlug(slug)
+// --- Fetch post detail
+let post: PostDetailType | null = null;
+try {
+  const { data } = await loadQuery<PostDetailType>({
+    query: postDetailQuery,
+    params: { slug },
+  });
+  post = data;
+} catch {
+  throw new Error('Failed to fetch post');
+}
 
-// Handle not found
-if (!post) throw new Error(`Post with slug "${slug}" not found`)
+if (!post) {
+  throw new Error(`Post with slug "${slug}" not found`);
+}
+
+// --- Fetch socials
+let socials: SocialIconType[] = [];
+try {
+  const { data } = await loadQuery<SocialIconType[]>({
+    query: socialsQuery,
+  });
+  socials = data;
+} catch {
+  console.error('Failed to fetch socials');
+}
 
 ---
 
