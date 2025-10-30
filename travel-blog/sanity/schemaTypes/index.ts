@@ -6,6 +6,7 @@ import { postType } from './post';
 import { socialType } from './social';
 import { HeaderType } from './header';
 import { footerType } from './footer';
+import { sectionHeadingType } from './heading';
 
 export const schemaTypes = [
   authorType,
@@ -15,5 +16,6 @@ export const schemaTypes = [
   postType,
   socialType,
   HeaderType,
-  footerType, 
+  footerType,
+  sectionHeadingType,
 ];
