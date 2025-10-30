@@ -47,7 +47,7 @@ try {
 }
 
 const { logo, menuItems = [], otherPages = [] } = headerData ?? {};
-const { contactItems = [], socials = [] } = footerData ?? {};
+const { contactItems = [], socials = [], bottomLinks = [] } = footerData ?? {};
 
 console.log(socials);
 
@@ -60,7 +60,7 @@ console.log(socials);
     <main class="flex-1 container mx-auto px-4 py-8 pt-[80px]">
       <slot />
     </main>
-    <Footer {logo} {contactItems} {socials} />
+    <Footer {logo} {contactItems} {socials} {bottomLinks}/>
 
     <VisualEditing enabled={visualEditingEnabled} />
   </body>
