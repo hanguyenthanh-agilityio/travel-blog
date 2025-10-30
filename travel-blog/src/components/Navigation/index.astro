@@ -1,12 +1,17 @@
 ---
 import { NavDropdownMenu, Link } from '@/components';
 
-interface Props {
-  items?: { text?: string; href?: string }[];
-  otherPages?: { text?: string; href?: string }[];
+interface SanityLinkItem {
+  text?: string;
+  href?: string;
 }
 
-const { items = [], otherPages = [] } = Astro.props as Props;
+interface Props {
+  menuItems?: SanityLinkItem[];
+  otherPages?: SanityLinkItem[];
+}
+
+const { menuItems  = [], otherPages = [] } = Astro.props as Props;
 ---
 
 <nav
@@ -16,25 +21,42 @@ const { items = [], otherPages = [] } = Astro.props as Props;
 >
   <!-- Primary Links -->
   <ul class="flex items-center space-x-6">
-    {items.map((item) => (
-      <li>
-        <Link
-          href={item.href ?? '#'}
-          text={item.text}
-          aria-label={`Navigate to ${item.text} page`}
-          classes="text-base text-gray-700 hover:text-accent transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-md px-2 py-1"
-        />
-      </li>
-    ))}
+    {
+      menuItems.length > 0 && (
+        <ul class="flex items-center space-x-6">
+          {menuItems.map((item) =>
+            item?.text && item?.href ? (
+              <li>
+                <Link
+                  href={item.href}
+                  text={item.text}
+                  aria-label={`Navigate to ${item.text} page`}
+                  classes="text-base text-gray-700 hover:text-accent transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-md px-2 py-1"
+                />
+              </li>
+            ) : null
+          )}
+        </ul>
+      )
+    }
   </ul>
 
   <!-- Secondary Dropdown -->
-  <div class="flex-shrink-0">
-    <NavDropdownMenu
-      client:idle
-      label="Other Pages"
-      items={otherPages.filter((p) => p?.href && p?.text) as { href: string; text: string }[]}
-      aria-label="Other pages dropdown menu"
-    />
-  </div>
+  {
+    otherPages.length > 0 && (
+      <div class="flex-shrink-0">
+        <NavDropdownMenu
+          client:idle
+          label="Other Pages"
+          items={
+            otherPages.filter(
+              (p): p is { href: string; text: string } =>
+                Boolean(p?.href && p?.text)
+            )
+          }
+          aria-label="Other pages dropdown menu"
+        />
+      </div>
+    )
+  }
 </nav>

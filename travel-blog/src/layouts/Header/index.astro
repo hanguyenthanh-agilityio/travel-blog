@@ -7,9 +7,11 @@ import {HOME_PAGE} from '@/constants/route'
 
 interface Props {
   logo?: { asset?: { url?: string } };
+  menuItems?: { text: string; href: string }[];
+  otherPages?: { text: string; href: string }[];
 }
 
-const { logo } = Astro.props;
+const { logo, menuItems = [], otherPages = [] } = Astro.props;
 ---
 
 <header class="w-full bg-white shadow-sm fixed top-0 z-50" role="banner">
@@ -34,12 +36,12 @@ const { logo } = Astro.props;
         aria-label="Main navigation"
         role="navigation"
       >
-        <Navigation />
+        <Navigation {menuItems} {otherPages} />
       </nav>
 
       <!-- Mobile Menu -->
       <div class="md:hidden" aria-label="Mobile menu">
-        <SheetMenu client:load />
+        <SheetMenu {menuItems} {otherPages} client:load />
       </div>
   </div>
 </header>

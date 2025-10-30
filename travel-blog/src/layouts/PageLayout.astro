@@ -36,13 +36,13 @@ try {
   console.error('Failed to fetch header data');
 }
 
-const { logo } = headerData ?? {};
+const { logo, menuItems = [], otherPages = [] } = headerData ?? {};
 ---
 
 <html lang="en">
   <SeoHead {title} {description} {image} {url} {noindex} />
   <body>
-    <Header {logo} />
+    <Header {logo} {menuItems} {otherPages} />
     <main class="flex-1 container mx-auto px-4 py-8 pt-[80px]">
       <slot />
     </main>
