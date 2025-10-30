@@ -34,6 +34,7 @@ const BlogCard: React.FC<BlogCardProps> = ({
   return (
     <Link href={`/posts/${postSlug}`}>
       <div
+        data-testid="blog-card"
         className={cn(
           'h-full overflow-hidden rounded-xl bg-transparent transition-transform duration-300 ease-in-out hover:shadow-lg hover:-translate-y-1 hover:scale-[1.01]',
           isHorizontal ? 'flex flex-col md:flex-row gap-4' : 'flex flex-col',
@@ -43,6 +44,7 @@ const BlogCard: React.FC<BlogCardProps> = ({
         {image && (
           <SanityImage
             node={image}
+            alt={title}
             className={cn(
               'object-cover rounded-xl w-full',
               isHorizontal && 'md:w-1/2 max-h-blog-md',

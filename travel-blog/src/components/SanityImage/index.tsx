@@ -21,6 +21,7 @@ export interface SanityImageType {
 
 interface SanityImageProps {
   node: SanityImageType | string | null | undefined;
+  alt?: string;
   className?: string;
   width?: number;
   height?: number;
