@@ -2,8 +2,7 @@ import { experimental_AstroContainer as AstroContainer } from 'astro/container';
 import { describe, it, expect } from 'vitest';
 
 // Components
-import InfoGrid from '../index.astro';
-
+import { ContactInfo } from '@/components';
 describe('InfoGrid.astro', () => {
   const items = [
     { label: 'Name', value: 'Astro' },
@@ -13,7 +12,7 @@ describe('InfoGrid.astro', () => {
 
   it('renders all items', async () => {
     const container = await AstroContainer.create();
-    const result = await container.renderToString(InfoGrid, {
+    const result = await container.renderToString(ContactInfo, {
       props: { items },
     });
 
