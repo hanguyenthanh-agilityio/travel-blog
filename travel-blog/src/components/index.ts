@@ -1,6 +1,5 @@
 export { default as ContactInfo } from './ContactInfo/index.astro';
 export { default as Hero } from './Hero/index.astro';
-export { default as Logo } from './Logo/index.astro';
 export { default as NavDropdownMenu } from './NavDropdownMenu';
 export { default as Navigation } from './Navigation/index.astro';
 export { default as Paginator } from './Paginator';
