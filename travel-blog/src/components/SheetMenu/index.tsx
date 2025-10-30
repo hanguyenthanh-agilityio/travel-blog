@@ -1,30 +1,22 @@
 import React from 'react';
-
-// Components
-import { SheetContent } from '@/components';
-
-// UI
-import {
-  Button,
-  Sheet,
-  SheetTrigger,
-  SheetContent as UISheetContent,
-} from '@/ui';
-
-// Icons
+import { Sheet, SheetTrigger, SheetContent as UISheetContent } from '@/ui';
+import { Button } from '@/ui/button';
 import { Hamburger } from '@/icons';
+import SheetContent from './SheetContent';
 
-// Contents
-import { menu, otherPages } from '@/mockData/blog';
+interface SheetMenuProps {
+  menuItems: { href: string; text: string }[];
+  otherPages?: { href: string; text: string }[];
+}
 
-export default function MobileSheetMenu() {
+const SheetMenu = ({ menuItems, otherPages = [] }: SheetMenuProps) => {
   return (
     <Sheet>
       <SheetTrigger asChild>
         <Button
           aria-label="Open menu"
           variant="ghost"
-          className="p-2 hover:bg-[none] hover:text-[none] cursor-pointer"
+          className="p-2 hover:bg-transparent"
         >
           <Hamburger />
         </Button>
@@ -33,10 +25,12 @@ export default function MobileSheetMenu() {
       <UISheetContent
         side="left"
         className="w-64"
-        aria-label="Mobile menu panel"
+        aria-label="Mobile navigation drawer"
       >
-        <SheetContent menu={menu} otherPages={otherPages} />
+        <SheetContent menuItems={menuItems} otherPages={otherPages} />
       </UISheetContent>
     </Sheet>
   );
-}
+};
+
+export default SheetMenu;

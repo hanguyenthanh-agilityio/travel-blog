@@ -62,7 +62,14 @@ const AuthorCard: React.FC<AuthorCardProps> = ({
         )}
       >
         <Avatar className={classAvatar}>
-          <AvatarImage src={avatar} alt={name} />
+          <AvatarImage
+            src={
+              typeof avatar === 'string'
+                ? avatar
+                : (avatar?.asset?.url ?? undefined)
+            }
+            alt={name}
+          />
           <AvatarFallback>{name?.[0]}</AvatarFallback>
         </Avatar>
 

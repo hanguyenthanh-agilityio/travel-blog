@@ -2,16 +2,11 @@
 // Layouts
 import PageLayout from '@/layouts/PageLayout.astro'
 
-// Components
-import {SocialIcons, LazyImage, PortableText} from '@/components'
-
 // Sections
-import {AuthorCard} from '@/sections'
-
+import { DetailHeader, DetailSidebar, DetailContent} from '@/sections'
 
 // Libs
 import {fetchPostBySlug, fetchPosts, getSocials} from '@/lib/api'
-import {generateSlug} from '@/lib/utils'
 
 // Static paths
 export async function getStaticPaths() {
@@ -33,117 +28,19 @@ const post = await fetchPostBySlug(slug)
 // Handle not found
 if (!post) throw new Error(`Post with slug "${slug}" not found`)
 
-// Normalize data
-const safePost = {
-  ...post,
-  slug: typeof post.slug === 'string' ? post.slug : post.slug?.current || '',
-  image: typeof post.image === 'string' ? post.image : post.image?.asset?.url || '',
-  author: post.author ?? {name: 'Unknown', role: '', avatar: '', date: ''},
-  content: post.content ?? {intro: [], sections: [], conclusion: []},
-  excerpt: post.excerpt ?? '',
-}
 ---
 
 <PageLayout>
   <article class="max-w-3xl mx-auto py-8">
     <!-- Header -->
-    <header class="md:px-8 text-center">
-      <AuthorCard
-        {...safePost.author}
-        isBlogDetail={true}
-        isRole={true}
-        classAvatar="w-14 h-14"
-        classContainer="!justify-center pb-4"
-        className="flex flex-col gap-1 justify-center items-center"
-        client:idle
-      />
-
-      <h1 class="text-xl md:text-3xl lg:text-4xl font-bold mb-4">
-        {safePost.title}
-      </h1>
-
-      {
-        safePost.author.date && (
-          <p class="text-sm text-primary mt-2 pb-5 border-b border-line">
-            {typeof safePost.author.date === 'string'
-              ? safePost.author.date
-              : safePost.author.date.toString()}
-          </p>
-        )
-      }
-    </header>
+    <DetailHeader title={post.title} author={post.author} />
 
     <!-- Main body -->
     <div class="lg:relative">
       <!-- Social icons -->
-      <aside class="lg:absolute lg:right-[-100px] pt-5" aria-label="Share on social networks">
-        <SocialIcons
-          socials={socials}
-          containerClassName="justify-center lg:flex-col gap-3 md:gap-4"
-          linkClassName="bg-[#f4f4f4] rounded-xl p-2"
-        />
-      </aside>
+      <DetailSidebar socials={socials} />
 
-      <!-- Excerpt -->
-      {safePost.excerpt && <p class="pt-5 text-primary text-base md:px-8">{safePost.excerpt}</p>}
-
-      <!-- Feature image -->
-      {
-        safePost.image && (
-          <LazyImage
-            src={safePost.image}
-            alt={safePost.title}
-            class="rounded-xl my-6 w-full h-blog-lg md:h-auto"
-            loading="lazy"
-          />
-        )
-      }
-
-      <!-- Post content -->
-      <div class="prose lg:prose-lg md:px-8">
-        <!-- Intro -->
-        {
-          safePost.content?.intro && (
-            <div class="border-l-2 border-line pl-4">
-              <PortableText portableText={safePost.content.intro} />
-            </div>
-          )
-        }
-
-        <!-- Sections -->
-        {
-          safePost.content?.sections?.map((section) => {
-            const headingId = generateSlug(section.country)
-            return (
-              <section aria-labelledby={headingId}>
-                <h2 
-                  id={headingId}
-                  aria-labelledby={headingId} 
-                  class="text-lg font-semibold mt-6"
-                >
-                  {section.country}
-                </h2>
-                {Array.isArray(section.items) && (
-                  <ul class="list-disc ml-6 text-base space-y-1">
-                    {section.items.map((item) => (
-                  <li>{item}</li>
-                ))}
-              </ul>
-            )}
-              </section>
-            )
-          })
-        }
-
-        <!-- Conclusion -->
-        {
-          safePost.content?.conclusion && (
-            <div class="mt-8 font-medium">
-              <PortableText portableText={safePost.content.conclusion} />
-            </div>
-          )
-        }
-      </div>
+      <DetailContent image={post.image} excerpt={post.excerpt} content={post.content} />
     </div>
   </article>
 </PageLayout>

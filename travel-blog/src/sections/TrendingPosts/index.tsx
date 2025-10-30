@@ -39,7 +39,22 @@ const TrendingPosts: React.FC<TrendingPostsProps> = ({
   return (
     <section className="container mx-auto flex flex-col mb-20">
       <HeadingBlock {...TRENDING_TITLE} />
-      <BlogGrid posts={currentPosts} column={3} className="mt-8" />
+      <BlogGrid
+        posts={
+          currentPosts.map((post) => ({
+            ...post,
+            author: {
+              ...post.author,
+              avatar:
+                typeof post.author.avatar === 'string'
+                  ? post.author.avatar
+                  : post.author.avatar?.asset?.url || '',
+            },
+          }))
+        }
+        column={3}
+        className="mt-8"
+      />
 
       <div className="mt-10 flex justify-center">
         <Paginator

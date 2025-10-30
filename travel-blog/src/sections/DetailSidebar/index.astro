@@ -1,0 +1,21 @@
+---
+import { SocialIcons } from '@/components'
+import type { Social } from '@/lib/schema'
+
+interface Props {
+  socials: Social[]
+}
+
+const { socials } = Astro.props
+---
+
+<aside
+  class="lg:absolute lg:right-[-100px] pt-5"
+  aria-label="Share on social networks"
+>
+  <SocialIcons
+    socials={socials}
+    containerClassName="justify-center lg:flex-col gap-3 md:gap-4"
+    linkClassName="bg-[#f4f4f4] rounded-xl p-2"
+  />
+</aside>

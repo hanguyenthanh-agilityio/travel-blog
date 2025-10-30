@@ -6,7 +6,16 @@ import { z } from 'zod';
 export const AuthorSchema = z.object({
   name: z.string().default('Unknown'),
   role: z.string().optional(),
-  avatar: z.string().optional(),
+  avatar: z
+    .union([
+      z.string().url().optional(),
+      z
+        .object({
+          asset: z.object({ url: z.string().optional() }).optional(),
+        })
+        .optional(),
+    ])
+    .optional(),
   date: z.union([z.string(), z.date()]).optional(),
 });
 
