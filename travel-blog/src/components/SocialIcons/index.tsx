@@ -5,21 +5,18 @@ import { Link, SanityImage } from '@/components';
 
 // Libs
 import { cn } from '@/lib/utils';
+import type { SocialIconType } from '@/types/detail';
 
-export interface SocialIconType {
-  href: string;
-  label?: string;
-  icon?: string | { asset?: { url?: string } };
+export interface SocialIcon extends SocialIconType {
   linkClassName?: string;
 }
 
 interface Props {
-  socials: SocialIconType[];
+  socials: SocialIcon[];
   containerClassName?: string;
   linkClassName?: string;
   dark?: boolean;
 }
-
 const SocialIcons: FC<Props> = ({
   socials,
   containerClassName,

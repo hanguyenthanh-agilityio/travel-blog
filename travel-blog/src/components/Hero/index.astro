@@ -5,7 +5,14 @@ import { Link, SanityImage} from '@/components'
 // Sections
 import {AuthorCard} from '@/sections'
 
-const {title, image, author, slug} = Astro.props
+interface HeroProps {
+  title: string;
+  image?: any;
+  author?: any;
+  slug: { current: string };
+}
+
+const {title, image, author, slug} = Astro.props as HeroProps
 
 const safeTitle = title || '';
 const parts = safeTitle.split(':');
@@ -15,7 +22,7 @@ const parts = safeTitle.split(':');
   class="relative w-full h-blog-lg rounded-2xl overflow-hidden" 
   aria-labelledby="hero-title"
 >
-  <Link href={`/posts/${slug}`} classes="block focus:outline-none focus:ring-4 focus:ring-primary/50 rounded-2xl">
+  <Link href={`/posts/${slug?.current}`} classes="block focus:outline-none focus:ring-4 focus:ring-primary/50 rounded-2xl">
 
     <!-- Sanity Image Integration -->
     <SanityImage
