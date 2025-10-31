@@ -14,10 +14,8 @@ const meta: Meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-// Template cơ bản
 const Template = (args: any) => <SanityImage {...args} />;
 
-// Story với URL string
 export const FromUrl: Story = {
   render: Template,
   args: {
@@ -29,7 +27,6 @@ export const FromUrl: Story = {
   },
 };
 
-// Story với Sanity image object
 const sampleSanityImage: SanityImageType = {
   _type: 'image',
   alt: 'Sample Sanity Image',

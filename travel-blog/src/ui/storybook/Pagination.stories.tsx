@@ -21,7 +21,6 @@ const meta: Meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-// Template cơ bản
 const Template = () => (
   <Pagination>
     <PaginationContent>

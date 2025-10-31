@@ -4,7 +4,6 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 // Components
 import BlogCard from './';
 
-// Mock AuthorCard cho Storybook
 const MockAuthorCard = ({ name, role }: { name: string; role?: string }) => (
   <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
     <div
@@ -17,7 +16,6 @@ const MockAuthorCard = ({ name, role }: { name: string; role?: string }) => (
   </div>
 );
 
-// Mock SanityImage cho Storybook
 const MockImage = ({ className }: { className?: string }) => (
   <div
     className={className}
@@ -58,7 +56,6 @@ const meta: Meta<typeof BlogCard> = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-// Template sử dụng mock image và author
 const Template = (args: any) => (
   <BlogCard
     {...args}
