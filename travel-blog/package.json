@@ -14,7 +14,7 @@
     "test:run": "vitest run --passWithNoTests",
     "prepare": "husky",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build",
+    "storybook:build": "storybook build",
     "studio": "sanity dev --config ./sanity.config.ts",
     "studio:deploy": "sanity deploy",
     "studio:graphql": "sanity graphql deploy",
