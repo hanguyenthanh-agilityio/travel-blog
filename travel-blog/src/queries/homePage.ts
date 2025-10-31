@@ -31,7 +31,7 @@ export const homePageQuery = `
   },
    "trendingPosts": {
     "heading": coalesce(*[_type == "sectionHeading" && section == "trending"][0].heading, []),
-    "posts": *[_type == "post" && category == "trending"] | order(_createdAt desc)[0..5]{
+    "posts": *[_type == "post" && category == "trending"] | order(_createdAt desc){
       _id,
       title,
       slug,

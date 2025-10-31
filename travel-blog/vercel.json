@@ -1,0 +1,9 @@
+{
+  "builds": [
+    {
+      "src": "coverage/**",
+      "use": "@vercel/static"
+    }
+  ],
+  "routes": [{ "src": "/coverage/(.*)", "dest": "/coverage/$1" }]
+}

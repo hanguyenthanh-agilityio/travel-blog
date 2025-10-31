@@ -37,6 +37,6 @@ const { heroPost, popularPosts, trendingPosts } = homePage;
 
   <section class="container mx-auto flex flex-col mb-20">
     <HeadingBlock heading={trendingPosts.heading} />
-    <TrendingPosts posts={trendingPosts.posts} postsPerPage={3} client:load />
+    <TrendingPosts posts={trendingPosts.posts} postsPerPage={6} client:load />
   </section>
 </PageLayout>
