@@ -1,13 +1,9 @@
 ---
-import { POPULAR_TITLE } from '@/constants';
-import { BlogCard, HeadingBlock } from '@/sections';
+import { BlogCard } from '@/sections';
 
 const { posts } = Astro.props;
 ---
-<section class="container mx-auto mb-16 md:mb-24">
-  <!-- Heading -->
-    <HeadingBlock {...POPULAR_TITLE} client:idle />
-
+<>
   <div class="grid md:grid-cols-[1fr_1.4fr] gap-6 md:gap-4 lg:gap-10">
     <!-- First (featured) post -->
     <BlogCard
@@ -24,4 +20,4 @@ const { posts } = Astro.props;
       ))}
     </div>
   </div>
-</section>
+</>

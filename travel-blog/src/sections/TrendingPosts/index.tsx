@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import { BlogGrid, HeadingBlock } from '@/sections';
+import { BlogGrid } from '@/sections';
 import { Paginator } from '@/components';
 import type { PostSummary } from '@/lib/schema';
-import { TRENDING_TITLE } from '@/constants';
 
 interface TrendingPostsProps {
   posts: PostSummary[];
@@ -37,21 +36,18 @@ const TrendingPosts: React.FC<TrendingPostsProps> = ({
   }));
 
   return (
-    <section className="container mx-auto flex flex-col mb-20">
-      <HeadingBlock {...TRENDING_TITLE} />
+    <>
       <BlogGrid
-        posts={
-          currentPosts.map((post) => ({
-            ...post,
-            author: {
-              ...post.author,
-              avatar:
-                typeof post.author.avatar === 'string'
-                  ? post.author.avatar
-                  : post.author.avatar?.asset?.url || '',
-            },
-          }))
-        }
+        posts={currentPosts.map((post) => ({
+          ...post,
+          author: {
+            ...post.author,
+            avatar:
+              typeof post.author.avatar === 'string'
+                ? post.author.avatar
+                : post.author.avatar?.asset?.url || '',
+          },
+        }))}
         column={3}
         className="mt-8"
       />
@@ -63,7 +59,7 @@ const TrendingPosts: React.FC<TrendingPostsProps> = ({
           onPageChange={setCurrentPage}
         />
       </div>
-    </section>
+    </>
   );
 };
 

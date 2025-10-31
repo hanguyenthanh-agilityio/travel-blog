@@ -7,7 +7,7 @@ import {MarkStrong, MarkLink} from "@/components/Marks"
 const { portableText } = Astro.props;
 
 const components = {
-  type: {
+  types: {
     image: SanityImage,
   },
   block: {
@@ -15,7 +15,7 @@ const components = {
     h3: BlockH3,
     normal: BlockNormal
   },
-  masks: {
+  marks: {
     strong: MarkStrong,
     link: MarkLink
   }

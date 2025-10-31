@@ -5,7 +5,7 @@ import { homePageQuery } from '@/queries/homePage';
 
 // Sanity utils
 import { loadQuery } from '@/sanity/load-query';
-import { PopularPosts, TrendingPosts } from '@/sections';
+import { PopularPosts, TrendingPosts, HeadingBlock } from '@/sections';
 import type { HomePageType } from '@/types/home';
 
 let homePage: HomePageType | null = null;
@@ -24,14 +24,19 @@ if (!homePage) {
 }
 
 const { heroPost, popularPosts, trendingPosts } = homePage;
-console.log(popularPosts);
 
 ---
 
 <PageLayout>
   <Hero {...heroPost} />
 
-  <PopularPosts posts={popularPosts} />
+  <section class="container mx-auto mb-16 md:mb-24">
+    <HeadingBlock heading={popularPosts.heading} />
+    <PopularPosts posts={popularPosts.posts} />
+  </section>
 
-  <TrendingPosts posts={trendingPosts} postsPerPage={3} client:load />
+  <section class="container mx-auto flex flex-col mb-20">
+    <HeadingBlock heading={trendingPosts.heading} />
+    <TrendingPosts posts={trendingPosts.posts} postsPerPage={3} client:load />
+  </section>
 </PageLayout>
