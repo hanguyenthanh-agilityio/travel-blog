@@ -15,7 +15,7 @@
     "prepare": "husky",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build -o storybook-static",
-    "chromatic": "npx chromatic --project-token=chpt_a08fa2975e924ed --build-script-name=build-storybook",
+    "chromatic": "npx chromatic --project-token=chpt_a08fa2975e924ed",
     "studio": "sanity dev --config ./sanity.config.ts",
     "studio:deploy": "sanity deploy",
     "studio:graphql": "sanity graphql deploy",
