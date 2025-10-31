@@ -1,13 +1,13 @@
 ---
-import {PortableText} from '@/components';
-
-
+import { PortableText } from '@/components';
 const { heading } = Astro.props;
+const hasHeading = heading && Array.isArray(heading) && heading.length > 0;
 ---
 
-
-{heading && Array.isArray(heading) && heading.length > 0 && (
-  <div class="text-center text-primary my-8">
-    <PortableText portableText={heading} />
-  </div>
-)}
+{hasHeading ? (
+  <Fragment>
+    <div class="text-center text-primary my-8">
+      <PortableText portableText={heading} />
+    </div>
+  </Fragment>
+) : null}
