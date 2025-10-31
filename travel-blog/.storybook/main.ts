@@ -27,27 +27,23 @@ const config: StorybookConfig = {
       alias: {
         ...(baseConfig.resolve?.alias ?? {}),
 
-        // ✅ Alias cho dự án
         '@': path.resolve(__dirname, '../src'),
 
-        // ✅ Mock Sanity client
         'sanity:client': path.resolve(__dirname, '__mocks__/sanity-client.ts'),
         'sanity:client/lib/utils': path.resolve(
           __dirname,
           '__mocks__/sanity-client.ts',
         ),
 
-        // ✅ Mock import .astro (tránh lỗi Storybook)
         '.astro': path.resolve(__dirname, '__mocks__/astro-mock.js'),
       },
     };
 
-    // ✅ Plugin để bỏ qua file .astro trong quá trình load
     baseConfig.plugins?.push({
       name: 'ignore-astro-files',
       load(id: string) {
         if (id.endsWith('.astro')) {
-          return ''; // Không load nội dung .astro
+          return '';
         }
         return null;
       },
