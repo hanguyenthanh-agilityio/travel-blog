@@ -1,45 +1,84 @@
 import React from 'react';
-import { render, screen, fireEvent } from '@testing-library/react';
-import { describe, it, expect } from 'vitest';
+import { render, screen } from '@testing-library/react';
+import { describe, it, expect, vi } from 'vitest';
+import SheetMenu from '..';
 
-// Components
-import MobileSheetMenu from '../index';
+// Mock UI components
+vi.mock('@/ui', async () => {
+  const actual = await vi.importActual('@/ui');
+  return {
+    ...actual,
+    Sheet: ({ children }: any) => <div>{children}</div>,
+    SheetTrigger: ({ children }: any) => <div>{children}</div>,
+    SheetContent: ({ children, ...props }: any) => (
+      <div {...props}>{children}</div>
+    ),
+  };
+});
 
-describe('MobileSheetMenu', () => {
-  it('renders the open menu button', () => {
-    render(<MobileSheetMenu />);
-    const button = screen.getByRole('button', { name: /open menu/i });
-    expect(button).toBeInTheDocument();
+vi.mock('@/ui/button', async () => {
+  const actual = await vi.importActual('@/ui/button');
+  return {
+    ...actual,
+    Button: ({ children, ...props }: any) => (
+      <button {...props}>{children}</button>
+    ),
+  };
+});
+
+vi.mock('@/icons', async () => ({
+  Hamburger: () => <span data-testid="hamburger">☰</span>,
+}));
+
+vi.mock('../SheetContent', () => ({
+  __esModule: true,
+  default: ({ menuItems, otherPages }: any) => (
+    <div data-testid="sheet-content">
+      {menuItems.map((item: any) => (
+        <div key={item.href} data-testid="menu-item">
+          {item.text}
+        </div>
+      ))}
+      {otherPages.map((item: any) => (
+        <div key={item.href} data-testid="other-page">
+          {item.text}
+        </div>
+      ))}
+    </div>
+  ),
+}));
+
+describe('SheetMenu', () => {
+  const menuItems = [
+    { href: '/home', text: 'Home' },
+    { href: '/blog', text: 'Blog' },
+  ];
+
+  const otherPages = [
+    { href: '/about', text: 'About' },
+    { href: '/contact', text: 'Contact' },
+  ];
+
+  it('renders trigger button with Hamburger icon', () => {
+    render(<SheetMenu menuItems={menuItems} />);
+    const trigger = screen.getByRole('button', { name: /open menu/i });
+    expect(trigger).toBeInTheDocument();
+    expect(screen.getByTestId('hamburger')).toBeInTheDocument();
   });
 
-  it.skip('opens the sheet when button is clicked', () => {
-    render(<MobileSheetMenu />);
-    const button = screen.getByRole('button', { name: /open menu/i });
+  it('renders SheetContent when sheet is opened', () => {
+    render(<SheetMenu menuItems={menuItems} otherPages={otherPages} />);
 
-    // Simulate click to open sheet
-    fireEvent.click(button);
+    // Với mock Sheet/SheetTrigger, SheetContent luôn render
+    const sheetContent = screen.getByTestId('sheet-content');
+    expect(sheetContent).toBeInTheDocument();
 
-    // Check if one of the menu links is visible
-    expect(screen.getByText('Home')).toBeInTheDocument();
-    expect(screen.getByText('Blog')).toBeInTheDocument();
-    expect(screen.getByText('Single Post')).toBeInTheDocument();
+    menuItems.forEach((item) => {
+      expect(screen.getByText(item.text)).toBeInTheDocument();
+    });
 
-    // Check "Other Pages" label
-    expect(screen.getByText('Other Pages')).toBeInTheDocument();
-  });
-
-  it.skip('renders links correctly', () => {
-    render(<MobileSheetMenu />);
-    fireEvent.click(screen.getByRole('button', { name: /open menu/i }));
-
-    expect(screen.getByText('Home').closest('a')).toHaveAttribute('href', '/');
-    expect(screen.getByText('Blog').closest('a')).toHaveAttribute(
-      'href',
-      '/blog',
-    );
-    expect(screen.getByText('Single Post').closest('a')).toHaveAttribute(
-      'href',
-      '/post/example',
-    );
+    otherPages.forEach((item) => {
+      expect(screen.getByText(item.text)).toBeInTheDocument();
+    });
   });
 });
