@@ -48,6 +48,7 @@ const SanityImage: React.FC<SanityImageProps> = ({
   if (!imageNode || !imageNode.asset?.url) {
     return (
       <div
+        data-testid="sanity-image-fallback"
         className={`bg-gray-100 rounded-xl ${className}`}
         style={{ aspectRatio: fallbackAspectRatio }}
       />
