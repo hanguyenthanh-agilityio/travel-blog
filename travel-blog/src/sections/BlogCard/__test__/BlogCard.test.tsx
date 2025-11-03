@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { describe, it, expect, vi } from 'vitest';
-import BlogCard from '..';
+import BlogCard from '../index.tsx';
 
 // --- Mock components ---
 vi.mock('@/components', async () => {

@@ -2,7 +2,7 @@ import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
 // Components
-import BlogCard from './';
+import BlogCard from './index.tsx';
 
 const MockAuthorCard = ({ name, role }: { name: string; role?: string }) => (
   <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>

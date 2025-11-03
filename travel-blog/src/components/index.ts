@@ -7,5 +7,5 @@ export { default as PortableText } from './PortableText/index.astro';
 export { default as SanityImage } from './SanityImage';
 export { default as SheetMenu } from './SheetMenu';
 export { default as SocialIcons } from './SocialIcons';
-export { default as Link } from './Link';
+export { default as Link } from './Link/index.astro';
 export { default as SheetContent } from './SheetMenu/SheetContent';
