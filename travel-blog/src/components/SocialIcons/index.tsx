@@ -33,12 +33,15 @@ const SocialIcons: FC<Props> = ({
           typeof social.icon === 'string'
             ? social.icon
             : social.icon?.asset?.url;
+
+        const label = social.label?.trim() || 'Social link';
+
         return (
           <li key={social.href} className="list-none">
             <Link
               href={social.href}
               external
-              aria-label={`Visit our ${social.label} profile`}
+              aria-label={`Visit our ${label} profile`}
               classes={cn(
                 'flex items-center justify-center p-2 rounded-lg transition-all duration-200',
                 'hover:scale-110 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2',
@@ -52,13 +55,16 @@ const SocialIcons: FC<Props> = ({
               {iconUrl ? (
                 <SanityImage
                   node={iconUrl}
-                  alt={`${social.label} icon`}
+                  alt={`${label} icon`}
                   width={24}
                   height={24}
                   className="w-6 h-6 object-contain"
                 />
               ) : (
-                <span className="w-6 h-6 block bg-gray-300" />
+                <span
+                  className="w-6 h-6 block bg-gray-300"
+                  aria-hidden="true"
+                />
               )}
             </Link>
           </li>
