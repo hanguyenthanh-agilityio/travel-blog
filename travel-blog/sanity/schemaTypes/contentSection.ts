@@ -14,7 +14,7 @@ export const contentSectionType = defineType({
       name: 'items',
       title: 'Items / Highlights',
       type: 'array',
-      of: [{ type: 'string' }],
+      of: [{ type: 'block' }],
     }),
   ],
 });
