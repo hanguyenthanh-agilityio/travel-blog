@@ -45,17 +45,15 @@ const SanityImage: React.FC<SanityImageProps> = ({
   const imageNode: SanityImageType | null =
     typeof node === 'string' ? { asset: { url: node } } : (node ?? null);
 
-  if (!imageNode || !imageNode.asset?.url) {
+  if (!imageNode?.asset?.url) {
     return (
       <div
-      
         className={`bg-gray-100 rounded-xl ${className}`}
         style={{ aspectRatio: fallbackAspectRatio }}
+        role="presentation"
       />
     );
   }
-
-  const image = urlForImage(imageNode, { width, quality: 80 });
 
   const intrinsicWidth = imageNode.asset.metadata?.dimensions?.width || width;
   const intrinsicHeight =
@@ -63,6 +61,7 @@ const SanityImage: React.FC<SanityImageProps> = ({
     height ||
     width / fallbackAspectRatio;
 
+  // --- responsive srcSet, auto format + quality
   const srcSet = srcSetWidths
     .map(
       (w) =>
@@ -75,9 +74,16 @@ const SanityImage: React.FC<SanityImageProps> = ({
     )
     .join(', ');
 
+  const baseUrl = urlForImage(imageNode)
+    .width(width)
+    .fit('max')
+    .auto('format')
+    .quality(80)
+    .url();
+
   return (
     <img
-      src={image.url()}
+      src={baseUrl}
       srcSet={srcSet}
       sizes={sizes}
       width={intrinsicWidth}

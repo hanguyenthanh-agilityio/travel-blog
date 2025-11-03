@@ -22,22 +22,19 @@ const { menuItems  = [], otherPages = [] } = Astro.props as Props;
   <!-- Primary Links -->
   <ul class="flex items-center space-x-6">
     {
-      menuItems.length > 0 && (
-        <ul class="flex items-center space-x-6">
-          {menuItems.map((item) =>
-            item?.text && item?.href ? (
-              <li>
-                <Link
-                  href={item.href}
-                  text={item.text}
-                  aria-label={`Navigate to ${item.text} page`}
-                  classes="text-base text-gray-700 hover:text-accent transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-md px-2 py-1"
-                />
-              </li>
-            ) : null
-          )}
-        </ul>
-      )
+      menuItems.length > 0 &&
+        menuItems.map((item) =>
+          item?.text && item?.href ? (
+            <li>
+              <Link
+                href={item.href}
+                text={item.text}
+                aria-label={`Navigate to ${item.text} page`}
+                classes="text-base text-gray-700 hover:text-accent transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-md px-2 py-1"
+              />
+            </li>
+          ) : null
+        )
     }
   </ul>
 
@@ -60,3 +57,4 @@ const { menuItems  = [], otherPages = [] } = Astro.props as Props;
     )
   }
 </nav>
+
