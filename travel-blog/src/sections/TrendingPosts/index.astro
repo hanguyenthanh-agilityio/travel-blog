@@ -1,0 +1,34 @@
+---
+import { BlogGrid } from '@/sections';
+import type { PostSummary } from '@/lib/schema';
+
+interface Props {
+  posts: PostSummary[];
+  column?: number;
+  className?: string;
+}
+
+const { posts, column = 3, className = '' } = Astro.props;
+
+const safePosts = posts.map((post) => ({
+  ...post,
+  slug: typeof post.slug === 'string' ? post.slug : post.slug?.current || '',
+  image:
+    typeof post.image === 'string'
+      ? post.image
+      : post.image?.asset?.url || '',
+  author: post.author
+    ? {
+        name: post.author.name || 'Unknown',
+        role: post.author.role || '',
+        avatar:
+          typeof post.author.avatar === 'string'
+            ? post.author.avatar
+            : post.author.avatar?.asset?.url || '',
+        date: post.author.date || '',
+      }
+    : { name: 'Unknown', role: '', avatar: '', date: '' },
+}));
+---
+
+<BlogGrid posts={safePosts} column={column} className={`mt-8 ${className}`} />

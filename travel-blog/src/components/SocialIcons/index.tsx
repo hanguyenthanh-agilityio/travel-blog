@@ -1,7 +1,7 @@
 import React, { type FC } from 'react';
 
 // Components
-import { Link, SanityImage } from '@/components';
+import { SanityImage } from '@/components';
 
 // Libs
 import { cn } from '@/lib/utils';
@@ -20,8 +20,8 @@ interface Props {
 const SocialIcons: FC<Props> = ({
   socials,
   containerClassName,
-  linkClassName,
-  dark = false,
+  // linkClassName,
+  // dark = false,
 }) => {
   return (
     <ul
@@ -38,7 +38,7 @@ const SocialIcons: FC<Props> = ({
 
         return (
           <li key={social.href} className="list-none">
-            <Link
+            {/* <Link
               href={social.href}
               external
               aria-label={`Visit our ${label} profile`}
@@ -51,22 +51,19 @@ const SocialIcons: FC<Props> = ({
                 linkClassName,
                 social.linkClassName,
               )}
-            >
-              {iconUrl ? (
-                <SanityImage
-                  node={iconUrl}
-                  alt={`${label} icon`}
-                  width={24}
-                  height={24}
-                  className="w-6 h-6 object-contain"
-                />
-              ) : (
-                <span
-                  className="w-6 h-6 block bg-gray-300"
-                  aria-hidden="true"
-                />
-              )}
-            </Link>
+            > */}
+            {iconUrl ? (
+              <SanityImage
+                node={iconUrl}
+                alt={`${label} icon`}
+                width={24}
+                height={24}
+                className="w-6 h-6 object-contain"
+              />
+            ) : (
+              <span className="w-6 h-6 block bg-gray-300" aria-hidden="true" />
+            )}
+            {/* </Link> */}
           </li>
         );
       })}

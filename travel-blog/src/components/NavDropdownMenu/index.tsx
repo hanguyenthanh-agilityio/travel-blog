@@ -7,7 +7,8 @@ import { ArrowIcon } from '@/icons';
 import { Button } from '@/ui/button';
 
 // Components
-import Link from '@/components/Link';
+// import Link from '@/components/Link';
+
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -48,13 +49,13 @@ const NavDropdownMenu: React.FC<NavDropdownMenuProps> = ({ label, items }) => {
       >
         {items.map((item) => (
           <DropdownMenuItem key={item.href} asChild>
-            <Link
+            {/* <Link
               href={item.href}
               classes="flex items-center p-2 hover:text-accent rounded-md"
               aria-label={`Go to ${item.text} page`}
-            >
-              {item.text}
-            </Link>
+            > */}
+            {item.text}
+            {/* </Link> */}
           </DropdownMenuItem>
         ))}
       </DropdownMenuContent>

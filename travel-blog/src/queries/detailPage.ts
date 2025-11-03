@@ -22,13 +22,11 @@ export const postSlugsQuery = `
 `;
 
 export const socialsQuery = `
-*[_type == "social"] | order(order asc) {
-  label,
-  href,
-  icon {
-    asset->{
-      url
+  *[_type == "social"] | order(order asc) {
+    label,
+    href,
+    icon {
+      asset->{ url }
     }
   }
-}
 `;

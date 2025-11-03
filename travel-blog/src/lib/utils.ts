@@ -5,10 +5,11 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-export function generateSlug(input: string): string {
+export function generateSlug(input: unknown): string {
+  if (typeof input !== 'string') return '';
   return input
     .toLowerCase()
     .trim()
-    .replace(/[^\w\s-]/g, '')
-    .replace(/\s+/g, '-');
+    .replace(/\s+/g, '-')
+    .replace(/[^\w-]+/g, '');
 }

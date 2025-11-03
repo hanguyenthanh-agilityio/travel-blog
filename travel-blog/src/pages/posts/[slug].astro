@@ -11,16 +11,23 @@ import type { PostDetailType, SocialIconType } from '@/types/detail';
 
 // Static paths
 export async function getStaticPaths() {
-  const { data } = await loadQuery<{ slug: string }[]>({
+  const { data } = await loadQuery<{ slug: string | { current: string } }[]>({
     query: postSlugsQuery,
   });
 
   return data.map((post) => ({
-    params: { slug: post.slug },
+    params: { slug: typeof post.slug === 'string' ? post.slug : post.slug.current },
   }));
 }
 
-const { slug } = Astro.params;
+// --- Params
+const { slug: rawSlug } = Astro.params as { slug: string | { current: string } };
+
+const slug = typeof rawSlug === 'string' ? rawSlug : rawSlug?.current;
+
+if (!slug) {
+  throw new Error('Invalid slug parameter');
+}
 
 // --- Fetch post detail
 let post: PostDetailType | null = null;
