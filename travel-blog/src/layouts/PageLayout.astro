@@ -34,7 +34,7 @@ try {
   const { data } = await loadQuery<HeaderType>({ query: headerQuery });
   headerData = data;
 } catch {
-  console.error('Failed to fetch header data');
+  headerData = null;
 }
 
 // --- Footer data
@@ -43,13 +43,11 @@ try {
   const { data } = await loadQuery<FooterType>({ query: footerQuery });
   footerData = data;
 } catch {
-  console.error('Failed to fetch footer data');
+  footerData = null;
 }
 
 const { logo, menuItems = [], otherPages = [] } = headerData ?? {};
 const { contactItems = [], socials = [], bottomLinks = [], copyright } = footerData ?? {};
-
-console.log(socials);
 
 ---
 

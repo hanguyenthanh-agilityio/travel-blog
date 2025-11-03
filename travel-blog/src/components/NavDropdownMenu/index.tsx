@@ -20,40 +20,46 @@ interface ItemProps {
   text: string;
 }
 
-const NavDropdownMenu = ({
-  label,
-  items,
-}: {
+interface NavDropdownMenuProps {
   label: string;
   items: ItemProps[];
-}) => (
-  <DropdownMenu>
-    <DropdownMenuTrigger asChild>
-      <Button
-        type="button"
-        variant="outline"
-        aria-label={`Open ${label} menu`}
-        className="border-none p-0 shadow-none text-base font-normal hover:bg-[none] hover:text-accent cursor-pointer"
-      >
-        {label}
-        <ArrowIcon />
-      </Button>
-    </DropdownMenuTrigger>
+}
 
-    <DropdownMenuContent>
-      {items.map((item) => (
-        <DropdownMenuItem key={item.href} asChild>
-          <Link
-            href={item.href}
-            classes="flex flex-col p-1 hover:text-accent"
-            aria-label={`Go to ${item.text} page`}
-          >
-            {item.text}
-          </Link>
-        </DropdownMenuItem>
-      ))}
-    </DropdownMenuContent>
-  </DropdownMenu>
-);
+const NavDropdownMenu: React.FC<NavDropdownMenuProps> = ({ label, items }) => {
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button
+          type="button"
+          variant="outline"
+          aria-label={`Open ${label} menu`}
+          className="border-none p-0 shadow-none text-base font-normal hover:bg-[none] hover:text-accent cursor-pointer flex items-center gap-1"
+        >
+          {label}
+          <ArrowIcon />
+        </Button>
+      </DropdownMenuTrigger>
+
+      <DropdownMenuContent
+        side="bottom"
+        align="start"
+        sideOffset={4}
+        className="absolute z-50 overflow-auto max-h-[calc(100vh-80px)] w-48 bg-card rounded-md shadow-lg p-1"
+      >
+        {items.map((item) => (
+          <DropdownMenuItem key={item.href} asChild>
+            <Link
+              href={item.href}
+              classes="flex items-center p-2 hover:text-accent rounded-md"
+              aria-label={`Go to ${item.text} page`}
+            >
+              {item.text}
+            </Link>
+          </DropdownMenuItem>
+        ))}
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
+};
 
 export default NavDropdownMenu;

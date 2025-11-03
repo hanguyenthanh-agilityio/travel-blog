@@ -36,7 +36,7 @@ const BlogCard: React.FC<BlogCardProps> = ({
       <div
         data-testid="blog-card"
         className={cn(
-          'h-full overflow-hidden rounded-xl bg-transparent transition-transform duration-300 ease-in-out hover:shadow-lg hover:-translate-y-1 hover:scale-[1.01]',
+          'h-auto overflow-hidden rounded-xl bg-transparent transition-transform duration-300 ease-in-out hover:shadow-lg hover:-translate-y-1 hover:scale-[1.01]',
           isHorizontal ? 'flex flex-col md:flex-row gap-4' : 'flex flex-col',
         )}
       >

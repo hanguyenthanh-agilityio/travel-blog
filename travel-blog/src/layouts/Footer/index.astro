@@ -32,13 +32,17 @@ const { logo, contactItems = [], socials = [], bottomLinks = [], copyright = [] 
     <!-- Brand Section -->
     <div class="pr-20 xl:pr-0">
       <Link href={HOME_PAGE} aria-label="Go to homepage">
-          <SanityImage
+          {logo?.asset?.url ? (
+             <SanityImage
             node={logo?.asset?.url}
             alt="Blog logo"
             width={280}
             height={100}
             className="object-contain transition-transform duration-200 hover:scale-105"
           />
+          ) : (
+            <span class="w-28 h-10 bg-gray-200" role="img" aria-label="Blog logo" />
+          )}
         </Link>
       <SocialIcons socials={socials} />
     </div>
