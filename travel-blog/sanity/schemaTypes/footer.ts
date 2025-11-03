@@ -57,6 +57,14 @@ export const footerType = defineType({
       type: 'array',
       of: [{ type: 'reference', to: [{ type: 'social' }] }],
     }),
+    // Copyright
+    defineField({
+      name: 'copyright',
+      title: 'Copyright Text',
+      type: 'array',
+      of: [{ type: 'block' }],
+      description: '© 2025 My Travel Blog',
+    }),
   ],
   preview: {
     select: {

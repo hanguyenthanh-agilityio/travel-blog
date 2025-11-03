@@ -1,5 +1,3 @@
-// src/sanity/queries/posts.ts
-
 import type { Post, Author } from '../../sanity.types';
 
 export const allPostsQuery = `

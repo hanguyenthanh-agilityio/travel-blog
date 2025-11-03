@@ -50,4 +50,5 @@ export interface FooterType {
     text: string;
     href: string;
   }[];
+  copyright?: { children?: { text?: string }[] };
 }

@@ -1,6 +1,6 @@
 ---
 // Components
-import { SocialIcons, ContactInfo, SanityImage } from '@/components';
+import { SocialIcons, ContactInfo, SanityImage, PortableText, Link } from '@/components';
 
 // Layouts
 import FooterLinks from './FooterLinks/index.astro'
@@ -8,8 +8,6 @@ import FooterLinks from './FooterLinks/index.astro'
 // Constants
 import { HOME_PAGE } from '@/constants/route';
 
-
-const year = new Date().getFullYear();
 
 interface Props {
   logo?: { asset?: { url?: string } };
@@ -20,9 +18,10 @@ interface Props {
     icon?: string | { asset?: { url?: string } };
   }[];
   bottomLinks?: {text: string; href: string}[];
+  copyright?: { children?: { text?: string }[] };
 }
 
-const { logo, contactItems = [], socials = [], bottomLinks = [] } = Astro.props;
+const { logo, contactItems = [], socials = [], bottomLinks = [], copyright = [] } = Astro.props;
 ---
 
 <footer class="container mx-auto bg-white text-gray-800 px-4">
@@ -32,17 +31,14 @@ const { logo, contactItems = [], socials = [], bottomLinks = [] } = Astro.props;
   >
     <!-- Brand Section -->
     <div class="pr-20 xl:pr-0">
-      <a href={HOME_PAGE} aria-label="Go to homepage">
-          {logo?.asset?.url && (
-            <SanityImage
-              node={logo.asset.url}
-              width={280}
-              height={100}
-              className="object-contain transition-transform duration-200 hover:scale-105"
-            />
-          )}
-        </a>
-        
+      <Link href={HOME_PAGE} aria-label="Go to homepage">
+          <SanityImage
+            node={logo?.asset?.url}
+            width={280}
+            height={100}
+            className="object-contain transition-transform duration-200 hover:scale-105"
+          />
+        </Link>
       <SocialIcons socials={socials} />
     </div>
 
@@ -57,9 +53,7 @@ const { logo, contactItems = [], socials = [], bottomLinks = [] } = Astro.props;
     class="flex flex-col lg:flex-row justify-between lg:items-center text-sm pt-0 pb-6 lg:py-10 text-secondary gap-4 lg:gap-0"
   >
     <!-- Copyright -->
-    <p class="order-2 lg:order-1 font-medium">
-      &copy; {year} Blog Template. All rights reserved.
-    </p>
+    <PortableText portableText={copyright} />
 
     <!-- Bottom Links -->
     <FooterLinks bottomLinks={bottomLinks} />

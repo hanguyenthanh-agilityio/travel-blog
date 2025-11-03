@@ -12,6 +12,7 @@ export const footerQuery = `
     label,
     href,
     "icon": icon.asset->url
-  }
+  },
+  copyright
 }
 `;
