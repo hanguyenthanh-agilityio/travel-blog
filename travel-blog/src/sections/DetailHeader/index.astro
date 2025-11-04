@@ -1,5 +1,5 @@
 ---
-import { PortableText } from '@/components';
+import { Heading } from '@/components/Heading';
 import { AuthorCard } from '@/sections';
 
 interface Props {
@@ -15,7 +15,7 @@ interface Props {
 const { title, author } = Astro.props;
 ---
 
-<header class="md:px-8 text-center">
+<header class="md:px-8 text-center mb-4">
   {
     author && (
       <AuthorCard
@@ -30,7 +30,7 @@ const { title, author } = Astro.props;
     )
   }
 
-  <PortableText portableText={title} />
+  <Heading as="h1" size="xl">{title}</Heading>
 
   {
     author?.date && (

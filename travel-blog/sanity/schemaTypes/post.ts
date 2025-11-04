@@ -8,7 +8,7 @@ export const postType = defineType({
     defineField({
       name: 'title',
       title: 'Title',
-      type: 'blockContent',
+      type: 'string',
       validation: (Rule) => Rule.required(),
     }),
     defineField({
