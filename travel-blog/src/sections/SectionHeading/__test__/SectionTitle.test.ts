@@ -3,12 +3,12 @@ import { describe, it, expect } from 'vitest';
 
 // Components
 
-describe('HeadingBlock', () => {
+describe('SectionHeading', () => {
   it.skip('renders title only', async () => {
     const container = await AstroContainer.create();
 
     const props = { title: 'Popular Posts' };
-    const result = await container.renderToString(HeadingBlock, { props });
+    const result = await container.renderToString(SectionHeading, { props });
 
     expect(result).toContain('<h2');
     expect(result).toContain('Popular Posts');
@@ -24,7 +24,7 @@ describe('HeadingBlock', () => {
       subTitle:
         'Discover how innovation and creativity drive meaningful change',
     };
-    const result = await container.renderToString(HeadingBlock, { props });
+    const result = await container.renderToString(SectionHeading, { props });
 
     expect(result).toContain('<h2');
     expect(result).toContain('Trending Posts');
