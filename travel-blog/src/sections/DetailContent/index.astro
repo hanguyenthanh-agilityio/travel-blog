@@ -46,13 +46,7 @@ const { image, excerpt, content } = Astro.props
           <h2 id={headingId} class="text-lg font-semibold mt-6">
             {section.country}
           </h2>
-          {Array.isArray(section.items) && (
-            <ul class="list-disc ml-6 text-base space-y-1">
-              {section.items.map((item) => (
-                <li>{item}</li>
-              ))}
-            </ul>
-          )}
+          {section.items && <PortableText portableText={section.items} />}
         </section>
       )
     })}

@@ -2,7 +2,8 @@
 import { PortableText as PortableTextInternal } from 'astro-portabletext';
 import { SanityImage } from '@/components';
 import { BlockH2, BlockH3, BlockNormal } from '@/components/Blocks';
-import {MarkStrong, MarkLink} from "@/components/Marks"
+import { MarkStrong, MarkLink } from "@/components/Marks";
+import List from '@/components/List/index.astro';
 
 const { portableText } = Astro.props;
 
@@ -13,15 +14,18 @@ const components = {
   block: {
     h2: BlockH2,
     h3: BlockH3,
-    normal: BlockNormal
+    normal: BlockNormal,
+  },
+  list: {
+    bullet: List,
+    number: List,
   },
   marks: {
     strong: MarkStrong,
-    link: MarkLink
-  }
+    link: MarkLink,
+  },
 };
 ---
-
 <div class="prose prose-neutral lg:prose-lg max-w-none">
   <PortableTextInternal value={portableText} components={components} />
 </div>
