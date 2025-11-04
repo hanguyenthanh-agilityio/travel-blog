@@ -2,6 +2,7 @@
 import { Link, SanityImage } from '@/components';
 import { AuthorCard } from '@/sections';
 import { cn } from '@/lib/utils';
+import { Heading } from '@/components/Heading';
 
 interface Author {
   name: string;
@@ -30,11 +31,11 @@ const {
   titleClassName = '',
 } = Astro.props;
 
-const postSlug =
-  typeof slug === 'string' ? slug : slug?.current || '';
+const postSlug = typeof slug === 'string' ? slug : slug?.current || '';
 
 const isHorizontal = variant === 'horizontal';
 ---
+
 <Link href={`/posts/${postSlug}`} aria-label={title}>
   <div
     data-testid="blog-card"
@@ -44,35 +45,42 @@ const isHorizontal = variant === 'horizontal';
     )}
   >
     <!-- Image -->
-    {image && (
-      <SanityImage
-        node={image}
-        alt={title}
-        className={cn(
-          'object-cover rounded-xl w-full',
-          isHorizontal && 'md:w-1/2 max-h-blog-md',
-          className,
-        )}
-        loading="lazy"
-        client:idle
-      />
-    )}
+    {
+      image && (
+        <SanityImage
+          node={image}
+          alt={title}
+          className={cn(
+            'object-cover rounded-xl w-full',
+            isHorizontal && 'md:w-1/2 max-h-blog-md',
+            className,
+          )}
+          loading="lazy"
+          client:idle
+        />
+      )
+    }
 
     <!-- Content -->
     <div
       class={cn(
-        'flex flex-col justify-between px-2',
+        'flex flex-col justify-between px-2 gap-8',
         isHorizontal ? 'flex-1 py-4 flex flex-col justify-between' : 'py-4',
         titleClassName,
       )}
     >
-      <h3 class="text-lg md:text-xl font-bold mb-4 line-clamp-2">
-        {title}
-      </h3>
+      <Heading>{title}</Heading>
 
-      {author && (
-        <AuthorCard {...author} classAvatar="w-10 h-10" role="true" client:visible />
-      )}
+      {
+        author && (
+          <AuthorCard
+            {...author}
+            classAvatar="w-10 h-10"
+            role="true"
+            client:visible
+          />
+        )
+      }
     </div>
   </div>
 </Link>

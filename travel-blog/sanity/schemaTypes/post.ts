@@ -23,8 +23,7 @@ export const postType = defineType({
     defineField({
       name: 'excerpt',
       title: 'Excerpt / Summary',
-      type: 'text',
-      rows: 3,
+      type: 'blockContent',
     }),
     defineField({
       name: 'image',
