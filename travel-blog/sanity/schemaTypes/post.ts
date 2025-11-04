@@ -8,7 +8,7 @@ export const postType = defineType({
     defineField({
       name: 'title',
       title: 'Title',
-      type: 'string',
+      type: 'blockContent',
       validation: (Rule) => Rule.required(),
     }),
     defineField({
@@ -23,8 +23,7 @@ export const postType = defineType({
     defineField({
       name: 'excerpt',
       title: 'Excerpt / Summary',
-      type: 'text',
-      rows: 3,
+      type: 'blockContent',
     }),
     defineField({
       name: 'image',

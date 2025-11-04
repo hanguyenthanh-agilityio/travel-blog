@@ -8,7 +8,7 @@ export const contentSectionType = defineType({
     defineField({
       name: 'country',
       title: 'Country / Region',
-      type: 'string',
+      type: 'blockContent',
     }),
     defineField({
       name: 'items',
