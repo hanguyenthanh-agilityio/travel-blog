@@ -1,13 +1,18 @@
 ---
 // Components
-import { SocialIcons, ContactInfo, SanityImage, PortableText, Link } from '@/components';
+import {
+  SocialIcons,
+  ContactInfo,
+  SanityImage,
+  PortableText,
+  Link,
+} from '@/components';
 
 // Layouts
-import FooterLinks from './FooterLinks/index.astro'
+import FooterLinks from './FooterLinks/index.astro';
 
 // Constants
 import { HOME_PAGE } from '@/constants/route';
-
 
 interface Props {
   logo?: { asset?: { url?: string } };
@@ -17,11 +22,17 @@ interface Props {
     label?: string;
     icon?: string | { asset?: { url?: string } };
   }[];
-  bottomLinks?: {text: string; href: string}[];
+  bottomLinks?: { text: string; href: string }[];
   copyright?: { children?: { text?: string }[] };
 }
 
-const { logo, contactItems = [], socials = [], bottomLinks = [], copyright = [] } = Astro.props;
+const {
+  logo,
+  contactItems = [],
+  socials = [],
+  bottomLinks = [],
+  copyright = [],
+} = Astro.props;
 ---
 
 <footer class="container mx-auto bg-white text-gray-800 px-4">
@@ -32,18 +43,24 @@ const { logo, contactItems = [], socials = [], bottomLinks = [], copyright = [] 
     <!-- Brand Section -->
     <div class="pr-20 xl:pr-0">
       <Link href={HOME_PAGE} aria-label="Go to homepage">
-          {logo?.asset?.url ? (
-             <SanityImage
-            node={logo?.asset?.url}
-            alt="Blog logo"
-            width={280}
-            height={100}
-            className="object-contain transition-transform duration-200 hover:scale-105"
-          />
+        {
+          logo?.asset?.url ? (
+            <SanityImage
+              node={logo?.asset?.url}
+              alt="Blog logo"
+              width={280}
+              height={100}
+              className="object-contain transition-transform duration-200 hover:scale-105"
+            />
           ) : (
-            <span class="w-28 h-10 bg-gray-200" role="img" aria-label="Blog logo" />
-          )}
-        </Link>
+            <span
+              class="w-28 h-10 bg-gray-200"
+              role="img"
+              aria-label="Blog logo"
+            />
+          )
+        }
+      </Link>
       <SocialIcons socials={socials} />
     </div>
 
