@@ -9,3 +9,4 @@ export { default as SheetMenu } from './SheetMenu';
 export { default as SocialIcons } from './SocialIcons/index.astro';
 export { default as Link } from './Link/index.astro';
 export { default as SheetContent } from './SheetMenu/SheetContent';
+export { default as Heading } from './Heading';

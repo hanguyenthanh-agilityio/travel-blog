@@ -1,9 +1,20 @@
 ---
+// Layouts
 import PageLayout from '@/layouts/PageLayout.astro';
+
+// Components
 import { Hero } from '@/components';
-import {PopularPosts, HeadingBlock, TrendingPosts} from '@/sections'
+
+// Sections
+import { PopularPosts, SectionHeading, TrendingPosts } from '@/sections';
+
+// Types
 import type { HomePageType } from '@/types/home';
+
+// Queries
 import { homePageQuery } from '@/queries/homePage';
+
+// Sanity
 import { loadQuery } from '@/sanity/load-query';
 
 let homePage: HomePageType | null = null;
@@ -24,12 +35,12 @@ const { heroPost, popularPosts, trendingPosts } = homePage;
   <Hero {...heroPost} />
 
   <section class="container mx-auto mb-16 md:mb-24">
-    <HeadingBlock heading={popularPosts.heading} />
+    <SectionHeading heading={popularPosts.heading} />
     <PopularPosts posts={popularPosts.posts} />
   </section>
 
   <section class="container mx-auto flex flex-col mb-20">
-    <HeadingBlock heading={trendingPosts.heading} />
+    <SectionHeading heading={trendingPosts.heading} />
     <TrendingPosts posts={trendingPosts.posts} />
   </section>
 </PageLayout>

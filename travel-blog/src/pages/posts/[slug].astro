@@ -1,13 +1,22 @@
 ---
 // Layouts
-import PageLayout from '@/layouts/PageLayout.astro'
-import { postDetailQuery, postSlugsQuery, socialsQuery } from '@/queries/detailPage';
+import PageLayout from '@/layouts/PageLayout.astro';
+
+// Sanity
 import { loadQuery } from '@/sanity/load-query';
 
-// Sections
-import { DetailHeader, DetailSidebar, DetailContent} from '@/sections'
-import type { PostDetailType, SocialIconType } from '@/types/detail';
+// Queries
+import {
+  postDetailQuery,
+  postSlugsQuery,
+  socialsQuery,
+} from '@/queries/detailPage';
 
+// Sections
+import { ArticleBody, ArticleHeader, ArticleSidebar } from '@/sections';
+
+// Types
+import type { PostDetailType, SocialIconType } from '@/types/detail';
 
 // Static paths
 export async function getStaticPaths() {
@@ -16,12 +25,16 @@ export async function getStaticPaths() {
   });
 
   return data.map((post) => ({
-    params: { slug: typeof post.slug === 'string' ? post.slug : post.slug.current },
+    params: {
+      slug: typeof post.slug === 'string' ? post.slug : post.slug.current,
+    },
   }));
 }
 
 // --- Params
-const { slug: rawSlug } = Astro.params as { slug: string | { current: string } };
+const { slug: rawSlug } = Astro.params as {
+  slug: string | { current: string };
+};
 
 const slug = typeof rawSlug === 'string' ? rawSlug : rawSlug?.current;
 
@@ -55,20 +68,23 @@ try {
 } catch {
   socials = [];
 }
-
 ---
 
 <PageLayout>
   <article class="max-w-3xl mx-auto py-8">
     <!-- Header -->
-    <DetailHeader title={post.title} author={post.author} />
+    <ArticleHeader title={post.title} author={post.author} />
 
     <!-- Main body -->
     <div class="lg:relative">
       <!-- Social icons -->
-      <DetailSidebar socials={socials} />
+      <ArticleSidebar socials={socials} />
 
-      <DetailContent image={post.image} excerpt={post.excerpt} content={post.content} />
+      <ArticleBody
+        image={post.image}
+        excerpt={post.excerpt}
+        content={post.content}
+      />
     </div>
   </article>
 </PageLayout>

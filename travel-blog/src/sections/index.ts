@@ -1,9 +1,9 @@
 export { default as AuthorCard } from './AuthorCard';
 export { default as BlogCard } from './BlogCard/index.astro';
 export { default as BlogGrid } from './BlogGrid/index.astro';
-export { default as HeadingBlock } from './HeadingBlock/index.astro';
+export { default as SectionHeading } from './SectionHeading/index.astro';
 export { default as TrendingPosts } from './TrendingPosts/index.astro';
 export { default as PopularPosts } from './PopularPosts/index.astro';
-export { default as DetailHeader } from './DetailHeader/index.astro';
-export { default as DetailSidebar } from './DetailSidebar/index.astro';
-export { default as DetailContent } from './DetailContent/index.astro';
+export { default as ArticleHeader } from './ArticleHeader/index.astro';
+export { default as ArticleSidebar } from './ArticleSidebar/index.astro';
+export { default as ArticleBody } from './ArticleBody/index.astro';
