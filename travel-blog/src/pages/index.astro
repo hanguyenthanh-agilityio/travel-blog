@@ -17,6 +17,12 @@ import { homePageQuery } from '@/queries/homePage';
 // Sanity
 import { loadQuery } from '@/sanity/load-query';
 
+import { URL } from 'node:url';
+
+const url = new URL(Astro.request.url);
+const currentPage = Number(url.searchParams.get('page')) || 1;
+const POSTS_PER_PAGE = 6;
+
 let homePage: HomePageType | null = null;
 
 try {
@@ -29,6 +35,14 @@ try {
 if (!homePage) throw new Error('Not Found');
 
 const { heroPost, popularPosts, trendingPosts } = homePage;
+
+// Slice trending posts for pagination
+const totalPosts = trendingPosts.posts.length;
+const totalPages = Math.ceil(totalPosts / POSTS_PER_PAGE);
+const paginatedPosts = trendingPosts.posts.slice(
+  (currentPage - 1) * POSTS_PER_PAGE,
+  currentPage * POSTS_PER_PAGE,
+);
 ---
 
 <PageLayout>
@@ -39,8 +53,12 @@ const { heroPost, popularPosts, trendingPosts } = homePage;
     <PopularPosts posts={popularPosts.posts} />
   </section>
 
-  <section class="container mx-auto flex flex-col mb-20">
+  <section id="trending" class="container mx-auto flex flex-col mb-20">
     <SectionHeading heading={trendingPosts.heading} />
-    <TrendingPosts posts={trendingPosts.posts} />
+    <TrendingPosts
+      posts={paginatedPosts}
+      currentPage={currentPage}
+      totalPages={totalPages}
+    />
   </section>
 </PageLayout>
