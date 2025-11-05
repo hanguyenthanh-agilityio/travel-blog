@@ -6,7 +6,7 @@ import PageLayout from '@/layouts/PageLayout.astro';
 import { Hero } from '@/components';
 
 // Sections
-import { PopularPosts, SectionHeading, TrendingPosts } from '@/sections';
+import { PopularPosts, TrendingPosts } from '@/sections';
 
 // Types
 import type { HomePageType } from '@/types/home';
@@ -48,17 +48,12 @@ const paginatedPosts = trendingPosts.posts.slice(
 <PageLayout>
   <Hero {...heroPost} />
 
-  <section class="container mx-auto mb-16 md:mb-24">
-    <SectionHeading heading={popularPosts.heading} />
-    <PopularPosts posts={popularPosts.posts} />
-  </section>
+  <PopularPosts heading={popularPosts.heading} posts={popularPosts.posts} />
 
-  <section id="trending" class="container mx-auto flex flex-col mb-20">
-    <SectionHeading heading={trendingPosts.heading} />
-    <TrendingPosts
-      posts={paginatedPosts}
-      currentPage={currentPage}
-      totalPages={totalPages}
-    />
-  </section>
+  <TrendingPosts
+    heading={trendingPosts.heading}
+    posts={paginatedPosts}
+    currentPage={currentPage}
+    totalPages={totalPages}
+  />
 </PageLayout>

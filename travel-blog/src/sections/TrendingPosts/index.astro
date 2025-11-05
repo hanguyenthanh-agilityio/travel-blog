@@ -1,9 +1,10 @@
 ---
-import { BlogGrid } from '@/sections';
+import { BlogGrid, SectionHeading } from '@/sections';
 import type { PostSummary } from '@/lib/schema';
 import { Paginator } from '@/components';
 
 interface Props {
+  heading?: any;
   posts: PostSummary[];
   column?: number;
   className?: string;
@@ -12,6 +13,7 @@ interface Props {
 }
 
 const {
+  heading,
   posts,
   column = 3,
   className = '',
@@ -38,5 +40,11 @@ const safePosts = posts.map((post) => ({
 }));
 ---
 
-<BlogGrid posts={safePosts} column={column} className={`mt-8 ${className}`} />
-<Paginator currentPage={currentPage} totalPages={totalPages} client:idle />
+<section id="trending" class="container mx-auto flex flex-col mb-20">
+  <SectionHeading heading={heading} />
+
+  <BlogGrid posts={safePosts} column={column} className={`mt-8 ${className}`} />
+
+  <!-- Paginator -->
+  <Paginator currentPage={currentPage} totalPages={totalPages} client:idle />
+</section>
