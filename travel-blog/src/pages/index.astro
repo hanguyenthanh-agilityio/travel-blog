@@ -6,7 +6,7 @@ import PageLayout from '@/layouts/PageLayout.astro';
 import { Hero } from '@/components';
 
 // Sections
-import { PopularPosts, SectionHeading, TrendingPosts } from '@/sections';
+import { PopularPosts, TrendingPosts } from '@/sections';
 
 // Types
 import type { HomePageType } from '@/types/home';
@@ -16,6 +16,12 @@ import { homePageQuery } from '@/queries/homePage';
 
 // Sanity
 import { loadQuery } from '@/sanity/load-query';
+
+import { URL } from 'node:url';
+
+const url = new URL(Astro.request.url);
+const currentPage = Number(url.searchParams.get('page')) || 1;
+const POSTS_PER_PAGE = 6;
 
 let homePage: HomePageType | null = null;
 
@@ -29,18 +35,25 @@ try {
 if (!homePage) throw new Error('Not Found');
 
 const { heroPost, popularPosts, trendingPosts } = homePage;
+
+// Slice trending posts for pagination
+const totalPosts = trendingPosts.posts.length;
+const totalPages = Math.ceil(totalPosts / POSTS_PER_PAGE);
+const paginatedPosts = trendingPosts.posts.slice(
+  (currentPage - 1) * POSTS_PER_PAGE,
+  currentPage * POSTS_PER_PAGE,
+);
 ---
 
 <PageLayout>
   <Hero {...heroPost} />
 
-  <section class="container mx-auto mb-16 md:mb-24">
-    <SectionHeading heading={popularPosts.heading} />
-    <PopularPosts posts={popularPosts.posts} />
-  </section>
+  <PopularPosts heading={popularPosts.heading} posts={popularPosts.posts} />
 
-  <section class="container mx-auto flex flex-col mb-20">
-    <SectionHeading heading={trendingPosts.heading} />
-    <TrendingPosts posts={trendingPosts.posts} />
-  </section>
+  <TrendingPosts
+    heading={trendingPosts.heading}
+    posts={paginatedPosts}
+    currentPage={currentPage}
+    totalPages={totalPages}
+  />
 </PageLayout>

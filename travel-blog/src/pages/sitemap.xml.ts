@@ -1,7 +1,6 @@
-// src/pages/sitemap.xml.ts
 import type { APIRoute } from 'astro';
 
-// 🚀 Fetch posts từ Sanity
+// Fetch posts from Sanity
 const SANITY_API_URL = `https://d5zc7aiu.api.sanity.io/v2024-05-15/data/query/production`;
 
 export const GET: APIRoute = async () => {
