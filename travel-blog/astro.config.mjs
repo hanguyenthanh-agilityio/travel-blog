@@ -4,12 +4,15 @@ import tailwindcss from '@tailwindcss/vite';
 import critters from 'astro-critters';
 import sanity from '@sanity/astro';
 import dotenv from 'dotenv';
-import vercel from '@astrojs/vercel/serverless';
+import vercel from '@astrojs/vercel';
 import viteCompression from 'vite-plugin-compression';
+
+import sitemap from '@astrojs/sitemap';
 
 dotenv.config();
 
 export default defineConfig({
+  site: 'https://travel-blog-nine-mu.vercel.app',
   integrations: [
     react(),
     critters({
@@ -23,6 +26,14 @@ export default defineConfig({
       useCdn: true,
       studioBasePath: '/studio',
       stega: { studioUrl: '/studio' },
+    }),
+    sitemap({
+      filter: (page) => !page.includes('/draft'),
+      entryLimit: 45000,
+      serialize: (item) => ({
+        ...item,
+        lastmod: new Date().toISOString(),
+      }),
     }),
   ],
   vite: {
