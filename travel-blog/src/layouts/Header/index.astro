@@ -1,45 +1,47 @@
 ---
 // Components
-import { Navigation, SanityImage, SheetMenu } from '@/components';
-
-// Constants
-import { HOME_PAGE } from '@/constants/route';
+import { Link, Navigation, SanityImage, SheetMenu } from '@/components';
+import { HOME_PAGE } from '@/constants';
 
 interface Props {
-  logo?: { asset?: { url?: string } };
+  logo?: {
+    image?: { asset?: { url?: string } };
+    link?: string;
+  };
   menuItems?: { text: string; href: string }[];
   otherPages?: { text: string; href: string }[];
 }
 
-const { logo, menuItems = [], otherPages = [] } = Astro.props;
+const { logo, menuItems = [] } = Astro.props;
+const logoHref = logo?.link || HOME_PAGE;
 ---
 
 <header class="w-full bg-white shadow-sm fixed top-0 z-50" role="banner">
   <div class="container mx-auto px-4 py-4 flex items-center justify-between">
     <!-- Logo/Brand -->
     <div class="flex items-center">
-      <a href={HOME_PAGE} aria-label="Go to homepage">
+      <Link href={logoHref} aria-label="Go to homepage">
         {
-          logo?.asset?.url && (
+          logo?.image?.asset?.url && (
             <SanityImage
-              node={logo.asset.url}
+              node={logo.image.asset.url}
               width={193}
               height={40}
               className="w-auto h-8 md:h-10 object-contain transition-transform duration-200 hover:scale-105"
             />
           )
         }
-      </a>
+      </Link>
     </div>
 
     <!-- Desktop Navigation -->
     <nav class="hidden md:block" aria-label="Main navigation" role="navigation">
-      <Navigation {menuItems} {otherPages} />
+      <Navigation {menuItems} />
     </nav>
 
     <!-- Mobile Menu -->
     <div class="md:hidden" aria-label="Mobile menu">
-      <SheetMenu {menuItems} {otherPages} client:load />
+      <SheetMenu {menuItems} client:load />
     </div>
   </div>
 </header>

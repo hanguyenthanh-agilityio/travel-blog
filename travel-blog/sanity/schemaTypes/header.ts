@@ -8,9 +8,31 @@ export const HeaderType = defineType({
     defineField({
       name: 'logo',
       title: 'Logo',
-      type: 'image',
-      options: { hotspot: true },
+      type: 'object',
+      fields: [
+        defineField({
+          name: 'image',
+          title: 'Image',
+          type: 'image',
+          options: { hotspot: true },
+        }),
+        defineField({
+          name: 'text',
+          title: 'Text (Optional)',
+          type: 'array',
+          of: [{ type: 'block' }],
+          description:
+            'Use this if you prefer text logo instead of an image (supports marks, strong, links...)',
+        }),
+        defineField({
+          name: 'link',
+          title: 'Logo Link',
+          type: 'string',
+          description: 'Destination when clicking the logo (default: /)',
+        }),
+      ],
     }),
+
     defineField({
       name: 'menuItems',
       title: 'Menu Items',
@@ -25,6 +47,7 @@ export const HeaderType = defineType({
         },
       ],
     }),
+
     defineField({
       name: 'otherPages',
       title: 'Other Pages',
