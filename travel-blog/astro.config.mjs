@@ -7,6 +7,8 @@ import dotenv from 'dotenv';
 import vercel from '@astrojs/vercel';
 import viteCompression from 'vite-plugin-compression';
 
+import robotsTxt from 'astro-robots-txt';
+
 import sitemap from '@astrojs/sitemap';
 
 dotenv.config();
@@ -28,12 +30,20 @@ export default defineConfig({
       stega: { studioUrl: '/studio' },
     }),
     sitemap({
-      filter: (page) => !page.includes('/draft'),
-      entryLimit: 45000,
       serialize: (item) => ({
         ...item,
         lastmod: new Date().toISOString(),
       }),
+    }),
+
+    robotsTxt({
+      policy: [
+        {
+          userAgent: '*',
+          allow: '/',
+        },
+      ],
+      sitemap: 'https://travel-blog-nine-mu.vercel.app',
     }),
   ],
   vite: {
