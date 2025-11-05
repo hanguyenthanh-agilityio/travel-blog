@@ -1,6 +1,12 @@
 export const headerQuery = `
   *[_type == "header"][0]{
-    logo { asset->{url} },
+  logo {
+    image {
+      asset->{url}
+    },
+    text,
+    link
+  },
     menuItems[] {
       text,
       href
