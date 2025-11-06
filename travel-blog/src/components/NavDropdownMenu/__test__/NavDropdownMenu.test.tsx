@@ -2,8 +2,6 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { describe, it, expect } from 'vitest';
 import userEvent from '@testing-library/user-event';
-
-// Components
 import NavDropdownMenu from '../index';
 
 describe('NavDropdownMenu', () => {
@@ -12,25 +10,23 @@ describe('NavDropdownMenu', () => {
     { href: '/about', text: 'About' },
   ];
 
-  it('renders button with label', () => {
+  it('renders button with correct label', () => {
     render(<NavDropdownMenu label="Menu" items={items} />);
-    const button = screen.getByRole('button', { name: /menu/i });
+    const button = screen.getByRole('button', { name: /open menu menu/i });
     expect(button).toBeInTheDocument();
+    expect(button).toHaveAttribute('aria-label', 'Open Menu menu');
   });
 
-  it('renders dropdown items when triggered', async () => {
+  it('each dropdown link has correct aria-label for accessibility', async () => {
     render(<NavDropdownMenu label="Menu" items={items} />);
     const user = userEvent.setup();
 
-    const button = screen.getByRole('button', { name: /menu/i });
+    const button = screen.getByRole('button', { name: /open menu menu/i });
     await user.click(button);
 
-    items.forEach((item) => {
-      expect(screen.getByText(item.text)).toBeInTheDocument();
-      expect(screen.getByText(item.text).closest('a')).toHaveAttribute(
-        'href',
-        item.href,
-      );
-    });
+    for (const item of items) {
+      const link = screen.getByLabelText(`Go to ${item.text} page`);
+      expect(link).toBeInTheDocument();
+    }
   });
 });

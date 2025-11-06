@@ -38,6 +38,7 @@ export default getViteConfig({
         'src/lib/schema.ts',
         'src/constants',
         '.vercel',
+        '.sanity',
       ],
     },
   },
