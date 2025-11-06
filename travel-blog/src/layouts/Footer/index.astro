@@ -14,9 +14,6 @@ import FooterLinks from './FooterLinks/index.astro';
 // Constants
 import { HOME_PAGE } from '@/constants/route';
 
-// Types
-import type { FooterType } from '@/types/home';
-
 interface Props {
   logo?: {
     image?: { asset?: { url?: string } };
@@ -29,7 +26,7 @@ interface Props {
     icon?: string | { asset?: { url?: string } };
   }[];
   bottomLinks?: { text: string; href: string }[];
-  copyright?: FooterType['copyright'];
+  copyright?: { children?: { text?: string }[] };
 }
 
 const {
@@ -37,84 +34,53 @@ const {
   contactItems = [],
   socials = [],
   bottomLinks = [],
-  copyright,
+  copyright = [],
 } = Astro.props;
 ---
 
-<footer class="bg-white text-gray-800 border-t border-gray-100">
-  <div class="container mx-auto px-4 py-10 space-y-10">
-    <!-- === Top Section === -->
-    <section
-      class="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-10"
-      aria-label="Footer main content"
-    >
-      <!-- Brand & Socials -->
-      <div class="flex flex-col items-start gap-6">
-        <Link href={logo?.link || HOME_PAGE} aria-label="Go to homepage">
-          {
-            logo?.image?.asset?.url ? (
-              <SanityImage
-                node={logo.image.asset.url}
-                alt="Blog logo"
-                width={280}
-                height={100}
-                className="object-contain transition-transform duration-200 hover:scale-105"
-              />
-            ) : (
-              <span
-                class="inline-block w-28 h-10 bg-gray-200 rounded-md"
-                role="img"
-                aria-label="Blog logo placeholder"
-              />
-            )
-          }
-        </Link>
-
+<footer class="container mx-auto bg-white text-gray-800 px-4">
+  <!-- Main Footer Content -->
+  <div
+    class="py-10 flex flex-col lg:flex-row justify-between lg:items-center gap-10 lg:gap-0"
+  >
+    <!-- Brand Section -->
+    <div class="pr-20 xl:pr-0">
+      <Link href={HOME_PAGE} aria-label="Go to homepage">
         {
-          socials.length > 0 && (
-            <SocialIcons socials={socials} aria-label="Social media links" />
-          )
-        }
-      </div>
-
-      <!-- Contact Info -->
-      {
-        contactItems.length > 0 && (
-          <address
-            class="not-italic text-sm text-gray-700"
-            aria-label="Contact information"
-          >
-            <ContactInfo items={contactItems} />
-          </address>
-        )
-      }
-    </section>
-
-    <!-- === Bottom Section === -->
-    <section
-      class="flex flex-col lg:flex-row justify-between items-center gap-6 border-t border-gray-100 pt-6"
-      aria-label="Footer bottom links and copyright"
-    >
-      <div class="text-sm text-gray-500">
-        {
-          copyright ? (
-            <PortableText portableText={copyright} />
+          logo?.image?.asset?.url ? (
+            <SanityImage
+              node={logo.image.asset.url}
+              alt="Blog logo"
+              width={280}
+              height={100}
+              className="object-contain transition-transform duration-200 hover:scale-105"
+            />
           ) : (
-            <p>
-              &copy; {new Date().getFullYear()} My Astro Blog. All rights
-              reserved.
-            </p>
+            <span
+              class="w-28 h-10 bg-gray-200"
+              role="img"
+              aria-label="Blog logo"
+            />
           )
         }
-      </div>
+      </Link>
+      <SocialIcons socials={socials} />
+    </div>
 
-      {
-        bottomLinks.length > 0 && (
-          <nav aria-label="Footer navigation">
-            <FooterLinks bottomLinks={bottomLinks} />
-          </nav>
-        )
-      }
-    </section>
+    <!-- Contact Information -->
+    <div class="md:col-span-2 lg:col-span-3 2xl:pr-32">
+      <ContactInfo items={contactItems} />
+    </div>
+  </div>
+
+  <!-- Footer Bottom -->
+  <div
+    class="flex flex-col lg:flex-row justify-between lg:items-center text-sm pt-0 pb-6 lg:py-10 text-secondary gap-4 lg:gap-0"
+  >
+    <!-- Copyright -->
+    <PortableText portableText={copyright} />
+
+    <!-- Bottom Links -->
+    <FooterLinks bottomLinks={bottomLinks} />
   </div>
 </footer>
