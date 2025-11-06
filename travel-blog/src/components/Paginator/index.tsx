@@ -7,6 +7,7 @@ import {
   PaginationItem,
   PaginationLink,
 } from '@/ui/pagination';
+
 interface PaginatorProps {
   currentPage: number;
   totalPages: number;
@@ -18,9 +19,11 @@ const Paginator: React.FC<PaginatorProps> = ({
   totalPages,
   onPageChange,
 }) => {
-  const pages = Array.from({ length: totalPages }, (_, i) => i + 1);
+  const pages = useMemo(
+    () => Array.from({ length: totalPages }, (_, i) => i + 1),
+    [totalPages],
+  );
 
-  // Handler click page
   const handlePageClick = useCallback(
     (page: number, e: React.MouseEvent) => {
       e.preventDefault();
@@ -29,16 +32,8 @@ const Paginator: React.FC<PaginatorProps> = ({
     [currentPage, onPageChange],
   );
 
-  const pageHandlers = useMemo(() => {
-    const handlers: Record<number, (e: React.MouseEvent) => void> = {};
-    pages.forEach((page) => {
-      handlers[page] = (e) => handlePageClick(page, e);
-    });
-    return handlers;
-  }, [pages, handlePageClick]);
-
   return (
-    <Pagination>
+    <Pagination role="navigation" aria-label="Pagination">
       <PaginationContent>
         {pages.map((page) => {
           const isActive = page === currentPage;
@@ -46,13 +41,15 @@ const Paginator: React.FC<PaginatorProps> = ({
             <PaginationItem key={page}>
               <PaginationLink
                 href={`?page=${page}`}
-                onClick={pageHandlers[page]}
-                isActive={isActive}
+                onClick={(e) => handlePageClick(page, e)}
+                aria-current={isActive ? 'page' : undefined}
                 aria-label={`Go to page ${page}`}
-                className={`
-                  flex h-12 w-12 items-center justify-center rounded-xl text-sm font-medium
-                  ${isActive ? 'bg-accent text-accent-foreground' : 'text-gray-600 hover:bg-gray-100'}
-                `}
+                className={[
+                  'flex h-10 w-10 items-center justify-center rounded-xl text-sm font-medium transition-colors',
+                  isActive
+                    ? 'bg-accent text-accent-foreground hover:text-white'
+                    : 'text-gray-600 hover:bg-gray-100  focus:outline-none',
+                ].join(' ')}
               >
                 {page}
               </PaginationLink>

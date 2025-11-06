@@ -36,7 +36,11 @@ const { heroPost, popularPosts, trendingPosts } = homePage;
 
   <PopularPosts heading={popularPosts.heading} posts={popularPosts.posts} />
 
-  <section id="trending" class="container mx-auto flex flex-col mb-20">
+  <section
+    id="trending"
+    class="container mx-auto flex flex-col mb-20"
+    aria-label="Trending blog posts"
+  >
     <SectionHeading heading={trendingPosts.heading} />
     <TrendingPosts posts={trendingPosts.posts} postsPerPage={6} client:load />
   </section>
