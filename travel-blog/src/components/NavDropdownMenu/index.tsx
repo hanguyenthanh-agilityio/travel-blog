@@ -6,9 +6,6 @@ import { ArrowIcon } from '@/icons';
 // UI
 import { Button } from '@/ui/button';
 
-// Components
-// import Link from '@/components/Link';
-
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -28,7 +25,7 @@ interface NavDropdownMenuProps {
 
 const NavDropdownMenu: React.FC<NavDropdownMenuProps> = ({ label, items }) => {
   return (
-    <DropdownMenu>
+    <DropdownMenu modal={false}>
       <DropdownMenuTrigger asChild>
         <Button
           type="button"
@@ -49,13 +46,13 @@ const NavDropdownMenu: React.FC<NavDropdownMenuProps> = ({ label, items }) => {
       >
         {items.map((item) => (
           <DropdownMenuItem key={item.href} asChild>
-            {/* <Link
+            <a
               href={item.href}
-              classes="flex items-center p-2 hover:text-accent rounded-md"
+              className="flex items-center p-2 hover:text-accent rounded-md"
               aria-label={`Go to ${item.text} page`}
-            > */}
-            {item.text}
-            {/* </Link> */}
+            >
+              {item.text}
+            </a>
           </DropdownMenuItem>
         ))}
       </DropdownMenuContent>

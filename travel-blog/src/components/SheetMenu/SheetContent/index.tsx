@@ -1,6 +1,6 @@
 import React from 'react';
 import { SheetClose } from '@/ui/sheet';
-// import { Link, NavDropdownMenu } from '@/components';
+import { NavDropdownMenu } from '@/components';
 
 interface SheetContentProps {
   menuItems: { href: string; text: string }[];
@@ -9,7 +9,7 @@ interface SheetContentProps {
 
 export default function SheetContent({
   menuItems,
-  // otherPages = [],
+  otherPages = [],
 }: SheetContentProps) {
   return (
     <nav
@@ -27,10 +27,10 @@ export default function SheetContent({
           </a>
         </SheetClose>
       ))}
-      {/* 
+
       {otherPages.length > 0 && (
         <NavDropdownMenu label="Other Pages" items={otherPages} />
-      )} */}
+      )}
     </nav>
   );
 }

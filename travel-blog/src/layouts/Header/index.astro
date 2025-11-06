@@ -12,7 +12,7 @@ interface Props {
   otherPages?: { text: string; href: string }[];
 }
 
-const { logo, menuItems = [] } = Astro.props;
+const { logo, menuItems = [], otherPages = [] } = Astro.props;
 const logoHref = logo?.link || HOME_PAGE;
 ---
 
@@ -36,12 +36,12 @@ const logoHref = logo?.link || HOME_PAGE;
 
     <!-- Desktop Navigation -->
     <nav class="hidden md:block" aria-label="Main navigation" role="navigation">
-      <Navigation {menuItems} />
+      <Navigation {menuItems} {otherPages} />
     </nav>
 
     <!-- Mobile Menu -->
     <div class="md:hidden" aria-label="Mobile menu">
-      <SheetMenu {menuItems} client:load />
+      <SheetMenu {menuItems} {otherPages} client:load />
     </div>
   </div>
 </header>

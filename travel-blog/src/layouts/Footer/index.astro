@@ -15,7 +15,10 @@ import FooterLinks from './FooterLinks/index.astro';
 import { HOME_PAGE } from '@/constants/route';
 
 interface Props {
-  logo?: { asset?: { url?: string } };
+  logo?: {
+    image?: { asset?: { url?: string } };
+    link?: string;
+  };
   contactItems?: { label: string; value: string }[];
   socials?: {
     href: string;
@@ -44,9 +47,9 @@ const {
     <div class="pr-20 xl:pr-0">
       <Link href={HOME_PAGE} aria-label="Go to homepage">
         {
-          logo?.asset?.url ? (
+          logo?.image?.asset?.url ? (
             <SanityImage
-              node={logo?.asset?.url}
+              node={logo.image.asset.url}
               alt="Blog logo"
               width={280}
               height={100}

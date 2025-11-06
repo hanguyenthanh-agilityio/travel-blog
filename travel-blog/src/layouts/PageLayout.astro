@@ -1,19 +1,17 @@
 ---
-import { VisualEditing } from "@sanity/astro/visual-editing";
+import { VisualEditing } from '@sanity/astro/visual-editing';
 
 // Layouts
 import SeoHead from './SeoHead.astro';
-import Header from './Header/index.astro'
-import Footer from './Footer/index.astro'
-
+import Header from './Header/index.astro';
+import Footer from './Footer/index.astro';
 
 // Styles
 import '../styles/globals.css';
-import { loadQuery } from "@/sanity/load-query";
-import type { FooterType, HeaderType } from "@/types/home";
-import { headerQuery } from "@/queries/header";
-import { footerQuery } from "@/queries/footer";
-
+import { loadQuery } from '@/sanity/load-query';
+import type { FooterType, HeaderType } from '@/types/home';
+import { headerQuery } from '@/queries/header';
+import { footerQuery } from '@/queries/footer';
 
 const seo = Astro.props.seo || {};
 
@@ -26,7 +24,7 @@ const {
 } = Astro.props;
 
 const visualEditingEnabled =
-  import.meta.env.PUBLIC_SANITY_VISUAL_EDITING_ENABLED === "true";
+  import.meta.env.PUBLIC_SANITY_VISUAL_EDITING_ENABLED === 'true';
 
 // --- Header data
 let headerData: HeaderType | null = null;
@@ -47,8 +45,12 @@ try {
 }
 
 const { logo, menuItems = [], otherPages = [] } = headerData ?? {};
-const { contactItems = [], socials = [], bottomLinks = [], copyright } = footerData ?? {};
-
+const {
+  contactItems = [],
+  socials = [],
+  bottomLinks = [],
+  copyright,
+} = footerData ?? {};
 ---
 
 <html lang="en">
@@ -58,7 +60,7 @@ const { contactItems = [], socials = [], bottomLinks = [], copyright } = footerD
     <main class="flex-1 container mx-auto px-4 py-8 pt-[80px]">
       <slot />
     </main>
-    <Footer {logo} {contactItems} {socials} {bottomLinks} {copyright}/>
+    <Footer {logo} {contactItems} {socials} {bottomLinks} {copyright} />
 
     <VisualEditing enabled={visualEditingEnabled} />
   </body>
