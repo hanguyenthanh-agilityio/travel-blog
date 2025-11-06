@@ -14,7 +14,10 @@ export const authorType = defineType({
     defineField({
       name: 'role',
       title: 'Role / Title',
-      type: 'string',
+      type: 'array',
+      of: [{ type: 'block' }],
+      description:
+        'Optional — supports text formatting (bold, italic, h2, etc.) for author role/title.',
     }),
     defineField({
       name: 'avatar',
