@@ -1,7 +1,7 @@
 ---
-import { type SocialIconType } from '@/types/detail';
 import { Link, SanityImage } from '@/components';
 import { cn } from '@/lib/utils';
+import type { SocialIconType } from '@/types/detail';
 
 interface SocialIcon extends SocialIconType {
   linkClassName?: string;
@@ -15,11 +15,23 @@ interface Props {
 }
 
 const {
-  socials,
+  socials = [],
   containerClassName,
   linkClassName,
   dark = false,
 } = Astro.props;
+
+const getSocialLabel = (href: string, label?: string) => {
+  if (label?.trim()) return label.trim();
+  try {
+    const host = new globalThis.URL(href).hostname
+      .replace('www.', '')
+      .split('.')[0];
+    return host.charAt(0).toUpperCase() + host.slice(1);
+  } catch {
+    return 'Social link';
+  }
+};
 ---
 
 <ul
@@ -28,9 +40,11 @@ const {
 >
   {
     socials.map((social) => {
+      if (!social.href) return null;
+
+      const label = getSocialLabel(social.href, social.label);
       const iconUrl =
         typeof social.icon === 'string' ? social.icon : social.icon?.asset?.url;
-      const label = social.label?.trim() || 'Social link';
 
       return (
         <li class="list-none">

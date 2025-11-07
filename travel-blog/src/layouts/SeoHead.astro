@@ -1,6 +1,4 @@
 ---
-import { URL } from 'node:url';
-
 const { title, description, image, url, noindex = false } = Astro.props;
 
 const siteUrl = import.meta.env.PUBLIC_SITE_URL;
@@ -8,14 +6,14 @@ const siteUrl = import.meta.env.PUBLIC_SITE_URL;
 const imageUrl = image
   ? image.startsWith('http')
     ? image
-    : new URL(image, siteUrl).toString()
+    : new globalThis.URL(image, siteUrl).toString()
   : undefined;
 
 const pageUrl = url
   ? url.startsWith('http')
     ? url
-    : new URL(url, siteUrl).toString()
-  : new URL(Astro.url.pathname, siteUrl).toString();
+    : new globalThis.URL(url, siteUrl).toString()
+  : new globalThis.URL(Astro.url.pathname, siteUrl).toString();
 ---
 
 <head>

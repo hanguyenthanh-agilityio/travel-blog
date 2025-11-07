@@ -15,12 +15,18 @@ const { bottomLinks } = Astro.props;
   role="navigation"
 >
   {
-    bottomLinks.map((link) => (
-      <Link
-        href={link.href ?? '#'}        
-        text={link.text}
-        classes="hover:text-accent transition-colors duration-200 hover:underline"
-      />
-    ))
+    bottomLinks.map((link) => {
+      const text = link.text?.trim() || 'Footer link';
+      const href = link.href?.trim() || '#';
+
+      return (
+        <Link
+          href={href}
+          aria-label={text}
+          text={text}
+          classes="hover:text-accent transition-colors duration-200 hover:underline"
+        />
+      );
+    })
   }
 </nav>

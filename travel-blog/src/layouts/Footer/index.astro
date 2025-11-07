@@ -1,5 +1,4 @@
 ---
-// Components
 import {
   SocialIcons,
   ContactInfo,
@@ -7,11 +6,7 @@ import {
   PortableText,
   Link,
 } from '@/components';
-
-// Layouts
 import FooterLinks from './FooterLinks/index.astro';
-
-// Constants
 import { HOME_PAGE } from '@/constants/route';
 
 interface Props {
@@ -24,6 +19,7 @@ interface Props {
     href: string;
     label?: string;
     icon?: string | { asset?: { url?: string } };
+    linkClassName?: string;
   }[];
   bottomLinks?: { text: string; href: string }[];
   copyright?: { children?: { text?: string }[] };
@@ -34,12 +30,11 @@ const {
   contactItems = [],
   socials = [],
   bottomLinks = [],
-  copyright = [],
+  copyright,
 } = Astro.props;
 ---
 
 <footer class="container mx-auto bg-white text-gray-800 px-4">
-  <!-- Main Footer Content -->
   <div
     class="py-10 flex flex-col lg:flex-row justify-between lg:items-center gap-10 lg:gap-0"
   >
@@ -64,12 +59,13 @@ const {
           )
         }
       </Link>
-      <SocialIcons socials={socials} />
+
+      {socials.length > 0 && <SocialIcons socials={socials} />}
     </div>
 
     <!-- Contact Information -->
     <div class="md:col-span-2 lg:col-span-3 2xl:pr-32">
-      <ContactInfo items={contactItems} />
+      {contactItems.length > 0 && <ContactInfo items={contactItems} />}
     </div>
   </div>
 
@@ -81,6 +77,6 @@ const {
     <PortableText portableText={copyright} />
 
     <!-- Bottom Links -->
-    <FooterLinks bottomLinks={bottomLinks} />
+    {bottomLinks.length > 0 && <FooterLinks bottomLinks={bottomLinks} />}
   </div>
 </footer>
