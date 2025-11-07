@@ -17,30 +17,30 @@ vi.mock('@/components', async (importOriginal) => {
 });
 
 describe('Navigation.astro', () => {
-  //   const menuItems = [
-  //     { text: 'Home', href: '/' },
-  //     { text: 'Blog', href: '/blog' },
-  //   ];
+  const menuItems = [
+    { text: 'Home', href: '/' },
+    { text: 'Blog', href: '/blog' },
+  ];
 
-  //   const otherPages = [
-  //     { text: 'About', href: '/about' },
-  //     { text: 'Contact', href: '/contact' },
-  //   ];
+  // const otherPages = [
+  //   { text: 'About', href: '/about' },
+  //   { text: 'Contact', href: '/contact' },
+  // ];
 
-  //   it('renders all primary menu items', async () => {
-  //     const container = await AstroContainer.create();
-  //     const result = await container.renderToString(Navigation, {
-  //       props: { menuItems },
-  //     });
+  it('renders all primary menu items', async () => {
+    const container = await AstroContainer.create();
+    const result = await container.renderToString(Navigation, {
+      props: { menuItems },
+    });
 
-  //     menuItems.forEach((item) => {
-  //       expect(result).toContain(item.text);
-  //       expect(result).toContain(`href="${item.href}"`);
-  //     });
+    menuItems.forEach((item) => {
+      expect(result).toContain(item.text);
+      expect(result).toContain(`href="${item.href}"`);
+    });
 
-  //     expect(result).toContain('<nav');
-  //     expect(result).toContain('aria-label="Main site navigation"');
-  //   });
+    expect(result).toContain('<nav');
+    expect(result).toContain('aria-label="Main site navigation"');
+  });
 
   //   it('renders secondary dropdown menu', async () => {
   //     const container = await AstroContainer.create();

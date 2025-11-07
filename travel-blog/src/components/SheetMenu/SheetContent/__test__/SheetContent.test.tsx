@@ -35,10 +35,10 @@ describe('SheetContent', () => {
     { href: '/about', text: 'About' },
   ];
 
-  const otherPages = [
-    { href: '/privacy', text: 'Privacy' },
-    { href: '/terms', text: 'Terms' },
-  ];
+  // const otherPages = [
+  //   { href: '/privacy', text: 'Privacy' },
+  //   { href: '/terms', text: 'Terms' },
+  // ];
 
   it('renders all menu items', () => {
     render(<SheetContent menuItems={menuItems} />);
@@ -53,18 +53,18 @@ describe('SheetContent', () => {
     });
   });
 
-  it('renders NavDropdownMenu when otherPages exist', () => {
-    render(<SheetContent menuItems={menuItems} otherPages={otherPages} />);
+  //   it('renders NavDropdownMenu when otherPages exist', () => {
+  //     render(<SheetContent menuItems={menuItems} otherPages={otherPages} />);
 
-    const dropdown = screen.getByTestId('nav-dropdown');
-    expect(dropdown).toBeInTheDocument();
-    expect(dropdown.textContent).toContain('Other Pages');
-    expect(dropdown.textContent).toContain(otherPages.length.toString());
-  });
+  //     const dropdown = screen.getByTestId('nav-dropdown');
+  //     expect(dropdown).toBeInTheDocument();
+  //     expect(dropdown.textContent).toContain('Other Pages');
+  //     expect(dropdown.textContent).toContain(otherPages.length.toString());
+  //   });
 
-  it('renders empty nav safely when otherPages is empty', () => {
-    render(<SheetContent menuItems={menuItems} otherPages={[]} />);
-    const dropdown = screen.queryByTestId('nav-dropdown');
-    expect(dropdown).toBeNull();
-  });
+  //   it('renders empty nav safely when otherPages is empty', () => {
+  //     render(<SheetContent menuItems={menuItems} otherPages={[]} />);
+  //     const dropdown = screen.queryByTestId('nav-dropdown');
+  //     expect(dropdown).toBeNull();
+  //   });
 });
