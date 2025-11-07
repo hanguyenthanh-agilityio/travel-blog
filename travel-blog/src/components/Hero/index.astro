@@ -13,9 +13,6 @@ interface HeroProps {
 }
 
 const { title, image, author, slug } = Astro.props as HeroProps;
-
-const safeTitle = title || '';
-const parts = safeTitle.split(':');
 ---
 
 <section
@@ -46,11 +43,7 @@ const parts = safeTitle.split(':');
     <div
       class="absolute top-4 md:top-8 left-3 md:left-10 right-3 md:right-10 text-white"
     >
-      <Heading size="lg" as="h1">
-        {parts[0]}:
-        <br />
-        {parts[1]}
-      </Heading>
+      <Heading size="lg" as="h1"> {title} </Heading>
     </div>
 
     <!-- Author Info -->
