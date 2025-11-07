@@ -6,7 +6,7 @@ import PageLayout from '@/layouts/PageLayout.astro';
 import { Hero } from '@/components';
 
 // Sections
-import { PopularPosts, SectionHeading, TrendingPosts } from '@/sections';
+import { PopularPosts, TrendingSection } from '@/sections';
 
 // Types
 import type { HomePageType } from '@/types/home';
@@ -36,12 +36,8 @@ const { heroPost, popularPosts, trendingPosts } = homePage;
 
   <PopularPosts heading={popularPosts.heading} posts={popularPosts.posts} />
 
-  <section
-    id="trending"
-    class="container mx-auto flex flex-col mb-20"
-    aria-label="Trending blog posts"
-  >
-    <SectionHeading heading={trendingPosts.heading} />
-    <TrendingPosts posts={trendingPosts.posts} postsPerPage={6} client:load />
-  </section>
+  <TrendingSection
+    heading={trendingPosts.heading}
+    posts={trendingPosts.posts}
+  />
 </PageLayout>

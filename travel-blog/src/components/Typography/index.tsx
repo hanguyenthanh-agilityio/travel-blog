@@ -1,17 +1,17 @@
 import React from 'react';
 import { cn } from '@/lib/utils';
 
-type HeadingSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
-type HeadingAs = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p';
+type TypographySize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+type TypographyAs = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p';
 
-interface HeadingProps {
-  as?: HeadingAs;
-  size?: HeadingSize;
+interface TypographyProps {
+  as?: TypographyAs;
+  size?: TypographySize;
   className?: string;
   children: React.ReactNode;
 }
 
-const sizeClasses: Record<HeadingSize, string> = {
+const sizeClasses: Record<TypographySize, string> = {
   xs: 'text-xs opacity-70',
   sm: 'text-sm font-medium',
   md: 'text-lg font-bold',
@@ -19,7 +19,7 @@ const sizeClasses: Record<HeadingSize, string> = {
   xl: 'text-2xl md:text-3xl font-extrabold',
 };
 
-const Heading: React.FC<HeadingProps> = ({
+const Typography: React.FC<TypographyProps> = ({
   as: Tag = 'h2',
   size = 'md',
   className,
@@ -40,4 +40,4 @@ const Heading: React.FC<HeadingProps> = ({
   );
 };
 
-export default Heading;
+export default Typography;

@@ -1,6 +1,6 @@
 import React from 'react';
 import { SheetClose } from '@/ui/sheet';
-import { NavDropdownMenu } from '@/components';
+import { LinkWrapper, NavDropdownMenu } from '@/components';
 
 interface SheetContentProps {
   menuItems: { href: string; text: string }[];
@@ -19,12 +19,12 @@ export default function SheetContent({
     >
       {menuItems.map((item) => (
         <SheetClose asChild key={item.href}>
-          <a
+          <LinkWrapper
             href={item.href}
             className="block text-sm border-b border-solid pb-2 hover:text-accent"
           >
             {item.text}
-          </a>
+          </LinkWrapper>
         </SheetClose>
       ))}
 

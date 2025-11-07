@@ -7,3 +7,4 @@ export { default as PopularPosts } from './PopularPosts/index.astro';
 export { default as ArticleHeader } from './ArticleHeader/index.astro';
 export { default as ArticleSidebar } from './ArticleSidebar/index.astro';
 export { default as ArticleBody } from './ArticleBody/index.astro';
+export { default as TrendingSection } from './TrendingSection/index.astro';

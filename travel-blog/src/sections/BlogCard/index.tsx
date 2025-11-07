@@ -1,7 +1,12 @@
 import React from 'react';
-import { SanityImage } from '@/components';
 
+// Components
+import { Typography, LinkWrapper, SanityImage } from '@/components';
+
+// Sections
 import { AuthorCard } from '@/sections';
+
+// Libs
 import { cn } from '@/lib/utils';
 
 interface BlogCardProps {
@@ -32,7 +37,7 @@ const BlogCard: React.FC<BlogCardProps> = ({
   const isHorizontal = variant === 'horizontal';
 
   return (
-    <a href={`/posts/${postSlug}`}>
+    <LinkWrapper href={`/posts/${postSlug}`}>
       <div
         data-testid="blog-card"
         className={cn(
@@ -62,14 +67,14 @@ const BlogCard: React.FC<BlogCardProps> = ({
             titleClassName,
           )}
         >
-          <h3 className="text-lg md:text-xl font-bold mb-4 line-clamp-2">
+          <Typography as="h3" size="lg" className="mb-4 line-clamp-2">
             {title}
-          </h3>
+          </Typography>
 
           {author && <AuthorCard {...author} classAvatar="w-10 h-10" />}
         </div>
       </div>
-    </a>
+    </LinkWrapper>
   );
 };
 
