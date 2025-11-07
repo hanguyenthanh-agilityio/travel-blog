@@ -1,7 +1,7 @@
 ---
 const { title, description, image, url, noindex = false } = Astro.props;
 
-const siteUrl = import.meta.env.PUBLIC_SITE_URL;
+const siteUrl = import.meta.env.PUBLIC_SITE_URL || 'http://localhost:3000';
 
 const imageUrl = image
   ? image.startsWith('http')
@@ -9,11 +9,20 @@ const imageUrl = image
     : new globalThis.URL(image, siteUrl).toString()
   : undefined;
 
-const pageUrl = url
-  ? url.startsWith('http')
-    ? url
-    : new globalThis.URL(url, siteUrl).toString()
-  : new globalThis.URL(Astro.url.pathname, siteUrl).toString();
+let pageUrl: string;
+try {
+  if (url) {
+    pageUrl = url.startsWith('http')
+      ? url
+      : new globalThis.URL(url, siteUrl).toString();
+  } else if (Astro.url) {
+    pageUrl = new globalThis.URL(Astro.url.pathname, siteUrl).toString();
+  } else {
+    pageUrl = siteUrl;
+  }
+} catch {
+  pageUrl = siteUrl;
+}
 ---
 
 <head>
