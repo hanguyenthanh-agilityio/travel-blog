@@ -1,6 +1,6 @@
 ---
 // Components
-import { Link, SanityImage, Heading } from '@/components';
+import { Link, SanityImage, PortableText } from '@/components';
 
 // Sections
 import { AuthorCard } from '@/sections';
@@ -43,7 +43,7 @@ const { title, image, author, slug } = Astro.props as HeroProps;
     <div
       class="absolute top-4 md:top-8 left-3 md:left-10 right-3 md:right-10 text-white"
     >
-      <Heading size="lg" as="h1"> {title} </Heading>
+      <PortableText portableText={title} />
     </div>
 
     <!-- Author Info -->

@@ -8,10 +8,12 @@ import { AuthorCard } from '@/sections';
 
 // Libs
 import { cn } from '@/lib/utils';
+import type { PortableTextBlock } from 'sanity';
+import { blockToPlainText } from '@/lib/sanity';
 
 interface BlogCardProps {
   slug?: string | { current: string };
-  title: string;
+  title: string | PortableTextBlock[];
   image?: string | { asset?: { _ref?: string; url?: string } };
   author?: {
     name: string;
@@ -36,6 +38,9 @@ const BlogCard: React.FC<BlogCardProps> = ({
   const postSlug = typeof slug === 'string' ? slug : slug?.current || '';
   const isHorizontal = variant === 'horizontal';
 
+  const plainTitle =
+    typeof title === 'string' ? title : blockToPlainText(title);
+
   return (
     <LinkWrapper href={`/posts/${postSlug}`}>
       <div
@@ -49,7 +54,7 @@ const BlogCard: React.FC<BlogCardProps> = ({
         {image && (
           <SanityImage
             node={image}
-            alt={title}
+            alt={plainTitle}
             className={cn(
               'object-cover rounded-xl w-full',
               isHorizontal && 'md:w-1/2 max-h-blog-md',
@@ -67,8 +72,8 @@ const BlogCard: React.FC<BlogCardProps> = ({
             titleClassName,
           )}
         >
-          <Typography as="h3" size="lg" className="mb-4 line-clamp-2">
-            {title}
+          <Typography as="h3" size="md" className="mb-4 line-clamp-2">
+            {plainTitle}
           </Typography>
 
           {author && <AuthorCard {...author} classAvatar="w-10 h-10" />}

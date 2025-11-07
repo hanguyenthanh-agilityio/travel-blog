@@ -14,7 +14,7 @@ interface TypographyProps {
 const sizeClasses: Record<TypographySize, string> = {
   xs: 'text-xs opacity-70',
   sm: 'text-sm font-medium',
-  md: 'text-lg font-bold',
+  md: 'text-lg md:text-xl font-bold',
   lg: 'text-xl md:text-2xl font-bold',
   xl: 'text-2xl md:text-3xl font-extrabold',
 };
@@ -30,7 +30,7 @@ const Typography: React.FC<TypographyProps> = ({
     <Tag
       className={cn(
         sizeClasses[size],
-        'text-primary leading-snug tracking-tight',
+        'leading-snug tracking-tight',
         className,
       )}
       {...props}
