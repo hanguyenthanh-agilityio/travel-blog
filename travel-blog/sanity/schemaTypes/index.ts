@@ -7,6 +7,7 @@ import { socialType } from './social';
 import { HeaderType } from './header';
 import { footerType } from './footer';
 import { sectionHeadingType } from './heading';
+import { blockTitleType } from './blockTitle';
 
 export const schemaTypes = [
   authorType,
@@ -18,4 +19,5 @@ export const schemaTypes = [
   HeaderType,
   footerType,
   sectionHeadingType,
+  blockTitleType,
 ];

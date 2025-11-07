@@ -1,12 +1,10 @@
 ---
-// Components
-import { Heading } from '@/components';
-
 // Sections
+import { PortableText } from '@/components';
 import { AuthorCard } from '@/sections';
 
 interface Props {
-  title: string | undefined;
+  title: any;
   author?: {
     name: string;
     role?: string;
@@ -33,7 +31,7 @@ const { title, author } = Astro.props;
     )
   }
 
-  <Heading as="h1" size="xl">{title}</Heading>
+  <PortableText portableText={title} />
 
   {
     author?.date && (

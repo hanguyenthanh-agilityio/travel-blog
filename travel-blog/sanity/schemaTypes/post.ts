@@ -8,7 +8,7 @@ export const postType = defineType({
     defineField({
       name: 'title',
       title: 'Title',
-      type: 'string',
+      type: 'blockTitle',
       validation: (Rule) => Rule.required(),
     }),
     defineField({
@@ -83,8 +83,17 @@ export const postType = defineType({
       media: 'image',
     },
     prepare(selection) {
-      const { subtitle } = selection;
-      return { ...selection, subtitle: subtitle ? `by ${subtitle}` : '' };
+      const { title, subtitle } = selection;
+
+      let textTitle = '';
+      if (Array.isArray(title) && title.length > 0) {
+        textTitle = title[0]?.children?.map((c: any) => c.text).join('') || '';
+      }
+      return {
+        title: textTitle || 'Untitled',
+        subtitle: subtitle ? `by ${subtitle}` : '',
+        media: selection.media,
+      };
     },
   },
 });

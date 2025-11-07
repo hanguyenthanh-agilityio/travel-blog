@@ -68,23 +68,21 @@ try {
 } catch {
   socials = [];
 }
+
+const { title, author, image, excerpt, content } = post;
 ---
 
 <PageLayout>
   <article class="max-w-3xl mx-auto py-8">
     <!-- Header -->
-    <ArticleHeader title={post.title} author={post.author} />
+    <ArticleHeader title={title} author={author} />
 
     <!-- Main body -->
     <div class="lg:relative">
       <!-- Social icons -->
       <ArticleSidebar socials={socials} />
 
-      <ArticleBody
-        image={post.image}
-        excerpt={post.excerpt}
-        content={post.content}
-      />
+      <ArticleBody image={image} excerpt={excerpt} content={content} />
     </div>
   </article>
 </PageLayout>
