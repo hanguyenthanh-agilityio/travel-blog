@@ -9,22 +9,6 @@ import {
 import FooterLinks from './FooterLinks/index.astro';
 import { HOME_PAGE } from '@/constants/route';
 
-interface Props {
-  logo?: {
-    image?: { asset?: { url?: string } };
-    link?: string;
-  };
-  contactItems?: { label: string; value: string }[];
-  socials?: {
-    href: string;
-    label?: string;
-    icon?: string | { asset?: { url?: string } };
-    linkClassName?: string;
-  }[];
-  bottomLinks?: { text: string; href: string }[];
-  copyright?: { children?: { text?: string }[] };
-}
-
 const {
   logo,
   contactItems = [],
@@ -40,7 +24,11 @@ const {
   >
     <!-- Brand Section -->
     <div class="pr-20 xl:pr-0">
-      <Link href={HOME_PAGE} aria-label="Go to homepage">
+      <Link
+        href={logo?.link || HOME_PAGE}
+        aria-label="Go to homepage"
+        text={logo ? 'Home' : undefined}
+      >
         {
           logo?.image?.asset?.url ? (
             <SanityImage
@@ -74,7 +62,7 @@ const {
     class="flex flex-col lg:flex-row justify-between lg:items-center text-sm pt-0 pb-6 lg:py-10 text-secondary gap-4 lg:gap-0"
   >
     <!-- Copyright -->
-    <PortableText portableText={copyright} />
+    {copyright && <PortableText portableText={copyright} />}
 
     <!-- Bottom Links -->
     {bottomLinks.length > 0 && <FooterLinks bottomLinks={bottomLinks} />}

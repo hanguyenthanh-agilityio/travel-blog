@@ -21,15 +21,16 @@ const {
   dark = false,
 } = Astro.props;
 
-const getSocialLabel = (href: string, label?: string) => {
+const extractSocialName = (href: string, label?: string) => {
   if (label?.trim()) return label.trim();
+
   try {
-    const host = new globalThis.URL(href).hostname
-      .replace('www.', '')
-      .split('.')[0];
-    return host.charAt(0).toUpperCase() + host.slice(1);
+    const cleaned = href.replace(/^https?:\/\/(www\.)?/, '');
+
+    const domain = cleaned.split(/[./]/)[0];
+    return domain ? domain.charAt(0).toUpperCase() + domain.slice(1) : 'Social';
   } catch {
-    return 'Social link';
+    return 'Social';
   }
 };
 ---
@@ -42,7 +43,7 @@ const getSocialLabel = (href: string, label?: string) => {
     socials.map((social) => {
       if (!social.href) return null;
 
-      const label = getSocialLabel(social.href, social.label);
+      const label = extractSocialName(social.href, social.label);
       const iconUrl =
         typeof social.icon === 'string' ? social.icon : social.icon?.asset?.url;
 
@@ -51,7 +52,7 @@ const getSocialLabel = (href: string, label?: string) => {
           <Link
             href={social.href}
             external
-            aria-label={`Visit our ${label} profile`}
+            label={`Visit our ${label} profile`}
             classes={cn(
               'flex items-center justify-center p-2 rounded-lg transition-all duration-200',
               'hover:scale-110 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2',
@@ -71,8 +72,12 @@ const getSocialLabel = (href: string, label?: string) => {
                 className="w-6 h-6 object-contain"
               />
             ) : (
-              <span class="w-6 h-6 block bg-gray-300" aria-hidden="true" />
+              <span
+                class="w-6 h-6 block bg-gray-300"
+                aria-label={`${label} icon`}
+              />
             )}
+            <span class="sr-only">{label}</span>
           </Link>
         </li>
       );

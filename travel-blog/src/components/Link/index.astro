@@ -8,26 +8,13 @@ interface Props {
   spanClass?: string;
 }
 
-const {
-  href,
-  label,
-  text,
-  classes = '',
-  spanClass = '',
-  external = false,
-} = Astro.props;
+const { href, label, text, classes = '', external = false } = Astro.props;
 
 const target = external ? '_blank' : '_self';
 const rel = external ? 'noopener noreferrer' : undefined;
 const ariaLabel = label || text || '';
 ---
-<a
-  href={href}
-  aria-label={ariaLabel}
-  class={classes}
-  target={target}
-  rel={rel}
->
+
+<a href={href} aria-label={ariaLabel} class={classes} target={target} rel={rel}>
   <slot />
-  {text && <span class={`ml-1 ${spanClass}`}>{text}</span>}
 </a>
