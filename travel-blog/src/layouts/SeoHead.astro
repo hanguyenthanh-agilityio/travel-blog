@@ -10,9 +10,20 @@ const { title, description, image, url, noindex = false } = Astro.props;
 
   <title>{title}</title>
   <meta name="description" content={description} />
+
+  <!-- Robots -->
+
   <meta
     name="robots"
     content={noindex ? 'noindex, nofollow' : 'index, follow'}
+  />
+
+  <!-- Sitemap link -->
+  <link
+    rel="sitemap"
+    type="application/xml"
+    title="Sitemap"
+    href="/sitemap-index.xml"
   />
 
   <!-- Open Graph -->
