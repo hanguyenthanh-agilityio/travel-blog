@@ -1,10 +1,26 @@
 ---
+import { URL } from 'node:url';
+
 const { title, description, image, url, noindex = false } = Astro.props;
+
+const siteUrl = import.meta.env.PUBLIC_SITE_URL;
+
+const imageUrl = image
+  ? image.startsWith('http')
+    ? image
+    : new URL(image, siteUrl).toString()
+  : undefined;
+
+const pageUrl = url
+  ? url.startsWith('http')
+    ? url
+    : new URL(url, siteUrl).toString()
+  : new URL(Astro.url.pathname, siteUrl).toString();
 ---
 
 <head>
   <meta charset="utf-8" />
-  <link rel="icon" href="/src/assets//suitcase.svg" />
+  <link rel="icon" href="/src/assets/suitcase.svg" />
   <meta name="viewport" content="width=device-width" />
   <meta name="generator" content={Astro.generator} />
 
@@ -12,13 +28,12 @@ const { title, description, image, url, noindex = false } = Astro.props;
   <meta name="description" content={description} />
 
   <!-- Robots -->
-
   <meta
     name="robots"
     content={noindex ? 'noindex, nofollow' : 'index, follow'}
   />
 
-  <!-- Sitemap link -->
+  <!-- Sitemap -->
   <link
     rel="sitemap"
     type="application/xml"
@@ -29,13 +44,13 @@ const { title, description, image, url, noindex = false } = Astro.props;
   <!-- Open Graph -->
   <meta property="og:title" content={title} />
   <meta property="og:description" content={description} />
-  <meta property="og:image" content={image} />
-  <meta property="og:url" content={url} />
+  {imageUrl && <meta property="og:image" content={imageUrl} />}
+  <meta property="og:url" content={pageUrl} />
   <meta property="og:type" content="website" />
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content={title} />
   <meta name="twitter:description" content={description} />
-  <meta name="twitter:image" content={image} />
+  {imageUrl && <meta name="twitter:image" content={imageUrl} />}
 </head>

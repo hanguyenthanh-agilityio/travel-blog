@@ -43,7 +43,7 @@ export default defineConfig({
           allow: '/',
         },
       ],
-      sitemap: 'https://travel-blog-nine-mu.vercel.app',
+      sitemap: 'https://travel-blog-nine-mu.vercel.app/sitemap-index.xml',
     }),
   ],
   vite: {
