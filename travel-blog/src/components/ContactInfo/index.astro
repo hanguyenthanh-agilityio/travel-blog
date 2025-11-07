@@ -1,4 +1,6 @@
 ---
+import { Typography } from '..';
+
 interface Props {
   items?: { label: string; value: string }[];
 }
@@ -6,11 +8,17 @@ interface Props {
 const { items = [] } = Astro.props;
 ---
 
-<div class="grid grid-col-1 gap-6 lg:gap-10 lg:grid-cols-3 text-sm">
-  {items.map((item) => (
-    <div class="flex flex-col gap-1">
-      <p class="font-semibold">{item.label}</p>
-      <p class="text-secondary">{item.value}</p>
-    </div>
-  ))}
+<div class="grid grid-col-1 gap-6 lg:gap-10 lg:grid-cols-3">
+  {
+    items.map((item) => (
+      <div class="flex flex-col gap-1">
+        <Typography as="p" size="sm" className="font-semibold">
+          {item.label}
+        </Typography>
+        <Typography as="p" size="sm" className="text-secondary font-normal">
+          {item.value}
+        </Typography>
+      </div>
+    ))
+  }
 </div>

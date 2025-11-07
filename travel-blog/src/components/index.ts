@@ -8,5 +8,7 @@ export { default as SanityImage } from './SanityImage';
 export { default as SheetMenu } from './SheetMenu';
 export { default as SocialIcons } from './SocialIcons/index.astro';
 export { default as Link } from './Link/index.astro';
+export { default as LinkWrapper } from './LinkWrapper';
 export { default as SheetContent } from './SheetMenu/SheetContent';
 export { default as Heading } from './Heading';
+export { default as Typography } from './Typography';

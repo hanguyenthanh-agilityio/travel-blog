@@ -1,6 +1,9 @@
 import React from 'react';
 
 // Components
+import { Typography } from '@/components';
+
+// UIs
 import { Avatar, AvatarFallback, AvatarImage } from '@/ui';
 
 // Libs
@@ -81,8 +84,14 @@ const AuthorCard: React.FC<AuthorCardProps> = ({
             dark ? 'text-white' : 'text-primary',
           )}
         >
-          <p className="text-sm font-medium">{name}</p>
-          {isRole && <p className="text-xs opacity-70">{role}</p>}
+          <Typography as="p" size="sm">
+            {name}
+          </Typography>
+          {isRole && (
+            <Typography as="p" size="xs">
+              {role}
+            </Typography>
+          )}
         </div>
       </div>
     </div>

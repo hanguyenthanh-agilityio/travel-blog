@@ -19,7 +19,7 @@ const logoHref = logo?.link || HOME_PAGE;
 <header class="w-full bg-white shadow-sm fixed top-0 z-50" role="banner">
   <div class="container mx-auto px-4 py-4 flex items-center justify-between">
     <!-- Logo/Brand -->
-    <div class="flex items-center">
+    <h1 class="flex items-center">
       <Link href={logoHref} aria-label="Go to homepage">
         {
           logo?.image?.asset?.url && (
@@ -32,7 +32,7 @@ const logoHref = logo?.link || HOME_PAGE;
           )
         }
       </Link>
-    </div>
+    </h1>
 
     <!-- Desktop Navigation -->
     <nav class="hidden md:block" aria-label="Main navigation" role="navigation">

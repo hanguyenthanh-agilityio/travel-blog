@@ -13,6 +13,9 @@ import {
   DropdownMenuTrigger,
 } from '@/ui';
 
+// Components
+import { LinkWrapper } from '@/components';
+
 interface ItemProps {
   href: string;
   text: string;
@@ -46,13 +49,13 @@ const NavDropdownMenu: React.FC<NavDropdownMenuProps> = ({ label, items }) => {
       >
         {items.map((item) => (
           <DropdownMenuItem key={item.href} asChild>
-            <a
+            <LinkWrapper
               href={item.href}
               className="flex items-center p-2 hover:text-accent rounded-md"
               aria-label={`Go to ${item.text} page`}
             >
               {item.text}
-            </a>
+            </LinkWrapper>
           </DropdownMenuItem>
         ))}
       </DropdownMenuContent>
